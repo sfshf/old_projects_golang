@@ -1,0 +1,17 @@
+[ReferralLogReason_NewUser]
+other = "referral new user"
+
+[ReferralLogReason_NewUserFirstTime]
+other = "referral new user first time"
+
+[ReferralLogReason_NewUserBilled]
+other = "referral new user billed"
+
+[ReferralLogReason_FreeTrial]
+other = "free trial"
+
+[ReferralLogReason_RedeemReward]
+other = "redeem reward"
+
+[ReferralLogReason_ConvertPoints]
+other = "convert points"

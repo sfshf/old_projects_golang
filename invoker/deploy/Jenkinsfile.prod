@@ -1,0 +1,84 @@
+pipeline {
+    agent {
+        label "${JENKINS_AGENT}"
+    }
+    stages {
+        stage('Build') {
+            steps {
+                sh """
+                    docker build \
+                        --build-arg env=test \
+                        --build-arg GRPC_SERVER_PORT=${GRPC_SERVER_PORT} \
+                        --build-arg GRPC_METRIC_PORT=${GRPC_METRIC_PORT} \
+                        -t nextsurfer/invoker:latest \
+                        -f build/invoker/Dockerfile .
+                    docker stop -t 60 -s SIGTERM invoker && docker rm invoker || echo 0
+                    docker run -itd \
+                        --name invoker \
+                        --restart always \
+                        -e 'APP_NAME=${APP_NAME}' \
+                        -e 'CONSUL_HTTP_ADDR=${CONSUL_HTTP_ADDR}' \
+                        -e 'GRPC_SERVER_HOST=${GRPC_SERVER_HOST}' \
+                        -e 'GRPC_SERVER_PORT=${GRPC_SERVER_PORT}' \
+                        -e 'GRPC_METRIC_PORT=${GRPC_METRIC_PORT}' \
+                        -e 'APPLICATION_ENV=${APPLICATION_ENV}' \
+                        -e 'INVOKER_REDIS_DNS=${INVOKER_REDIS_DNS}' \
+                        -e 'I18N_TOML_PATH=${I18N_TOML_PATH}' \
+                        -e 'INVOKER_MYSQL_DNS=${INVOKER_MYSQL_DNS}' \
+                        -e 'MYSQL_METRIC_PORT=${MYSQL_METRIC_PORT}' \
+                        -p '${GRPC_SERVER_PORT}:${GRPC_SERVER_PORT}' \
+                        -p '${GRPC_METRIC_PORT}:${GRPC_METRIC_PORT}' \
+                        nextsurfer/invoker:latest
+                """
+            }
+        }
+        stage('PushService') {
+            steps {
+                sh """
+                    docker run --rm \
+                        -v ./:/test \
+                        -w /test \
+                        -e 'CONSOLE_HOST=${CONSOLE_HOST}' \
+                        -e 'CONSOLE_GRPC_PORT=${CONSOLE_GRPC_PORT}' \
+                        golang:1.23 \
+                        sh -c \
+                        "git config --global url.https://github@github.com.insteadof https://github.com && GOSUMDB=off go mod tidy && go run ./cmd/pushproto"
+                """
+            }
+        }
+        stage('UI') {
+            steps {
+                sh """
+                    docker build \
+                        --build-arg env=production \
+                        -t nextsurfer/invoker-ui:latest \
+                        -f ./ui/Dockerfile ./ui
+                    docker stop invoker-ui && docker rm invoker-ui || echo 0
+                    docker run -d \
+                        --restart always \
+                        --name invoker-ui \
+                        -p ${INVOKER_UI_PORT}:3000 \
+                        nextsurfer/invoker-ui:latest
+                """
+            }
+        }
+    }
+    post {
+        success {
+            sh """
+                echo 'deploy success'
+            """
+        }
+        failure {
+            sh """
+                echo 'deploy fail'
+            """ 
+        }
+        cleanup {
+            sh """
+                docker system prune -f
+            """
+            cleanWs()
+        }
+    }
+}

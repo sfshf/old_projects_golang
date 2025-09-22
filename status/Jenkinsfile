@@ -1,0 +1,79 @@
+pipeline {
+    agent {
+        label 'test'
+    }
+    stages {
+        stage('Pre') {
+            steps {
+                script {
+                    sh '''
+                        git remote update origin --prune
+                        git branch -a | grep -e '^  remotes/origin/dev$'
+                        echo 'remote dev branch exists'
+                        git branch -D dev || echo 'no local dev branch'
+                        git branch dev remotes/origin/dev
+                    '''
+                    sh """
+                        git checkout ${BRANCH_NAME}
+                        git rebase dev
+                        echo 'git rebase dev success'
+                        git push origin ${BRANCH_NAME}
+                        echo 'git push origin' ${BRANCH_NAME} 'success'
+                    """
+                }
+            }
+        }
+        stage('Build') {
+            steps {
+                sh """
+                    docker build \
+                        -t nextsurfer/status:latest \
+                        -f ./docker/Dockerfile .
+                    docker stop status && docker rm status || echo 0
+                    docker run -d \
+                        --name status \
+                        --restart always \
+                        --dns ${HOST_IP} \
+                        --dns 8.8.8.8 \
+                        -p 4010:4010 \
+                        -p 4000:3000 \
+                        nextsurfer/status:latest
+                """
+            }
+        }
+    }
+    post {
+        success {
+            sh """
+                echo 'e2e testing success'
+                git checkout dev
+                git rebase ${BRANCH_NAME}
+                git push origin dev
+            """
+        }
+        failure {
+            sh """
+                echo 'feature build or e2e testing fail'
+                git checkout dev
+                docker build \
+                    -t nextsurfer/status:latest \
+                    -f ./docker/Dockerfile .
+                docker stop status && docker rm status || echo 0
+                docker run -d \
+                    --name status \
+                    --restart always \
+                    --dns ${HOST_IP} \
+                    --dns 8.8.8.8 \
+                    -p 4010:4010 \
+                    -p 4000:3000 \
+                    nextsurfer/status:latest
+            """
+        }
+        cleanup {
+            sh """
+                docker system prune -f
+            """
+            cleanWs()
+        }
+    }
+}

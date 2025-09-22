@@ -1,0 +1,34 @@
+package riki
+
+import (
+	"context"
+	"errors"
+
+	connector_grpc "github.com/nextsurfer/connector/pkg/grpc"
+	"github.com/nextsurfer/doom-console/internal/pkg/crypto"
+	"github.com/nextsurfer/ground/pkg/rpc"
+)
+
+const (
+	RoleWrite = "write"
+	RoleRead  = "read"
+)
+
+var (
+	ErrInvalidApiKey = errors.New("invalid api key")
+)
+
+func ValidateApiKey(ctx context.Context, rpcCtx *rpc.Context, app, apikey, role string) error {
+	passwordHash, err := crypto.Keccak256Hex([]byte(apikey))
+	if err != nil {
+		return err
+	}
+	exist, err := connector_grpc.ValidateApiKey(ctx, rpcCtx, app, string(passwordHash), role)
+	if err != nil {
+		return err
+	}
+	if !exist {
+		return ErrInvalidApiKey
+	}
+	return nil
+}

@@ -1,0 +1,6 @@
+conf.json
+dist/
+conf-release.json
+
+download/
+backup/

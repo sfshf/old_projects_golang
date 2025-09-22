@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package console_api;
+option go_package = "./api/gateway";
+
+import "google/protobuf/struct.proto";
+
+service GatewayService {
+  rpc RefreshService(RefreshServiceRequest) returns (RefreshServiceResponse);
+  rpc RefreshCertificate(RefreshCertificateRequest) returns (RefreshCertificateResponse);
+  rpc RefreshProxy(RefreshProxyRequest) returns (RefreshProxyResponse);
+}
+
+message RefreshServiceRequest {
+  string name = 1; // @gotags: validate:"required"
+}
+
+message RefreshServiceResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}
+
+message RefreshCertificateRequest {
+  string domain = 1; // @gotags: validate:"required"
+}
+
+message RefreshCertificateResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}
+
+message RefreshProxyRequest {
+  string domain = 1; // @gotags: validate:"required"
+}
+
+message RefreshProxyResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}

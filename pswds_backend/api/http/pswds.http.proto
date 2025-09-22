@@ -1,0 +1,997 @@
+syntax = "proto3";
+
+package pswds_api;
+
+import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
+
+service PasswordService {
+  rpc CheckUpdates(CheckUpdatesRequest) returns (CheckUpdatesResponse) {
+      option (google.api.http) = {
+          post: "/pswds/checkUpdates/v1"
+          body: "*"
+      };
+  };
+  rpc UploadData(UploadDataRequest) returns (UploadDataResponse) {
+      option (google.api.http) = {
+          post: "/pswds/uploadData/v1"
+          body: "*"
+      };
+  };
+  rpc DownloadData(DownloadDataRequest) returns (DownloadDataResponse) {
+      option (google.api.http) = {
+          post: "/pswds/downloadData/v1"
+          body: "*"
+      };
+  };
+  rpc CreatePasswordRecord(CreatePasswordRecordRequest) returns (CreatePasswordRecordResponse) {
+      option (google.api.http) = {
+          post: "/pswds/createPasswordRecord/v1"
+          body: "*"
+      };
+  };
+  rpc UpdatePasswordRecord(UpdatePasswordRecordRequest) returns (UpdatePasswordRecordResponse) {
+      option (google.api.http) = {
+          post: "/pswds/updatePasswordRecord/v1"
+          body: "*"
+      };
+  };
+  rpc DeletePasswordRecord(DeletePasswordRecordRequest) returns (DeletePasswordRecordResponse) {
+      option (google.api.http) = {
+          post: "/pswds/deletePasswordRecord/v1"
+          body: "*"
+      };
+  };
+  rpc GetAirdropID(GetAirdropIDRequest) returns (GetAirdropIDResponse) {
+    option (google.api.http) = {
+      post: "/pswds/getAirdropID/v1"
+      body: "*"
+    };
+  };
+  rpc RequestAirdropData(RequestAirdropDataRequest) returns (RequestAirdropDataResponse) {
+    option (google.api.http) = {
+      post: "/pswds/requestAirdropData/v1"
+      body: "*"
+    };
+  };
+  rpc UploadAirdropData(UploadAirdropDataRequest) returns (UploadAirdropDataResponse) {
+    option (google.api.http) = {
+      post: "/pswds/uploadAirdropData/v1"
+      body: "*"
+    };
+  };
+  rpc UploadSecurityQuestions(UploadSecurityQuestionsRequest) returns (UploadSecurityQuestionsResponse) {
+    option (google.api.http) = {
+      post: "/pswds/uploadSecurityQuestions/v1"
+      body: "*"
+    };
+  };
+  rpc RecoverUnlockPassword(RecoverUnlockPasswordRequest) returns (RecoverUnlockPasswordResponse) {
+    option (google.api.http) = {
+      post: "/pswds/recoverUnlockPassword/v1"
+      body: "*"
+    };
+  };
+  rpc CreateTrustedContact(CreateTrustedContactRequest) returns (CreateTrustedContactResponse) {
+    option (google.api.http) = {
+      post: "/pswds/createTrustedContact/v1"
+      body: "*"
+    };
+  };
+  rpc GetTrustedContacts(GetTrustedContactsRequest) returns (GetTrustedContactsResponse) {
+    option (google.api.http) = {
+      post: "/pswds/getTrustedContacts/v1"
+      body: "*"
+    };
+  };
+  rpc DeleteTrustedContact(DeleteTrustedContactRequest) returns (DeleteTrustedContactResponse) {
+    option (google.api.http) = {
+      post: "/pswds/deleteTrustedContact/v1"
+      body: "*"
+    };
+  };
+  rpc GetBackupCiphertext(GetBackupCiphertextRequest) returns (GetBackupCiphertextResponse) {
+    option (google.api.http) = {
+      post: "/pswds/getBackupCiphertext/v1"
+      body: "*"
+    };
+  };
+  rpc GetPrivacyEmails(GetPrivacyEmailsRequest) returns (GetPrivacyEmailsResponse) {
+    option (google.api.http) = {
+      post: "/pswds/getPrivacyEmails/v1"
+      body: "*"
+    };
+  };
+  rpc GetPrivacyEmail(GetPrivacyEmailRequest) returns (GetPrivacyEmailResponse) {
+    option (google.api.http) = {
+      post: "/pswds/getPrivacyEmail/v1"
+      body: "*"
+    };
+  };
+  rpc DeletePrivacyEmail(DeletePrivacyEmailRequest) returns (DeletePrivacyEmailResponse) {
+    option (google.api.http) = {
+      post: "/pswds/deletePrivacyEmail/v1"
+      body: "*"
+    };
+  };
+  rpc AddPrivacyEmailAccount(AddPrivacyEmailAccountRequest) returns (AddPrivacyEmailAccountResponse) {
+    option (google.api.http) = {
+      post: "/pswds/addPrivacyEmailAccount/v1"
+      body: "*"
+    };
+  };
+  rpc CreateNonPasswordRecord(CreateNonPasswordRecordRequest) returns (CreateNonPasswordRecordResponse) {
+    option (google.api.http) = {
+      post: "/pswds/createNonPasswordRecord/v1"
+      body: "*"
+    };
+  };
+  rpc UpdateNonPasswordRecord(UpdateNonPasswordRecordRequest) returns (UpdateNonPasswordRecordResponse) {
+    option (google.api.http) = {
+      post: "/pswds/updateNonPasswordRecord/v1"
+      body: "*"
+    };
+  };
+  rpc DeleteNonPasswordRecord(DeleteNonPasswordRecordRequest) returns (DeleteNonPasswordRecordResponse) {
+    option (google.api.http) = {
+      post: "/pswds/deleteNonPasswordRecord/v1"
+      body: "*"
+    };
+  };
+  rpc DownloadSharedData(DownloadSharedDataRequest) returns (DownloadSharedDataResponse) {
+    option (google.api.http) = {
+      post: "/pswds/downloadSharedData/v1"
+      body: "*"
+    };
+  };
+  rpc CreateFamily(CreateFamilyRequest) returns (CreateFamilyResponse) {
+    option (google.api.http) = {
+      post: "/pswds/createFamily/v1"
+      body: "*"
+    };
+  };
+  rpc GetFamilyInfo(GetFamilyInfoRequest) returns (GetFamilyInfoResponse) {
+    option (google.api.http) = {
+      post: "/pswds/getFamilyInfo/v1"
+      body: "*"
+    };
+  };
+  rpc CheckUserAvailable(CheckUserAvailableRequest) returns (CheckUserAvailableResponse) {
+    option (google.api.http) = {
+      post: "/pswds/checkUserAvailable/v1"
+      body: "*"
+    };
+  };
+  rpc InviteFamilyMember(InviteFamilyMembersRequest) returns (InviteFamilyMemberResponse) {
+    option (google.api.http) = {
+      post: "/pswds/inviteFamilyMember/v1"
+      body: "*"
+    };
+  };
+  rpc CheckFamilyInvitation(CheckFamilyInvitationRequest) returns (CheckFamilyInvitationResponse) {
+    option (google.api.http) = {
+      post: "/pswds/checkFamilyInvitation/v1"
+      body: "*"
+    };
+  };
+  rpc ProcessFamilyInvitation(ProcessFamilyInvitationRequest) returns (ProcessFamilyInvitationResponse) {
+    option (google.api.http) = {
+      post: "/pswds/processFamilyInvitation/v1"
+      body: "*"
+    };
+  };
+  rpc RemoveFamilyMember(RemoveFamilyMemberRequest) returns (RemoveFamilyMemberResponse) {
+    option (google.api.http) = {
+      post: "/pswds/removeFamilyMember/v1"
+      body: "*"
+    };
+  };
+  rpc LeaveFamily(LeaveFamilyRequest) returns (LeaveFamilyResponse) {
+    option (google.api.http) = {
+      post: "/pswds/leaveFamily/v1"
+      body: "*"
+    };
+  };
+  rpc ShareDataToFamily(ShareDataToFamilyRequest) returns (ShareDataToFamilyResponse) {
+    option (google.api.http) = {
+      post: "/pswds/shareDataToFamily/v1"
+      body: "*"
+    };
+  };
+  rpc ManageSharingData(ManageSharingDataRequest) returns (ManageSharingDataResponse) {
+    option (google.api.http) = {
+      post: "/pswds/manageSharingData/v1"
+      body: "*"
+    };
+  };
+  rpc HandleAdminAuthority(HandleAdminAuthorityRequest) returns (HandleAdminAuthorityResponse) {
+    option (google.api.http) = {
+      post: "/pswds/handleAdminAuthority/v1"
+      body: "*"
+    };
+  };
+  rpc RemoveFamily(RemoveFamilyRequest) returns (RemoveFamilyResponse) {
+    option (google.api.http) = {
+      post: "/pswds/removeFamily/v1"
+      body: "*"
+    };
+  };
+  rpc GetFamilyMessages(GetFamilyMessagesRequest) returns (GetFamilyMessagesResponse) {
+    option (google.api.http) = {
+      post: "/pswds/getFamilyMessages/v1"
+      body: "*"
+    };
+  };
+  rpc GetFamilyBackups(GetFamilyBackupsRequest) returns (GetFamilyBackupsResponse) {
+    option (google.api.http) = {
+      post: "/pswds/getFamilyBackups/v1"
+      body: "*"
+    };
+  };
+  rpc SetFamilyBackup(SetFamilyBackupRequest) returns (SetFamilyBackupResponse) {
+    option (google.api.http) = {
+      post: "/pswds/setFamilyBackup/v1"
+      body: "*"
+    };
+  };
+  rpc RequestFamilyRecover(RequestFamilyRecoverRequest) returns (RequestFamilyRecoverResponse) {
+    option (google.api.http) = {
+      post: "/pswds/requestFamilyRecover/v1"
+      body: "*"
+    };
+  };
+  rpc HelpFamilyRecover(HelpFamilyRecoverRequest) returns (HelpFamilyRecoverResponse) {
+    option (google.api.http) = {
+      post: "/pswds/helpFamilyRecover/v1"
+      body: "*"
+    };
+  };
+  rpc RejectFamilyRecover(RejectFamilyRecoverRequest) returns (RejectFamilyRecoverResponse) {
+    option (google.api.http) = {
+      post: "/pswds/rejectFamilyRecover/v1"
+      body: "*"
+    };
+  };
+  rpc GetFamilyBackupRecovers(GetFamilyBackupRecoversRequest) returns (GetFamilyBackupRecoversResponse) {
+    option (google.api.http) = {
+      post: "/pswds/getFamilyBackupRecovers/v1"
+      body: "*"
+    };
+  };
+  rpc CheckUnlockPasswordBackups(CheckUnlockPasswordBackupsRequest) returns (CheckUnlockPasswordBackupsResponse) {
+    option (google.api.http) = {
+      post: "/pswds/checkUnlockPasswordBackups/v1"
+      body: "*"
+    };
+  };
+  rpc ConfirmFamilyRecover(ConfirmFamilyRecoverRequest) returns (ConfirmFamilyRecoverResponse) {
+    option (google.api.http) = {
+      post: "/pswds/confirmFamilyRecover/v1"
+      body: "*"
+    };
+  };
+}
+
+message ConfirmFamilyRecoverRequest {
+  string uuid = 1;
+}
+
+message ConfirmFamilyRecoverResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message CheckUnlockPasswordBackupsRequest {
+  string email = 1;
+}
+
+message CheckUnlockPasswordBackupsResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Member {
+    int64 userID = 1;
+    string email = 2;
+  }
+  message Data {
+    bool nullBackup = 1;
+    bool canRecover = 2;
+    int64 lastRecoveredAt = 3;
+    int64 nextRecoverTS = 4;
+    bool canFamilyRecover = 5;
+    int64 lastFamilyRecoveredAt = 6;
+    int64 nextFamilyRecoverTS = 7;
+    repeated Member backupMembers = 8;
+  }
+  Data data = 5;
+}
+
+message GetFamilyBackupRecoversRequest {
+  int64 userID = 1;
+}
+
+message GetFamilyBackupRecoversResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Recover {
+    int64 id = 1;
+    int64 createdAt = 2;
+    int64 userID = 3;
+    string email = 4;
+    string ciphertext = 5;
+    int64 checkedAt = 6;
+  }
+  message Data {
+    repeated Recover self = 1;
+    repeated Recover family = 2;
+  }
+  Data data = 5;
+}
+
+message RejectFamilyRecoverRequest {
+  string uuid = 1;
+}
+
+message RejectFamilyRecoverResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message HelpFamilyRecoverRequest {
+  int64 userID = 1;
+  string email = 2;
+}
+
+message HelpFamilyRecoverResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message RequestFamilyRecoverRequest {
+  string email = 1;
+  int64 userID = 2;
+}
+
+message RequestFamilyRecoverResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message SetFamilyBackupRequest {
+  bool set = 1;
+  message Backup {
+    int64 userID = 1;
+    string email = 2;
+    string ciphertext = 3;
+  }
+  repeated Backup familyBackups = 2;
+}
+
+message SetFamilyBackupResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message GetFamilyBackupsRequest {
+}
+
+message GetFamilyBackupsResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Backup {
+    int64 id = 1;
+    int64 userID = 2;
+    string email = 3;
+    int64 createdAt = 4;
+  }
+  message Data {
+    repeated Backup self = 1;
+    repeated Backup family = 2;
+  }
+  Data data = 5;
+}
+
+message GetFamilyMessagesRequest {
+}
+
+message GetFamilyMessagesResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Message {
+    int64 id = 1;
+    int64 createdAt = 2;
+    string creator = 3;
+    string target = 4;
+    int64 operation = 5;
+  }
+  message Data {
+    repeated Message list = 1;
+  }
+  Data data = 5;
+}
+
+message RemoveFamilyRequest {
+}
+
+message RemoveFamilyResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message HandleAdminAuthorityRequest {
+  int64 userID = 1;
+}
+
+message HandleAdminAuthorityResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message ManageSharingDataRequest {
+  string dataID = 1;
+  repeated int64 sharingMembers = 2;
+  bool stop = 3;
+}
+
+message ManageSharingDataResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message ShareDataToFamilyRequest {
+  repeated int64 sharingMembers = 1;
+  string dataID = 2;
+  string type = 3;
+  string content = 4;
+}
+
+message ShareDataToFamilyResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message LeaveFamilyRequest {
+}
+
+message LeaveFamilyResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message RemoveFamilyMemberRequest {
+  int64 userID = 1;
+}
+
+message RemoveFamilyMemberResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message ProcessFamilyInvitationRequest {
+  int64 id = 1;
+  bool accept = 2;
+}
+
+message ProcessFamilyInvitationResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message CheckFamilyInvitationRequest {
+}
+
+message CheckFamilyInvitationResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Data {
+    bool hasInvitation = 1;
+    int64 id = 2;
+    string invitedBy = 3;
+    int64 invitedAt = 4;
+    string encryptedFamilyKey = 5;
+  }
+  Data data = 5;
+}
+
+message InviteFamilyMembersRequest {
+  string email = 1;
+  string encryptedFamilyKey = 2;
+}
+
+message InviteFamilyMemberResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+
+message CheckUserAvailableRequest {
+  string email = 1;
+}
+
+message CheckUserAvailableResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Data {
+    string state = 1;
+    string userPublicKey = 2;
+  }
+  Data data = 5;
+}
+
+message GetFamilyInfoRequest {
+}
+
+message GetFamilyInfoResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message FamilyMember {
+    int64 id = 1;
+    int64 userID = 2;
+    string email = 3;
+    string familyID = 4;
+    int64 joinedAt = 5;
+    bool isAdmin = 6;
+    string userPublicKey = 7;
+  }
+  message Data {
+    bool hasFamily = 1;
+    string description = 2;
+    repeated FamilyMember familyMembers = 3;
+    int64 sharedNumbers = 4;
+  }
+  Data data = 5;
+}
+
+message CreateFamilyRequest {
+  string description = 1;
+  string encryptedFamilyKey = 2;
+}
+
+message CreateFamilyResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message DownloadSharedDataRequest {
+}
+
+message DownloadSharedDataResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message ListItem {
+    string dataID = 1;
+    int64 updatedAt = 2;
+    string familyID = 3;
+    int64 sharedBy = 4;
+    string type = 5;
+    string content = 6;
+    int64 version = 7;
+    bool sharedToAll = 8;
+  }
+  message SharedDataItem {
+    string dataID = 1;
+    int64 sharedAt = 2;
+    repeated int64 sharingMembers = 3;
+  }
+  message Data {
+    repeated ListItem sharingList = 1;
+    string encryptedFamilyKey = 2;
+    repeated SharedDataItem sharedData = 3;
+  }
+  Data data = 5;
+}
+
+message CreateNonPasswordRecordRequest {
+  int64 updatedAt = 1;
+  string dataID = 2;
+  string type = 3;
+  string content = 4;
+}
+
+message CreateNonPasswordRecordResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message UpdateNonPasswordRecordRequest {
+  int64 updatedAt = 1;
+  string dataID = 2;
+  string content = 3;
+  string sharedData = 4;
+}
+
+message UpdateNonPasswordRecordResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message DeleteNonPasswordRecordRequest {
+  int64 updatedAt = 1;
+  string dataID = 2;
+}
+
+message DeleteNonPasswordRecordResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message AddPrivacyEmailAccountRequest {
+}
+
+message AddPrivacyEmailAccountResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message DeletePrivacyEmailRequest {
+  int64 id = 1;
+}
+
+message DeletePrivacyEmailResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message GetPrivacyEmailRequest {
+  int64 id = 1;
+}
+
+message GetPrivacyEmailResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Content {
+    string contentType = 1;
+    string content = 3;
+  }
+  message Attachment {
+    string filename = 1;
+    int64 size = 2;
+    string content = 3;
+  }
+  message Data {
+    int64 id = 1;
+    string mailbox = 2;
+    int64 uid = 3;
+    string sentBy = 4;
+    int64 sentAt = 5;
+    string subject = 6;
+    repeated Content contents = 7;
+    repeated Attachment attachments = 8;
+  }
+  Data data = 5;
+}
+
+message GetPrivacyEmailsRequest {
+  int64 pageNum = 1;
+  int64 pageSize = 2;
+}
+
+message GetPrivacyEmailsResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Email {
+    int64 id = 1;
+    string mailbox = 2;
+    int64 uid = 3;
+    string sentBy = 4;
+    int64 sentAt = 5;
+    string subject = 6;
+  }
+  message Data {
+    bool hasAccount = 1;
+    int64 total = 2;
+    repeated Email list = 3;
+    repeated string accounts = 4;
+  }
+  Data data = 5;
+}
+
+message GetBackupCiphertextRequest {
+  string email = 1;
+  string contactEmail = 2;
+}
+
+message GetBackupCiphertextResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message DeleteTrustedContactRequest {
+  int64 id = 1;
+}
+
+message DeleteTrustedContactResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message GetTrustedContactsRequest {
+}
+
+message GetTrustedContactsResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message TrustedContact {
+    int64 id = 1;
+    string contactEmail = 2;
+  }
+  message Data {
+    repeated TrustedContact list = 1;
+  }
+  Data data = 5;
+}
+
+message CreateTrustedContactRequest {
+  string contactEmail = 1;
+  string backupCiphertext = 2;
+}
+
+message CreateTrustedContactResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message CheckUpdatesRequest {
+  int64 updatedAt = 1;
+  int64 sharedDataChecksum = 2;
+}
+
+message CheckUpdatesResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message OtherFamilyMember {
+    int64 userID = 1;
+    string email = 2;
+  }
+  message Data {
+    string state = 1;
+    int64 updatedAt = 2;
+    bool hasFamily = 3;
+    bool sharedDataUpdated = 4;
+    repeated OtherFamilyMember otherFamilyMembers = 5;
+  }
+  Data data = 5;
+}
+
+message UploadDataRequest {
+  int64 updatedAt = 1;
+  string passwordHash = 2;
+  message PasswordDTO {
+    string dataID = 1;
+    int64 updatedAt = 2;
+    string content = 3;
+  }
+  repeated PasswordDTO pwdList = 3;
+  message NonPasswordDTO {
+    string dataID = 1;
+    int64 updatedAt = 2;
+    string type = 3;
+    string content = 4;
+  }
+  repeated NonPasswordDTO nprList = 4;
+  string userPublicKey = 5;
+  string encryptedFamilyKey = 6;
+}
+
+message UploadDataResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message DownloadDataRequest {
+  int64 updatedAt = 1;
+}
+
+message DownloadDataResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message ListItem {
+    string dataID = 1;
+    int64 updatedAt = 2;
+    string familyID = 3;
+    int64 sharedBy = 4;
+    string type = 5;
+    string content = 6;
+    int64 version = 7;
+    bool sharedToAll = 8;
+  }
+  message SharedDataItem {
+    string dataID = 1;
+    int64 sharedAt = 2;
+    repeated int64 sharingMembers = 3;
+  }
+  message Data {
+    int64 updatedAt = 1;
+    string passwordHash = 2;
+    string pwdList = 3;
+    string securityQuestions = 4;
+    repeated string pwdIDList = 5;
+    string nprList = 6;
+    repeated string nprIDList = 7;
+    string encryptedFamilyKey = 8;
+    repeated ListItem sharingList = 9;
+    repeated SharedDataItem sharedData = 10;
+  }
+  Data data = 5;
+}
+
+message CreatePasswordRecordRequest {
+  int64 updatedAt = 1;
+  string dataID = 2;
+  string content = 3;
+}
+
+message CreatePasswordRecordResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message UpdatePasswordRecordRequest {
+  int64 updatedAt = 1;
+  string dataID = 2;
+  string content = 3;
+  string sharedData = 4; 
+}
+
+message UpdatePasswordRecordResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message DeletePasswordRecordRequest {
+  int64 updatedAt = 1;
+  string dataID = 2;
+}
+
+message DeletePasswordRecordResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message GetAirdropIDRequest {
+}
+
+message GetAirdropIDResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Data {
+    string uuid = 1;
+  }
+  Data data = 5;
+}
+
+message RequestAirdropDataRequest {
+  string uuid = 1;
+}
+
+message RequestAirdropDataResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Data {
+    string cipherText = 1;
+    string options = 2;
+  }
+  Data data = 5;
+}
+
+message UploadAirdropDataRequest {
+  string uuid = 1;
+  string cipherText = 2;
+  string options = 3;
+}
+
+message UploadAirdropDataResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message UploadSecurityQuestionsRequest {
+  int64 updatedAt = 1;
+  string securityQuestions = 2;
+  string securityQuestionsCiphertext = 3;
+}
+
+message UploadSecurityQuestionsResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Data {
+    int64 updatedAt = 1;
+  }
+  Data data = 5;
+}
+
+message RecoverUnlockPasswordRequest {
+  string email = 1;
+}
+
+message RecoverUnlockPasswordResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}

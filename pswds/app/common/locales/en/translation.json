@@ -1,0 +1,649 @@
+{
+  "app": {
+    "name": "pswds",
+    "toast": {
+      "success": "success",
+      "error": "error",
+      "requestError": "request error",
+      "internalError": "internal error",
+      "syncBackupDataError": "sync backup data error",
+      "notSignedIn": "not sign in",
+      "synchronizingData": "synchronizing data ...",
+      "afterSyncBackupData": "refresh the data, and try again",
+      "emptyUnlockPassword": "empty unlock password",
+      "cameraError": "fail to request permission of camera",
+      "parameterError": "parameter error",
+      "backupRecordError": "backup record error",
+      "familyKeyError": "family key error",
+      "notFoundError": "data not found"
+    },
+    "alert": {
+      "cancelBtn": "Cancel",
+      "commitBtn": "Commit",
+      "confirmBtn": "Confirm",
+      "okBtn": "OK",
+      "mustSignedInTitle": "Please Sign In",
+      "mustSignedInMessage": "Must sign in, please.",
+      "mustSetUnlockPasswordTitle": "Please Set Unlock Password",
+      "mustSetUnlockPasswordMessage": "Must set unlock password, please.",
+      "mustSetSecurityQuestionsTitle": "Please Set Security Questions",
+      "mustSetSecurityQuestionsMessage": "Must set security questions, please.",
+      "emailHasSentTitle": "Please Check Your Mailbox",
+      "emailHasSentMessage": "An email has been sent to ",
+      "recoverRequestLimitTitle": "Recover request limit",
+      "recoverRequestLimitMessage": "Recover request only once a day.",
+      "nullBackupTitle": "Not set any backup",
+      "nullBackupMessage": "The account does not set any backup, could not recover unlock password."
+    },
+    "button": {
+      "delete": "Delete",
+      "edit": "Edit",
+      "share": "Share",
+      "transfer": "Transfer By QR code",
+      "transfer2": "Transfer By QR Scanner",
+      "copy": "Copy"
+    }
+  },
+  "lockScreen": {
+    "title": "Verification",
+    "toast": {
+      "notHasHardwareAsync": "no fingerprint/face id scanner is available on the device",
+      "notIsEnrolledAsync": "no saved fingerprints/face id data to use for authentication on the device"
+    },
+    "tips": {
+      "1": "Please enter password",
+      "2": "Please click and verify fingerprint/face id"
+    },
+    "errTips": {
+      "1": "Password is empty! Please input password",
+      "2": "Password is wrong! Please type in again.",
+      "3": "Invlid login session",
+      "4": "Login by secondary password fail."
+    },
+    "logout": "Log Back In",
+    "usePassword": "Verify By Password",
+    "useFingerprint": "Verify By Fingerprint/FaceID",
+    "authenticationPromptTitle": "Authenticate to recover secret",
+    "recoverUnlockPassword": "recover unlock password"
+  },
+  "familyShare": {
+    "overlay": {
+      "shareToAll": "Share to all members",
+      "shareBtn": "Share",
+      "changeShareBtn": "Change",
+      "stopShareBtn": "Cancel Sharing"
+    },
+    "status": {
+      "sharing": "from family",
+      "shared": "shared"
+    }
+  },
+  "familyOperation": {
+    "overlay": {
+      "label": "Operations",
+      "operations": {
+        "1": "Set as administrator",
+        "2": "Set as non-administrator",
+        "3": "Move out of the family",
+        "4": "Cancel"
+      }
+    }
+  },
+  "home": {
+    "tabTitle": "Home",
+    "searchPassword": {
+      "mostUsedBtn": "Most Used",
+      "latestUsedBtn": "Latest Used",
+      "latestUpdatedBtn": "Latest Updated"
+    }
+  },
+  "dataQR": {
+    "label": "Data QR Code",
+    "usePin": "Use Pin",
+    "onlyPassword": "Only Password",
+    "pinCode": "Pin Code"
+  },
+  "passwords": {
+    "tabTitle": "Passwords",
+    "firstOneBtn": "Create Your First Password",
+    "newPassword": {
+      "label": "New Password",
+      "toast": {
+        "invalidWebsite": "invalid website",
+        "invalidTOTP": "invalid totp uri"
+      },
+      "newBtn": "New Password",
+      "addFieldBtn": "Add Field",
+      "title": "Title",
+      "titlePlaceholder": "Input title",
+      "website": "Website",
+      "websitePlaceholder": "Input website (optional)",
+      "username": "Username",
+      "usernamePlaceholder": "Input username",
+      "password": "Password",
+      "passwordPlaceholder": "Input password",
+      "notes": "Notes",
+      "notesPlaceholder": "Input notes (multiline)",
+      "randomPassword": "random password",
+      "randomPasswordDialog": {
+        "title": "Random Password Generator",
+        "useBtn": "Use",
+        "cancelBtn": "Cancel",
+        "type": "Type",
+        "typeListRandomPasswordLabel": "Random Password",
+        "typeRandomPassword": "Random Password",
+        "charLength": "Characters",
+        "includeNumber": "Include Numbers",
+        "includeSymbol": "Include Symbols",
+        "copyPrompt": "Copied"
+      },
+      "emptyTitle": "empty title",
+      "emptyUsername": "empty username",
+      "emptyPassword": "empty password",
+      "otherFields": {
+        "label": "Please select Field Type",
+        "fieldType1": "Text",
+        "fieldType2": "Url",
+        "fieldType3": "Password",
+        "fieldType4": "One-Time Password",
+        "fieldType5": "Date",
+        "fieldType6": "PIN",
+        "fieldPlaceholder": "Input field name",
+        "valuePlaceholder": "Input field value"
+      }
+    },
+    "passwordDetail": {
+      "label": "Password Detail",
+      "toast": {
+        "invalidWebsite": "invalid website",
+        "invalidTOTP": "invalid totp uri"
+      },
+      "header": "Detail",
+      "title": "Title",
+      "titlePlaceholder": "Input title",
+      "website": "Website",
+      "websitePlaceholder": "Input website (optional)",
+      "username": "Username",
+      "usernamePlaceholder": "Input username",
+      "password": "Password",
+      "passwordPlaceholder": "Input password",
+      "notes": "Notes",
+      "notesPlaceholder": "Input notes (multiline)",
+      "copyPrompt": "Copied",
+      "editPrompt": "Update Password ",
+      "deletePrompt": "Delete Password ",
+      "deleteBtn": "Delete",
+      "lastEditedLabel": "Last Edited At: ",
+      "sharingSince": "Sharing to family since ",
+      "sharedBy": "Shared by ",
+      "qrcodeScanner": {
+        "label": "QR Code Scanner",
+        "toast": {}
+      }
+    },
+    "searchPassword": {
+      "label": "Search Password",
+      "searchInputPlaceholder": "Enter Title Of A Password"
+    }
+  },
+  "records": {
+    "tabTitle": "Records",
+    "firstOneBtn": "Create Your First Record",
+    "recordType1": "identity",
+    "recordType2": "credit card",
+    "recordType3": "bank account",
+    "recordType4": "driver license",
+    "recordType5": "passport",
+    "recordTypeOverlay": {
+      "label": "Please select Record Type"
+    },
+    "newRecord": {
+      "label": "New Record",
+      "toast": {
+        "invalidTOTP": "invalid totp uri",
+        "pinTypeError": "unformat pin code"
+      },
+      "newBtn": "New Record",
+      "addFieldBtn": "Add Field",
+      "inputs": {
+        "identity": {
+          "title": "Title",
+          "titlePlaceholder": "Input title",
+          "firstName": "First Name",
+          "firstNamePlaceholder": "Input first name (optional)",
+          "lastName": "Last Name",
+          "lastNamePlaceholder": "Input last name (optional)",
+          "gender": "Gender",
+          "genderPlaceholder": "Input gender (optional)",
+          "birthDate": "Birth Date",
+          "birthDatePlaceholder": "Input birth date (optional)",
+          "job": "Job",
+          "jobPlaceholder": "Input job (optional)",
+          "address": "Address",
+          "addressPlaceholder": "Input address (optional)",
+          "phone": "Phone",
+          "phonePlaceholder": "Input phone (optional)",
+          "socialSecurityNumber": "Social Security Number",
+          "socialSecurityNumberPlaceholder": "Input social security number (optional)",
+          "idNumber": "ID Number",
+          "idNumberPlaceholder": "Input id number (optional)"
+        },
+        "creditCard": {
+          "title": "Title",
+          "titlePlaceholder": "Input title",
+          "cardholderName": "Cardholder Name",
+          "cardholderNamePlaceholder": "Input cardholder name (optional)",
+          "type": "Type",
+          "typePlaceholder": "Input type (optional)",
+          "number": "Number",
+          "numberPlaceholder": "Input number (optional)",
+          "verificationNumber": "Verification Number",
+          "verificationNumberPlaceholder": "Input verification number (optional)",
+          "pin": "PIN",
+          "pinPlaceholder": "Input pin (optional)",
+          "expiryDate": "Expiry Date",
+          "expiryDatePlaceholder": "Input expiry date (optional)",
+          "validFrom": "Valid From",
+          "validFromPlaceholder": "Input valid from (optional)",
+          "issuingBank": "Issuing Bank",
+          "issuingBankPlaceholder": "Input issuing bank (optional)"
+        },
+        "bankAccount": {
+          "title": "Title",
+          "titlePlaceholder": "Input title",
+          "bankName": "Bank Name",
+          "bankNamePlaceholder": "Input bank name (optional)",
+          "nameOnAccount": "Name On Account",
+          "nameOnAccountPlaceholder": "Input name on account (optional)",
+          "type": "Type",
+          "typePlaceholder": "Input type (optional)",
+          "routingNumber": "Routing Number",
+          "routingNumberPlaceholder": "Input routing number (optional)",
+          "branch": "Branch",
+          "branchPlaceholder": "Input branch (optional)",
+          "accountNumber": "Account Number",
+          "accountNumberPlaceholder": "Input account number (optional)",
+          "swift": "SWIFT",
+          "swiftPlaceholder": "Input swift (optional)",
+          "pin": "PIN",
+          "pinPlaceholder": "Input pin (optional)",
+          "phone": "Phone",
+          "phonePlaceholder": "Input phone (optional)"
+        },
+        "driverLicense": {
+          "title": "Title",
+          "titlePlaceholder": "Input title",
+          "fullName": "Full Name",
+          "fullNamePlaceholder": "Input full name (optional)",
+          "address": "Address",
+          "addressPlaceholder": "Input address (optional)",
+          "birthDate": "Birth Date",
+          "birthDatePlaceholder": "Input birth date (optional)",
+          "gender": "Gender",
+          "genderPlaceholder": "Input gender (optional)",
+          "height": "Height",
+          "heightPlaceholder": "Input height (optional)",
+          "number": "Number",
+          "numberPlaceholder": "Input number (optional)",
+          "licenseClass": "License Class",
+          "licenseClassPlaceholder": "Input license class (optional)",
+          "state": "State",
+          "statePlaceholder": "Input state (optional)",
+          "country": "Country",
+          "countryPlaceholder": "Input country (optional)",
+          "expiryDate": "Expiry Date",
+          "expiryDatePlaceholder": "Input expiry date (optional)"
+        },
+        "passport": {
+          "title": "Title",
+          "titlePlaceholder": "Input title",
+          "issuingCountry": "Issuing Country",
+          "issuingCountryPlaceholder": "Input issuing country (optional)",
+          "type": "Type",
+          "typePlaceholder": "Input type (optional)",
+          "number": "Number",
+          "numberPlaceholder": "Input number (optional)",
+          "fullName": "Full Name",
+          "fullNamePlaceholder": "Input full name (optional)",
+          "gender": "Gender",
+          "genderPlaceholder": "Input gender (optional)",
+          "nationality": "Nationality",
+          "nationalityPlaceholder": "Input nationality (optional)",
+          "issuingAuthority": "Issuing Authority",
+          "issuingAuthorityPlaceholder": "Input issuing authority (optional)",
+          "birthDate": "Birth Date",
+          "birthDatePlaceholder": "Input birth date (optional)",
+          "birthPlace": "Birth Place",
+          "birthPlacePlaceholder": "Input birth place (optional)",
+          "issuedOn": "Issued On",
+          "issuedOnPlaceholder": "Input issued on (optional)",
+          "expiryDate": "Expiry Date",
+          "expiryDatePlaceholder": "Input expiry date (optional)"
+        }
+      },
+      "datePicker": {
+        "label": "Date Picker",
+        "byMonth": "By Month",
+        "yearLabel": "Year",
+        "monthLabel": "Month",
+        "dayLabel": "Day",
+        "useBtn": "Use"
+      },
+      "emptyTitle": "empty title"
+    },
+    "recordDetail": {
+      "label": "Record Detail",
+      "toast": {
+        "invalidTOTP": "invalid totp uri"
+      },
+      "header": "Detail",
+      "copyPrompt": "Copied",
+      "editPrompt": "Update Record ",
+      "deletePrompt": "Delete Record ",
+      "deleteBtn": "Delete",
+      "lastEditedLabel": "Last Edited At: ",
+      "sharingSince": "Sharing to family since ",
+      "sharedBy": "Shared by ",
+      "qrcodeScanner": {
+        "label": "QR Code Scanner",
+        "toast": {}
+      }
+    }
+  },
+  "settings": {
+    "tabTitle": "Settings",
+    "version": "Version",
+    "cards": {
+      "title1": "Account",
+      "title2": "Setting",
+      "title3": "About"
+    },
+    "signin": {
+      "label": "Sign In",
+      "toast": {
+        "emptyEmail": "empty email",
+        "emptyUnlockPassword": "empty unlock password"
+      },
+      "hasSignedIn": "signed in",
+      "email": "Email",
+      "emailPlaceholder": "Input email",
+      "unlockPassword": "Unlock Password",
+      "unlockPasswordPlaceholder": "Input unlock password",
+      "noAccount": "trial without account",
+      "goToSignUp": "go to sign up"
+    },
+    "signout": {
+      "label": "Sign Out"
+    },
+    "family": {
+      "label": "Family Share",
+      "createFamilyBtn": "Create Family",
+      "familyName": "Family Name: ",
+      "joinedAt": "Joined At: ",
+      "isMe": " (Me)",
+      "isAdmin": "Admin",
+      "inviteMemberBtn": "Invite Member",
+      "leaveFamilyBtn": "Leave Family",
+      "leaveFamilyPrompt": "Are you sure to leave the family?",
+      "removeFamilyBtn": "Remove Family",
+      "removeFamilyPrompt": "Are you sure to Remove the family?",
+      "backupUnlockPasswordBtn": "Backup Unlock Password",
+      "familyMessage": {
+        "label": "Family Message",
+        "createdAt": "Time At: ",
+        "creator": "Operator: ",
+        "target": "Target: ",
+        "operation": "Operation: ",
+        "operations": {
+          "1": "Invite family member",
+          "2": "Accept family invitation",
+          "3": "Reject family invitation",
+          "4": "Authorize family administrator",
+          "5": "Unauthorize family administrator",
+          "6": "Remove family member",
+          "7": "Leave family",
+          "8": "Family invitation is canceled, Please invite again"
+        }
+      },
+      "familyInvitation": {
+        "title": "Family Invitation",
+        "invitedBy": "Invited By: ",
+        "invitedAt": "Invited At: ",
+        "acceptBtn": "Accept",
+        "rejectBtn": "Reject"
+      },
+      "createFamily": {
+        "label": "Create Family",
+        "toast": {
+          "emptyDescription": "empty description"
+        },
+        "descriptionPlaceholder": "Input description"
+      },
+      "inviteFamilyMember": {
+        "label": "Invite Family Member",
+        "toast": {
+          "emptyEmail": "empty email",
+          "malformedEmail": "malformed email",
+          "emptyUserPublicKey": "empty user public key",
+          "invitationStateNoUser": "user data not found",
+          "invitationStateHasFamily": "user has family",
+          "invitationStateHasInvited": "user has invited",
+          "invitationStateInvitable": "user is invitable"
+        },
+        "emailPlaceholder": "Input email",
+        "checkBtn": "Check Email",
+        "cancelBtn": "Cancel",
+        "okBtn": "Ok",
+        "inviteBtn": "Invite"
+      },
+      "backupUnlockPassword": {
+        "label": "Backup Unlock Password",
+        "backupBtn": "Set Up Backup",
+        "sharedBackupAt": "Shared Backup At: ",
+        "sharingBackupAt": "Sharing Backup At: ",
+        "recoverPasswordBtn": "Recover Password"
+      },
+      "setupFamilyBackupOverlay": {
+        "backupBtn": "Backup"
+      },
+      "familyBackupRecover": {
+        "label": "Family Backup Recover",
+        "recoverFromFamily": "Recover From Family",
+        "recoverForFamily": "Recover For Family",
+        "helpRecoverBtn": "Help Recover",
+        "labels": {
+          "myRecoverRequest": "My Recover Request",
+          "theirRecoverRequest": "Their Recover Request",
+          "sentAt": "Sent At: ",
+          "willExpiredAt": "Will Expired At: ",
+          "needToConfirm": "The recover email is not confirmed.",
+          "ciphertext": "Cipher Text: ",
+          "plaintext": "Unlock Password: ",
+          "waitUntil": "Wait Until: ",
+          "emailRejectedAt": "Rejected At: "
+        }
+      },
+      "requestFamilyRecoverOverlay": {
+        "commitBtn": "Request Help"
+      }
+    },
+    "email": {
+      "label": "Privacy Email",
+      "itemSubject": "Subject: ",
+      "itemFrom": "From: ",
+      "itemDate": "Date: ",
+      "paginationTotal": "Total: ",
+      "paginationPage": "Page: ",
+      "applyEmailAccountBtn": "Apply For An Email Account"
+    },
+    "emailDetail": {
+      "label": "Email Detail",
+      "sentByLabel": "From: ",
+      "sentAtLabel": "Date: ",
+      "titleLabel": "Subject: ",
+      "contentLabel": "Content: ",
+      "attachmentLabel": "Attachments: ",
+      "attachmentFilenameLabel": "Filename: ",
+      "attachmentFilesizeLabel": "File Size: ",
+      "attachmentFilecontentLabel": "File Content: ",
+      "deletePrompt": "Delete Email "
+    },
+    "signup": {
+      "label": "Sign Up",
+      "toast": {
+        "emptyEmail": "empty email",
+        "emptyCaptcha": "empty captcha"
+      },
+      "header": "Sign Up By Email",
+      "email": "Email",
+      "emailPlaceholder": "Input email",
+      "captcha": "Captcha",
+      "captchaPlaceholder": "Input captcha",
+      "fetchCaptcha": "Fetch Captcha"
+    },
+    "language": {
+      "label": "Language",
+      "default": "System Default",
+      "zh": "Chinese (Simple)",
+      "en": "English (US)"
+    },
+    "theme": {
+      "label": "Theme",
+      "default": "System Default",
+      "dark": "Dark",
+      "light": "Light"
+    },
+    "forum": {
+      "label": "Forum"
+    },
+    "unlockPassword": {
+      "label": "Unlock Password",
+      "toast": {
+        "notSet": "not set unlock password"
+      },
+      "updatePassword": "Update Password",
+      "verificationMode": {
+        "label": "Change Verification Mode",
+        "supportFingerprint": "Support Fingerprint"
+      },
+      "editUnlockPassword": {
+        "label": "Set up Unlock Password",
+        "toast": {
+          "inconsistentPasswords": "inconsistent passwords",
+          "passwordTypeError": "unformat unlock password"
+        },
+        "alert": {
+          "title1": "Important Warning",
+          "message1": "Changing the unlock password will delete existing security questions and trusted contacts."
+        },
+        "title1": "Verify Old Password",
+        "title2": "Input New Password",
+        "oldPassword": "Old Password",
+        "oldPasswordPlaceholder": "Input Old Password",
+        "verifyBtn": "Verify",
+        "password1": "Unlock Password",
+        "password1Placeholder": "Input unlock password",
+        "password2": "Confirm Unlock Password",
+        "password2Placeholder": "Input unlock passwowrd again",
+        "createBtn": "Confirm"
+      },
+      "autoLock": {
+        "label": "Auto Lock Screen",
+        "caption": "Choose the amount of time before the application locks automatically",
+        "lockTimes": {
+          "immediately": "Immediately",
+          "after30Seconds": "After 30 seconds",
+          "after1Minute": "After 1 minute",
+          "after10Minutes": "After 10 minutes",
+          "after30Minutes": "After 30 minutes",
+          "after1Hour": "After 1 hour",
+          "never": "Never"
+        }
+      },
+      "securityQuestion": {
+        "label": "Security Question",
+        "hasSecurityQuestion": "Already Has Set",
+        "verifyTitle": "Verify Unlock Password",
+        "verifyBtn": "Verify",
+        "passwordPlaceholder": "Input unlock password",
+        "question1Title": "Question One",
+        "answer1Title": "Answer One",
+        "question2Title": "Question Two",
+        "answer2Title": "Answer Two",
+        "question3Title": "Question Three",
+        "answer3Title": "Answer Three",
+        "securityQuestionDetail": {
+          "label": "Security Question Detail"
+        },
+        "editSecurityQuestion": {
+          "label1": "Set Security Question",
+          "label2": "Reset Security Question",
+          "toast": {
+            "emptyQuestion": "has empty question",
+            "emptyAnswer": "has empty answer",
+            "requestPublicKeyError": "request public key fail",
+            "uploadSecurityQuestionAnswersError": "upload security questions and answers fail"
+          }
+        }
+      },
+      "recoverUnlockPassword": {
+        "label": "Recover Unlock Password",
+        "toast": {},
+        "title": "Please Input Account Email",
+        "emailPlaceholder": "Input account email",
+        "useFamilyMode": "Family Mode",
+        "doRecoverBtn": "Secret Protection Recovery",
+        "doFamilyRecoverBtn": "Family Backup Recovery",
+        "doCheckBtn": "Check Email",
+        "recoverTip": "You have request security questions recover at {{lastRecoveredAt, string}}, you can send the next request at {{nextRecoverTS, string}}.",
+        "familyRecoverTip": "You have request family recover at {{lastFamilyRecoveredAt, string}}, you can send the next request at {{nextFamilyRecoverTS, string}}."
+      },
+      "trustedContact": {
+        "label": "Trusted Contact",
+        "deleteBtn": "Delete",
+        "addBtn": "Add"
+      },
+      "addTrustedContact": {
+        "label": "Add Trusted Contact",
+        "toast": {
+          "emptyContactEmail": "empty contact email",
+          "emptyBackupPassword": "empty backup password"
+        },
+        "contactEmail": "Contact Email",
+        "contactEmailPlaceholder": "Input contact email",
+        "backupPassword": "Backup Password",
+        "backupPasswordPlaceholder": "Input backup password",
+        "addBtn": "Add",
+        "refreshBtn": "Refresh",
+        "copyBtn": "Copy"
+      }
+    }
+  },
+  "debug": {
+    "label": "Application Debug",
+    "useGo": "Use Encrypted Http",
+    "logs": {
+      "label": "Debug Logs"
+    },
+    "logHttp": "Log Http",
+    "httpLogs": {
+      "label": "Http Logs"
+    },
+    "httpLogDetail": {
+      "label": "Http Log Detail",
+      "fields": {
+        "useGo": "Use Go",
+        "start": "Started At",
+        "end": "Ended At",
+        "duration": "Duration (ms)",
+        "host": "Host",
+        "path": "Path",
+        "reqBody": "Request Body",
+        "reqHeaders": "Request Headers",
+        "respCode": "Response Code",
+        "respHeaders": "Response Headers",
+        "respBody": "Response Body"
+      }
+    }
+  }
+}

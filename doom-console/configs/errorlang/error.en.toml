@@ -1,0 +1,20 @@
+[ClientErrMsg_WrongRequestParameters]
+other = "Request has wrong parameters, please inspect parameters"
+
+[ClientErrMsg_UnsupportedToken]
+other = "Unsupported token."
+
+[ClientErrMsg_ApiKeyIsInvalid]
+other = "ApiKey is invalid. Please input apiKey correctly."
+
+[ClientErrMsg_BadRequest]
+other = "bad request"
+
+[FatalErrMsg]
+other = "Sorry. Some fatal error happened. Try to contact the custom service of this APP."
+
+[Business_ErrorTokenDetectionERC20]
+other = "The token is ERC20"
+
+[Business_ErrorTokenDetectionNotERC20]
+other = "The token is NOT ERC20"

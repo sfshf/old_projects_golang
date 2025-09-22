@@ -1,0 +1,170 @@
+pipeline {
+    agent {
+        label 'hongkong-test'
+    }
+    stages {
+        stage('Pre') {
+            steps {
+                script {
+                    sh '''
+                        git remote update origin --prune
+                        git branch -a | grep -e '^  remotes/origin/dev$'
+                        echo 'remote dev branch exists'
+                        git branch -D dev || echo 'no local dev branch'
+                        git branch dev remotes/origin/dev
+                    '''
+                    sh """
+                        git checkout ${BRANCH_NAME}
+                        git rebase dev
+                        echo 'git rebase dev success'
+                        git push origin ${BRANCH_NAME}
+                        echo 'git push origin' ${BRANCH_NAME} 'success'
+                    """
+                }
+            }
+        }
+        stage('Build') {
+            steps {
+                sh """
+                    docker build \
+                        --build-arg env=test \
+                        -t nextsurfer/tester:latest \
+                        -f build/tester/Dockerfile .
+                    docker stop -t 60 -s SIGTERM tester && docker rm tester || echo 0
+                    docker run -itd \
+                        --name tester \
+                        --dns ${HOST_IP} \
+                        --dns 8.8.8.8 \
+                        --restart always \
+                        -e 'APP_NAME=${APP_NAME}' \
+                        -e 'CONSUL_HTTP_ADDR=${CONSUL_HTTP_ADDR}' \
+                        -e 'GRPC_SERVER_HOST=${GRPC_SERVER_HOST}' \
+                        -e 'GRPC_SERVER_PORT=${GRPC_SERVER_PORT}' \
+                        -e 'GRPC_METRIC_PORT=${GRPC_METRIC_PORT}' \
+                        -e 'MYSQL_METRIC_PORT=${MYSQL_METRIC_PORT}' \
+                        -e 'APPLICATION_ENV=${APPLICATION_ENV}' \
+                        -e 'TESTER_REDIS_DNS=${TESTER_REDIS_DNS}' \
+                        -e 'TESTER_MYSQL_DNS=${TESTER_MYSQL_DNS}' \
+                        -e 'I18N_TOML_PATH=${I18N_TOML_PATH}' \
+                        -e 'TESTER_MONGODB_URI=${TESTER_MONGODB_URI}' \
+                        -e 'UPLOAD_BUCKET_NAME=${UPLOAD_BUCKET_NAME}' \
+                        -e 'AWS_REGION=${AWS_REGION}' \
+                        -p '${GRPC_SERVER_PORT}:${GRPC_SERVER_PORT}' \
+                        -p '${GRPC_METRIC_PORT}:${GRPC_METRIC_PORT}' \
+                        -p '${MYSQL_METRIC_PORT}:${MYSQL_METRIC_PORT}' \
+                        nextsurfer/tester:latest
+                """
+            }
+        }
+         stage('PushService') {
+            steps {
+                sh """
+                    docker run --rm \
+                        -v ./:/test \
+                        -w /test \
+                        -e 'CONSOLE_HOST=${CONSOLE_HOST}' \
+                        -e 'CONSOLE_GRPC_PORT=${CONSOLE_GRPC_PORT}' \
+                        golang:1.23 \
+                        sh -c \
+                        "git config --global url.https://github@github.com.insteadof https://github.com && GOSUMDB=off go mod tidy && go run ./cmd/pushproto"
+                """
+            }
+        }
+        stage('Test') {
+            steps {
+                sh """
+                    docker run --rm \
+                        -v ./:/test \
+                        -w /test \
+                        -e 'SLARK_MYSQL_DNS=${SLARK_MYSQL_DNS}' \
+                        -e 'ORACLE_GATEWAY_DNS=${ORACLE_GATEWAY_DNS}' \
+                        -e 'TESTER_APIKEY=${TESTER_APIKEY}' \
+                        golang:1.23 \
+                        sh -c \
+                        "git config --global url.https://github@github.com.insteadof https://github.com && GOSUMDB=off go mod tidy && go test --ldflags '-extldflags "-Wl,--allow-multiple-definition"' -v -timeout 0 ./test/e2e/tester"
+                """
+            }
+        }
+        stage('UI') {
+            steps {
+                sh """
+                    docker build \
+                        --build-arg env=test \
+                        -t nextsurfer/tester-ui:latest \
+                        -f ./ui/Dockerfile ./ui
+                    docker stop tester-ui && docker rm tester-ui || echo 0
+                    docker run -d \
+                        --restart always \
+                        --name tester-ui \
+                        --dns ${HOST_IP} \
+                        --dns 8.8.8.8 \
+                        -p 8080:3000 \
+                        nextsurfer/tester-ui:latest
+                """
+            }
+        }
+    }
+    post {
+        success {
+            sh """
+                echo 'e2e testing success'
+                git checkout dev
+                git rebase ${BRANCH_NAME}
+                git push origin dev
+            """
+        }
+        failure {
+            sh """
+                echo 'feature build or e2e testing fail'
+                git checkout dev
+                docker build \
+                    --build-arg env=test \
+                    -t nextsurfer/tester:latest \
+                    -f build/tester/Dockerfile .
+                docker stop -t 60 -s SIGTERM tester && docker rm tester || echo 0
+                docker run -itd \
+                    --name tester \
+                    --dns ${HOST_IP} \
+                    --dns 8.8.8.8 \
+                    --restart always \
+                    -e 'APP_NAME=${APP_NAME}' \
+                    -e 'CONSUL_HTTP_ADDR=${CONSUL_HTTP_ADDR}' \
+                    -e 'GRPC_SERVER_HOST=${GRPC_SERVER_HOST}' \
+                    -e 'GRPC_SERVER_PORT=${GRPC_SERVER_PORT}' \
+                    -e 'GRPC_METRIC_PORT=${GRPC_METRIC_PORT}' \
+                    -e 'MYSQL_METRIC_PORT=${MYSQL_METRIC_PORT}' \
+                    -e 'APPLICATION_ENV=${APPLICATION_ENV}' \
+                    -e 'TESTER_REDIS_DNS=${TESTER_REDIS_DNS}' \
+                    -e 'TESTER_MYSQL_DNS=${TESTER_MYSQL_DNS}' \
+                    -e 'I18N_TOML_PATH=${I18N_TOML_PATH}' \
+                    -e 'TESTER_MONGODB_URI=${TESTER_MONGODB_URI}' \
+                    -e 'UPLOAD_BUCKET_NAME=${UPLOAD_BUCKET_NAME}' \
+                    -e 'AWS_REGION=${AWS_REGION}' \
+                    -p '${GRPC_SERVER_PORT}:${GRPC_SERVER_PORT}' \
+                    -p '${GRPC_METRIC_PORT}:${GRPC_METRIC_PORT}' \
+                    -p '${MYSQL_METRIC_PORT}:${MYSQL_METRIC_PORT}' \
+                    nextsurfer/tester:latest
+            """ 
+            sh """
+                docker build \
+                    --build-arg env=test \
+                    -t nextsurfer/tester-ui:latest \
+                    -f ./ui/Dockerfile ./ui
+                docker stop tester-ui && docker rm tester-ui || echo 0
+                docker run -d \
+                    --restart always \
+                    --name tester-ui \
+                    --dns ${HOST_IP} \
+                    --dns 8.8.8.8 \
+                    -p 8080:3000 \
+                    nextsurfer/tester-ui:latest
+            """
+        }
+        cleanup {
+            sh """
+                docker system prune -f
+            """
+            cleanWs()
+        }
+    }
+}

@@ -1,0 +1,15 @@
+[ClientErrMsg_WrongRequestParameters]
+other = "请求参数有误，请您排错后重试"
+
+
+[ClientErrMsg_UserHasNoSecurityQuestions]
+other = "当前用户没有安全问题，您可以尝试创建安全问题"
+
+[ClientErrMsg_UserHasNoDatum]
+other = "当前用户没有数据，您可以尝试创建数据"
+
+[ClientErrMsg_UserHasNoPrivateKeyBackup]
+other = "当前用户没有私钥备份，您可以尝试创建私钥备份"
+
+[FatalErrMsg]
+other = "服务器发生一些问题， 请稍后重试。 如果多次无法登录， 请联系客服"

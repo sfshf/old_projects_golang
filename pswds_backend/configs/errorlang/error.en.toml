@@ -1,0 +1,53 @@
+[ClientErrMsg_WrongRequestParameters]
+other = "Request has wrong parameters, please inspect parameters"
+
+[ClientErrMsg_InvalidApiKey]
+other = "Invalid api key."
+
+[ClientErrMsg_InvalidUserID]
+other = "Invalid user ID."
+
+[ClientErrMsg_InvalidSession]
+other = "Invalid session."
+
+[ClientErrMsg_LockScreenSecretChanged]
+other = "lock screen secret has changed."
+
+[ClientErrMsg_BackendDataPullAhead]
+other = "Backend data pull ahead."
+
+[ClientErrMsg_BackendDataFallBehind]
+other = "Backend data fall behind."
+
+[ClientErrMsg_UserHasNoBackup]
+other = "User has no bakup. You can try to create a backup."
+
+[ClientErrMsg_HasNotSetSecurityQuestions]
+other = "User has not set security questions."
+
+[ClientErrMsg_TooManyRequests]
+other = "Too many requests."
+
+[ClientErrMsg_HasRelatedRecord]
+other = "Has related record, the operation is forbidden."
+
+[ClientErrMsg_ResourceNotFound]
+other = "Resource not found"
+
+[ClientErrMsg_ResourceExists]
+other = "Resource already exists."
+
+[ClientErrMsg_EmailNotRegistered]
+other = "No account is registered by this email. Please register account first."
+
+[ClientErrMsg_Unauthorized]
+other = "Unauthorized operation."
+
+[ClientErrMsg_Forbidden]
+other = "Forbidden operation."
+
+[ClientErrMsg_ResourceLimit]
+other = "Resource limit."
+
+[FatalErrMsg]
+other = "Sorry. Some fatal error happened. Try to contact the custom service of this APP."

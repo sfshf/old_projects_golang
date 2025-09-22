@@ -1,0 +1,23 @@
+[[Items]]
+  BookID = 100000000
+  Level = "a1"
+
+[[Items]]
+  BookID = 100000001
+  Level = "a2"
+
+[[Items]]
+  BookID = 100000002
+  Level = "b1"
+
+[[Items]]
+  BookID = 100000003
+  Level = "b2"
+
+[[Items]]
+  BookID = 100000004
+  Level = "c1"
+
+[[Items]]
+  BookID = 100000006
+  Level = "c2"

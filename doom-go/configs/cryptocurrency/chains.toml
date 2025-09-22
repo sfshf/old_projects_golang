@@ -1,0 +1,3 @@
+[[Chains]]
+  Name = "eth"
+  Address = "wss://mainnet.infura.io/ws/v3/ae1cb3ad3a4542e294f99a5f92be46c9"

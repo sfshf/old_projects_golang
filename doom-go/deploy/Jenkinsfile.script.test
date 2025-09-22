@@ -1,0 +1,64 @@
+pipeline {
+    agent {
+        label 'hongkong-test'
+    }
+    stages {
+        stage('Pre') {
+            steps {
+                script {
+                    sh '''
+                        git remote update origin --prune
+                        git branch -a | grep -e '^  remotes/origin/dev$'
+                        echo 'remote dev branch exists'
+                        git branch -D dev || echo 'no local dev branch'
+                        git branch dev remotes/origin/dev
+                    '''
+                    sh """
+                        git checkout ${BRANCH_NAME}
+                        git rebase dev
+                        echo 'git rebase dev success'
+                        git push origin ${BRANCH_NAME}
+                        echo 'git push origin' ${BRANCH_NAME} 'success'
+                    """
+                }
+            }
+        }
+        stage('Run') {
+            steps {
+                sh """
+                    docker build \
+                        --build-arg env=test \
+                        --build-arg cmd=${SCRIPT} \
+                        -t nextsurfer/`echo doom-go_${SCRIPT} | tr '[:upper:]' '[:lower:]'`:latest \
+                        -f build/doom/Dockerfile.script .
+                    docker stop -t 60 -s SIGTERM ${SCRIPT} && docker rm ${SCRIPT} || echo 0
+                    docker run -itd \
+                        --name ${SCRIPT} \
+                        --dns ${HOST_IP} \
+                        --dns 8.8.8.8 \
+                        nextsurfer/`echo doom-go_${SCRIPT} | tr '[:upper:]' '[:lower:]'`:latest
+                    sleep 60s
+                    docker logs ${SCRIPT}
+                """
+            }
+        }
+    }
+    post {
+        success {
+            sh """
+                echo "run script ${SCRIPT} success"
+            """
+        }
+        failure {
+            sh """
+                echo "run script ${SCRIPT} fail"
+            """ 
+        }
+        cleanup {
+            sh """
+                docker system prune -f
+            """
+            cleanWs()
+        }
+    }
+}

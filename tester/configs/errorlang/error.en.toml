@@ -1,0 +1,14 @@
+[ClientErrMsg_WrongRequestParameters]
+other = "Request has wrong parameters, please inspect parameters"
+
+[ClientErrMsg_ResourceNotFound]
+other = "Resource not found"
+
+[ClientErrMsg_UnsupportedToken]
+other = "Unsupported token."
+
+[ClientErrMsg_ApiKeyIsInvalid]
+other = "ApiKey is invalid. Please input apiKey correctly."
+
+[FatalErrMsg]
+other = "Sorry. Some fatal error happened. Try to contact the custom service of this APP."

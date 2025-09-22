@@ -1,0 +1,8 @@
+[LoginErrMsg_WrongRequestParameters]
+other = "Request has wrong parameters, please inspect parameters"
+
+[RequestErrMsg]
+other = "Sorry. It is a bad request. Please check the parameters."
+
+[FatalErrMsg]
+other = "Sorry. Some fatal error happened. Try again or to contact the custom service of this APP."

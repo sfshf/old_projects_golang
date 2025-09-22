@@ -1,0 +1,378 @@
+syntax = "proto3";
+
+package tester_api;
+
+import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
+
+service TesterService {
+  rpc UpdateAPITestcase(UpdateAPITestcaseRequest) returns (UpdateAPITestcaseResponse) {
+    option (google.api.http) = {
+      post: "/tester/updateAPITestcase/v1"
+      body: "*"
+    };
+  };
+  rpc GetApps(GetAppsRequest) returns (GetAppsResponse) {
+    option (google.api.http) = {
+      post: "/tester/getApps/v1"
+      body: "*"
+    };
+  };
+  rpc GetAPITestcases(GetAPITestcasesRequest) returns (GetAPITestcasesResponse) {
+    option (google.api.http) = {
+      post: "/tester/getAPITestcases/v1"
+      body: "*"
+    };
+  };
+  rpc GetMysqlInfo(GetMysqlInfoRequest) returns (GetMysqlInfoResponse) {
+    option (google.api.http) = {
+      post: "/tester/getMysqlInfo/v1"
+      body: "*"
+    };
+  };
+  rpc GetMongoInfo(GetMongoInfoRequest) returns (GetMongoInfoResponse) {
+    option (google.api.http) = {
+      post: "/tester/getMongoInfo/v1"
+      body: "*"
+    };
+  };
+  rpc GetBtcDiff(GetBtcDiffRequest) returns (GetBtcDiffResponse) {
+    option (google.api.http) = {
+      post: "/tester/getBtcDiff/v1"
+      body: "*"
+    };
+  };
+  rpc GetTxsMempoolInfo(GetTxsMempoolInfoRequest) returns (GetTxsMempoolInfoResponse) {
+    option (google.api.http) = {
+      post: "/tester/getTxsMempoolInfo/v1"
+      body: "*"
+    };
+  };
+  rpc GetSlarkRegistrationCaptchas(GetSlarkRegistrationCaptchasRequest) returns (GetSlarkRegistrationCaptchasResponse) {
+    option (google.api.http) = {
+      post: "/tester/getSlarkRegistrationCaptchas/v1"
+      body: "*"
+    };
+  };
+  rpc GetSlarkLoginCaptchas(GetSlarkLoginCaptchasRequest) returns (GetSlarkLoginCaptchasResponse) {
+    option (google.api.http) = {
+      post: "/tester/getSlarkLoginCaptchas/v1"
+      body: "*"
+    };
+  };
+  rpc UploadApp(UploadAppRequest) returns (UploadAppResponse) {
+    option (google.api.http) = {
+      post: "/tester/uploadApp/v1"
+      body: "*"
+    };
+  };
+  rpc GetUploadedApps(GetUploadedAppsRequest) returns (GetUploadedAppsResponse) {
+    option (google.api.http) = {
+      post: "/tester/getUploadedApps/v1"
+      body: "*"
+    };
+  };
+  rpc GetMessageNotificationConfig(GetMessageNotificationConfigRequest) returns (GetMessageNotificationConfigResponse) {
+    option (google.api.http) = {
+      post: "/tester/getMessageNotificationConfig/v1"
+      body: "*"
+    };
+  };
+  rpc UpdateMessageNotificationConfig(UpdateMessageNotificationConfigRequest) returns (UpdateMessageNotificationConfigResponse) {
+    option (google.api.http) = {
+      post: "/tester/updateMessageNotificationConfig/v1"
+      body: "*"
+    };
+  };
+  rpc SendMessageNotification(SendMessageNotificationRequest) returns (SendMessageNotificationResponse) {
+    option (google.api.http) = {
+      post: "/tester/sendMessageNotification/v1"
+      body: "*"
+    };
+  };
+  rpc GetMessageNotificationLogs(GetMessageNotificationLogsRequest) returns (GetMessageNotificationLogsResponse) {
+    option (google.api.http) = {
+      post: "/tester/getMessageNotificationLogs/v1"
+      body: "*"
+    };
+  };
+  rpc GetPrivacyEmailAccounts(GetPrivacyEmailAccountsRequest) returns (GetPrivacyEmailAccountsResponse) {
+    option (google.api.http) = {
+      post: "/tester/getPrivacyEmailAccounts/v1"
+      body: "*"
+    };
+  };
+}
+
+message GetPrivacyEmailAccountsRequest {
+  string apiKey = 1;
+}
+
+message GetPrivacyEmailAccountsResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Account {
+    int64 id = 1;
+    int64 userID = 2;
+    string userEmail = 3;
+    string emailAccount = 4;
+    string password = 5;
+  }
+  message Data {
+    repeated Account list = 1;
+  }
+  Data data = 5;
+}
+
+message GetMessageNotificationLogsRequest {
+  string apiKey = 1;
+}
+
+message GetMessageNotificationLogsResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Log {
+    string id = 1;
+    int32 mode = 2;
+    string message = 3;
+    int64 createdAt = 4;
+  }
+  message Data {
+    repeated Log list = 1;
+  }
+  Data data = 4;
+}
+
+message SendMessageNotificationRequest {
+  string apiKey = 1;
+}
+
+message SendMessageNotificationResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}
+
+message UpdateMessageNotificationConfigRequest {
+  string apiKey = 1;
+  bool useTelegram = 2;
+  bool useWxpusher = 3;
+  repeated string wxpusherUIDs = 4;
+  bool useEmail  = 5;
+  repeated string emails = 6;
+}
+
+message UpdateMessageNotificationConfigResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}
+
+message GetMessageNotificationConfigRequest {
+  string apiKey = 1;
+}
+
+message GetMessageNotificationConfigResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    bool useTelegram = 1;
+    bool useWxpusher = 2;
+    repeated string wxpusherUIDs = 3;
+    bool useEmail  = 4;
+    repeated string emails = 5;
+  }
+  Data data = 4;
+}
+
+message UpdateAPITestcaseRequest {
+  string apiKey = 1;
+  string app = 2;
+  string data = 3;
+}
+
+message UpdateAPITestcaseResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}
+
+message GetAppsRequest {
+  string apiKey = 1;
+}
+
+message GetAppsResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    repeated string list = 1;
+  }
+  Data data = 4;
+}
+
+message GetAPITestcasesRequest {
+  string apiKey = 1;
+  string app = 2;
+}
+
+message GetAPITestcasesResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message ApiTestCase {
+    string name = 1;
+    string path = 2;
+    google.protobuf.Value body = 3;
+  }
+  message Data {
+    repeated ApiTestCase list = 1;
+  }
+  Data data = 4;
+}
+
+message GetMysqlInfoRequest {
+  string apiKey = 1;
+}
+
+message GetMysqlInfoResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message DatabaseInfo {
+    string database = 1;
+    double size = 2;
+  }
+  message Data {
+    repeated DatabaseInfo list = 1;
+  }
+  Data data = 4;
+}
+
+message GetMongoInfoRequest {
+  string apiKey = 1;
+}
+
+message GetMongoInfoResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message DatabaseInfo {
+    string database = 1;
+    double size = 2;
+  }
+  message Data {
+    repeated DatabaseInfo list = 1;
+  }
+  Data data = 4;
+}
+
+message GetBtcDiffRequest {
+  string apiKey = 1;
+}
+
+message GetBtcDiffResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    double priceCB = 1;
+    double priceBN = 2;
+    double priceDiff = 3;
+    double diffPercent = 4;
+    string errorMessage = 5;
+    int64 updatedAt = 6;
+  }
+  Data data = 4;
+}
+
+message GetTxsMempoolInfoRequest {
+  string apiKey = 1;
+}
+message GetTxsMempoolInfoResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    int64 lastTS = 1;
+    string msg = 2;
+  }
+  Data data = 4;
+}
+
+message GetSlarkRegistrationCaptchasRequest {
+  string apiKey = 1;
+}
+
+message GetSlarkRegistrationCaptchasResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message EmailCaptcha {
+    string email = 1;
+    string captcha = 2;
+    int64 createdAt = 3;
+  }
+  message Data {
+    repeated EmailCaptcha list = 1;
+  }
+  Data data = 4;
+}
+
+message GetSlarkLoginCaptchasRequest {
+  string apiKey = 1;
+}
+
+message GetSlarkLoginCaptchasResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message EmailCaptcha {
+    string email = 1;
+    string captcha = 2;
+    int64 createdAt = 3;
+  }
+  message Data {
+    repeated EmailCaptcha list = 1;
+  }
+  Data data = 4;
+}
+
+message UploadAppRequest {
+  string apiKey = 1;
+  string appName = 2;
+  string appHashName = 3;
+}
+
+message UploadAppResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}
+
+message GetUploadedAppsRequest {
+  string apiKey = 1;
+}
+
+message GetUploadedAppsResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message AppVersion {
+    int32 version = 1;
+    string download = 2;
+  }
+  message UploadedApp {
+    string id = 1;
+    string appName = 2;
+    repeated AppVersion appVersions = 3;
+  }
+  message Data {
+    repeated UploadedApp list = 1;
+  }
+  Data data = 4;
+}

@@ -1,0 +1,699 @@
+syntax = "proto3";
+
+package connector_api;
+
+import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
+
+service ConnectorService {
+  rpc CreatePassword(CreatePasswordRequest) returns (CreatePasswordResponse) {
+    option (google.api.http) = {
+      post: "/riki/createPassword/v1"
+      body: "*"
+    };
+  };
+  rpc CheckPassword(CheckPasswordRequest) returns (CheckPasswordResponse) {
+    option (google.api.http) = {
+      post: "/riki/checkPassword/v1"
+      body: "*"
+    };
+  };
+  rpc DeletePassword(DeletePasswordRequest) returns (DeletePasswordResponse) {
+    option (google.api.http) = {
+      post: "/riki/deletePassword/v1"
+      body: "*"
+    };
+  };
+  rpc CreatePrivateKey(CreatePrivateKeyRequest) returns (CreatePrivateKeyResponse) {
+    option (google.api.http) = {
+      post: "/riki/createPrivateKey/v1"
+      body: "*"
+    };
+  };
+  rpc GetPublicKey(GetPublicKeyRequest) returns (GetPublicKeyResponse) {
+    option (google.api.http) = {
+      post: "/riki/getPublicKey/v1"
+      body: "*"
+    };
+  };
+  rpc DeletePrivateKey(DeletePrivateKeyRequest) returns (DeletePrivateKeyResponse) {
+    option (google.api.http) = {
+      post: "/riki/deletePrivateKey/v1"
+      body: "*"
+    };
+  };
+  rpc SaveData(SaveDataRequest) returns (SaveDataResponse) {
+    option (google.api.http) = {
+      post: "/riki/saveData/v1"
+      body: "*"
+    };
+  };
+  rpc DeleteData(DeleteDataRequest) returns (DeleteDataResponse) {
+    option (google.api.http) = {
+      post: "/riki/deleteData/v1"
+      body: "*"
+    };
+  };
+  rpc DecryptData(DecryptDataRequest) returns (DecryptDataResponse) {
+    option (google.api.http) = {
+      post: "/riki/decryptData/v1"
+      body: "*"
+    };
+  };
+  rpc GetData(GetDataRequest) returns (GetDataResponse) {
+    option (google.api.http) = {
+      post: "/riki/getData/v1"
+      body: "*"
+    };
+  };
+  rpc CheckKeyExisting(CheckKeyExistingRequest) returns (CheckKeyExistingResponse) {
+    option (google.api.http) = {
+      post: "/riki/checkKeyExisting/v1"
+      body: "*"
+    };
+  };
+}
+
+service ConnectorConsoleService {
+  rpc GetLogs(GetLogsRequest) returns (GetLogsResponse) {
+    option (google.api.http) = {
+      post: "/riki/console/getLogs/v1"
+      body: "*"
+    };
+  };
+  rpc GetMonitorInfos(GetMonitorInfosRequest) returns (GetMonitorInfosResponse) {
+    option (google.api.http) = {
+      post: "/riki/console/getMonitorInfos/v1"
+      body: "*"
+    };
+  };
+  rpc ListConfigs(ListConfigsRequest) returns (ListConfigsResponse) {
+    option (google.api.http) = {
+      post: "/riki/console/listConfigs/v1"
+      body: "*"
+    };
+  };
+  rpc CreateConfig(CreateConfigRequest) returns (CreateConfigResponse) {
+    option (google.api.http) = {
+      post: "/riki/console/createConfig/v1"
+      body: "*"
+    };
+  };
+  rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse) {
+    option (google.api.http) = {
+      post: "/riki/console/updateConfig/v1"
+      body: "*"
+    };
+  };
+  rpc DeleteConfig(DeleteConfigRequest) returns (DeleteConfigResponse) {
+    option (google.api.http) = {
+      post: "/riki/console/deleteConfig/v1"
+      body: "*"
+    };
+  };
+  rpc ListPassword(ListPasswordRequest) returns (ListPasswordResponse) {
+    option (google.api.http) = {
+      post: "/riki/console/listPassword/v1"
+      body: "*"
+    };
+  };
+  rpc AddPassword(AddPasswordRequest) returns (AddPasswordResponse) {
+    option (google.api.http) = {
+      post: "/riki/console/addPassword/v1"
+      body: "*"
+    };
+  };
+  rpc RemovePassword(RemovePasswordRequest) returns (RemovePasswordResponse) {
+    option (google.api.http) = {
+      post: "/riki/console/removePassword/v1"
+      body: "*"
+    };
+  };
+  rpc FetchPassword(FetchPasswordRequest) returns (FetchPasswordResponse) {
+    option (google.api.http) = {
+      post: "/riki/console/fetchPassword/v1"
+      body: "*"
+    };
+  };
+  rpc ListPrivateKey(ListPrivateKeyRequest) returns (ListPrivateKeyResponse) {
+    option (google.api.http) = {
+      post: "/riki/console/listPrivateKey/v1"
+      body: "*"
+    };
+  };
+  rpc AddPrivateKey(AddPrivateKeyRequest) returns (AddPrivateKeyResponse) {
+    option (google.api.http) = {
+      post: "/riki/console/addPrivateKey/v1"
+      body: "*"
+    };
+  };
+  rpc RemovePrivateKey(RemovePrivateKeyRequest) returns (RemovePrivateKeyResponse) {
+    option (google.api.http) = {
+      post: "/riki/console/removePrivateKey/v1"
+      body: "*"
+    };
+  };
+  rpc GetAllApps(GetAllAppsRequest) returns (GetAllAppsResponse) {
+    option (google.api.http) = {
+      post: "/riki/console/getAllApps/v1"
+      body: "*"
+    };
+  };
+  rpc GetAllKeyIDs(GetAllKeyIDsRequest) returns (GetAllKeyIDsResponse) {
+    option (google.api.http) = {
+      post: "/riki/console/getAllKeyIDs/v1"
+      body: "*"
+    };
+  };
+  rpc ListApiKey(ListApiKeyRequest) returns (ListApiKeyResponse) {
+    option (google.api.http) = {
+      post: "/riki/console/listApiKey/v1"
+      body: "*"
+    };
+  };
+  rpc AddApiKey(AddApiKeyRequest) returns (AddApiKeyResponse) {
+    option (google.api.http) = {
+      post: "/riki/console/addApiKey/v1"
+      body: "*"
+    };
+  };
+  rpc RemoveApiKey(RemoveApiKeyRequest) returns (RemoveApiKeyResponse) {
+    option (google.api.http) = {
+      post: "/riki/console/removeApiKey/v1"
+      body: "*"
+    };
+  };
+  rpc ValidateApiKey(ValidateApiKeyRequest) returns (ValidateApiKeyResponse) {
+    option (google.api.http) = {
+      post: "/riki/console/validateApiKey/v1"
+      body: "*"
+    };
+  };
+  rpc GetManagePlatformLogs(GetManagePlatformLogsRequest) returns (GetManagePlatformLogsResponse) {
+    option (google.api.http) = {
+      post: "/riki/console/getManagePlatformLogs/v1"
+      body: "*"
+    };
+  };
+}
+
+message Empty {
+}
+
+message EmptyResponse {
+    int32 code = 1;
+    string message = 2;
+    google.protobuf.Value debugMessage = 3;
+}
+
+message CreatePasswordRequest {
+  string apiKey = 1;
+  string keyID = 2;
+}
+
+message CreatePasswordResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Data {
+    string password = 1;
+  }
+  Data data = 5;
+}
+
+message CheckPasswordRequest {
+  string apiKey = 1;
+  string keyID = 2;
+  string passwordHash = 3;
+}
+
+message CheckPasswordResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Data {
+    bool valid = 1;
+  }
+  Data data = 5;
+}
+
+message DeletePasswordRequest {
+  string apiKey = 1;
+  string keyID = 2;
+}
+
+message DeletePasswordResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message CreatePrivateKeyRequest {
+  string apiKey = 1;
+  string keyID = 2;
+}
+
+message CreatePrivateKeyResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Data {
+    string publicKey = 1;
+  }
+  Data data = 5;
+}
+
+message GetPublicKeyRequest {
+  string apiKey = 1;
+  string keyID = 2;
+}
+
+message GetPublicKeyResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Data {
+    string publicKey = 1;
+  }
+  Data data = 5;
+}
+
+message DeletePrivateKeyRequest {
+  string apiKey = 1;
+  string keyID = 2;
+}
+
+message DeletePrivateKeyResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message SaveDataRequest {
+  string apiKey = 1;
+  string keyID = 2;
+  string dataID = 3;
+  bool replaceCurrentItem = 4;
+  string data = 5;
+  string plaintextHash = 6;
+}
+
+message SaveDataResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message DeleteDataRequest {
+  string apiKey = 1;
+  string keyID = 2;
+  string dataID = 3;
+}
+
+message DeleteDataResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message DecryptDataRequest {
+  string apiKey = 1;
+  string keyID = 2;
+  string data = 3;
+}
+
+message DecryptDataResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Data {
+    string decrypedData = 1;
+  }
+  Data data = 5;
+}
+
+message GetDataRequest {
+  string apiKey = 1;
+  string keyID = 2;
+  string dataID = 3;
+}
+
+message GetDataResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Data {
+    string data = 1;
+  }
+  Data data = 5;
+}
+
+message CheckKeyExistingRequest {
+  string apiKey = 1;
+  string keyID = 2;
+}
+
+message CheckKeyExistingResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Data {
+    bool existing = 1;
+  }
+  Data data = 5;
+}
+
+message GetLogsRequest {
+  string apiKey = 1;
+  int32 pageNumber = 2;
+  int32 pageSize = 3;
+}
+
+message GetLogsResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    int32 total = 1;
+    repeated string list = 2;
+  }
+  Data data = 4;
+}
+
+message GetMonitorInfosRequest {
+  string apiKey = 1;
+}
+
+message GetMonitorInfosResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message InfoItem {
+    string name = 1;
+    string value = 2;
+  }
+  message Data {
+    repeated InfoItem infos = 1;
+  }
+  Data data = 4;
+}
+
+message ListConfigsRequest {
+  string apiKey = 1;
+}
+
+message ListConfigsResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message AppConfig {
+    string app = 1;
+    string config = 2;
+  }
+  message Data {
+    repeated AppConfig configList = 1;
+  }
+  Data data = 4;
+}
+
+message CreateConfigRequest {
+  string apiKey = 1;
+  string app = 2;
+  string config = 3;
+}
+
+message CreateConfigResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}
+
+message UpdateConfigRequest {
+  string apiKey = 1;
+  string app = 2;
+  string config = 3; 
+}
+
+message UpdateConfigResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}
+
+message DeleteConfigRequest {
+  string apiKey = 1;
+  string app = 2;
+}
+
+message DeleteConfigResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}
+
+message ListPasswordRequest {
+  string apiKey = 1;
+  string app = 2;
+}
+
+message ListPasswordResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message ListItem {
+    string keyID = 1;
+    string passwordHash = 2;
+    int64 createdAt = 3;
+    string app = 4;
+  }
+  message Data {
+    repeated ListItem list = 1;
+  }
+  Data data = 4;
+}
+
+message AddPasswordRequest {
+  string apiKey = 1;
+  string app = 2;
+  string keyID = 3;
+}
+
+message AddPasswordResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    string keyID = 1;
+    string passwordHash = 2;
+    int64 createdAt = 3;
+  }
+  Data data = 4;
+}
+
+message RemovePasswordRequest {
+  string apiKey = 1;
+  string app = 2;
+  string keyID = 3;
+}
+
+message RemovePasswordResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}
+
+message FetchPasswordRequest {
+  string apiKey = 1;
+  string app = 2;
+  string keyID = 3;
+}
+
+message FetchPasswordResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    string password = 1;
+  }
+  Data data = 4;
+}
+
+message ListPrivateKeyRequest {
+  string apiKey = 1;
+  string app = 2;
+}
+
+message ListPrivateKeyResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message ListItem {
+    string keyID = 1;
+    int64 createdAt = 2;
+    string publicKey = 3;
+    string app = 4;
+  }
+  message Data {
+    repeated ListItem list = 1;
+  }
+  Data data = 4;
+}
+
+message AddPrivateKeyRequest {
+  string apiKey = 1;
+  string app = 2;
+  string keyID = 3;
+}
+
+message AddPrivateKeyResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    string keyID = 1;
+    int64 createdAt = 2;
+    string publicKey = 3;
+  }
+  Data data = 4;
+}
+
+message RemovePrivateKeyRequest {
+  string apiKey = 1;
+  string app = 2;
+  string keyID = 3;
+}
+
+message RemovePrivateKeyResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}
+
+message GetAllAppsRequest {
+  string apiKey = 1;
+}
+
+message GetAllAppsResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    repeated string list = 1;
+  }
+  Data data = 4;
+}
+
+message GetAllKeyIDsRequest {
+  string apiKey = 1;
+}
+
+message GetAllKeyIDsResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    repeated string list = 1;
+  }
+  Data data = 4;
+}
+
+message ListApiKeyRequest {
+  string apiKey = 1;
+}
+
+message ListApiKeyResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message ListItem {
+    int64 id = 1;
+    int64 createdAt = 2;
+    string keyID = 3;
+    string permission = 4;
+    string app = 5;
+    string name = 6;
+  }
+  message Data {
+    repeated ListItem list = 1;
+  }
+  Data data = 4;
+}
+
+message AddApiKeyRequest {
+  string apiKey = 1;
+  string app = 2;
+  string keyID = 3;
+  string name = 4;
+  string permission = 5;
+}
+
+message AddApiKeyResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}
+
+message RemoveApiKeyRequest {
+  string apiKey = 1;
+  int64 id = 2;
+}
+
+message RemoveApiKeyResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}
+
+message ValidateApiKeyRequest {
+  string app = 1;
+  string apiKey = 2;
+  string role = 3;
+}
+
+message ValidateApiKeyResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    bool valid = 1;
+  }
+  Data data = 4;
+}
+
+message GetManagePlatformLogsRequest {
+  string apiKey = 1;
+  int32 pageSize = 2;
+  int32 pageNumber = 3;
+}
+
+message GetManagePlatformLogsResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message ListItem {
+    int64 createdAt = 1;
+    string ip = 2;
+    string status = 3;
+    string object = 4;
+    string operation = 5;
+    string keyID = 6;
+    string app = 7;
+    string apiKeyName = 8;
+  }
+  message Data {
+    int64 total = 1;
+    repeated ListItem list = 2;
+  }
+  Data data = 4;
+}

@@ -1,0 +1,17 @@
+[ReferralLogReason_NewUser]
+other = "推广新用户"
+
+[ReferralLogReason_NewUserFirstTime]
+other = "第一次推广新用户"
+
+[ReferralLogReason_NewUserBilled]
+other = "推广付费用户"
+
+[ReferralLogReason_FreeTrial]
+other = "免费试用"
+
+[ReferralLogReason_RedeemReward]
+other = "奖励兑换"
+
+[ReferralLogReason_ConvertPoints]
+other = "积分转换"

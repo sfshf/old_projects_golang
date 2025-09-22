@@ -1,0 +1,77 @@
+[LoginErrMsg_WrongRequestParameters]
+other = "Request has wrong parameters, please inspect parameters"
+
+[ClientErrMsg_UserHasJoined]
+other = "User has joined the app. You can try another app."
+
+[ClientErrMsg_InvalidReferralCode]
+other = "ReferralCode is invalid. You can try another code."
+
+[ClientErrMsg_UserRegisteredOnOldDevice]
+other = "User has registered on old device. You can try another user."
+
+[ClientErrMsg_UserHasNoReferralPointRecord]
+other = "User has no referral point record. You can try to get some referral points."
+
+[ClientErrMsg_UserHasNoReferralNewUserRecord]
+other = "User has no referral new-user record. You can try another user."
+
+[ClientErrMsg_ReferralNewUserRecordHasExpired]
+other = "User's referral new-user record has expired. You can try another user."
+
+[ClientErrMsg_UserHasNoAppAccountToken]
+other = "User has no app account token. You can try to get a token."
+
+[ClientErrMsg_UserHasNoNewUserDiscountStateAndNoNewUserReferral]
+other = "User has no new-user discount state log and no new-user referral log. You can try another user."
+
+[ClientErrMsg_UserHasNoNewUserDiscountState]
+other = "User has no new-user discount state log. You can try another user."
+
+[ClientErrMsg_UserHasNoNewUserDiscountStateAndExpiredNewUserReferral]
+other = "User has no new-user discount state log and expired new-user referral log. You can try another user."
+
+[ClientErrMsg_NewUserDiscountStateRemainingTimeNotGreaterThanZero]
+other = "User's new-user discount state remaining times not greater than zero. You can try another user."
+
+[ClientErrMsg_NewUserDiscountStateRemainingTimeNotEqualToOne]
+other = "User's new-user discount state remaining times not equal to 1. You can try another user."
+
+[ClientErrMsg_NewUserDiscountStateRemainingTimeMismatch]
+other = "User's new-user discount state remaining times mismatch. You can try another user."
+
+[ClientErrMsg_UserHasNoReferralCode]
+other = "User has no referral code. You can try to get a referral code."
+
+[ClientErrMsg_UserHasNoPromotionalOfferRecord]
+other = "User has no promotional offer record. You can try to get a promotional offer."
+
+[ClientErrMsg_InvalidRewardId]
+other = "It's an invalid reward id. You can try another reward."
+
+[ClientErrMsg_ReferalPointsNotEnoughToCost]
+other = "Referral points not enough to cost. You can try another reward."
+
+[ClientErrMsg_UserHasNoFreeTrialState]
+other = "User has no free trial state log. You can try to get a free trial."
+
+[ClientErrMsg_NoNeedToMarkNewRegistration]
+other = "No need to mark new registration."
+
+[ClientErrMsg_WrongParameters]
+other = "wrong parameters"
+
+[ClientErrMsg_UserHasNotRegistered]
+other = "User has not registered"
+
+[ClientErrMsg_UserHasRegisteredExceed]
+other = "User's registration duration exceeds the limit"
+
+[ParamErrMsg_ApiKeyIsInvalid]
+other = "ApiKey is invalid. Please input apiKey correctly."
+
+[ClientErrMsg_DeformedConfig]
+other = "Deformed config."
+
+[FatalErrMsg]
+other = "Sorry. Some fatal error happened. Try to contact the custom service of this APP."

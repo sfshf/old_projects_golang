@@ -1,0 +1,53 @@
+[LoginErrMsg_WrongRequestParameters]
+other = "Request has wrong parameters, please inspect parameters"
+
+[ParamErrMsg_NicknameIsRepeated]
+other = "Nickname is repeated, please input another nickname"
+
+[RegisterErrMsg_EmailHasRegistered]
+other = "The email has been used to register before. You can register by other email or log in by this email."
+
+[RegisterErrMsg_NicknameHasRegistered]
+other = "Nickname has registered, please retry with another nickname"
+
+[LoginErrMsg_WrongPassword]
+other = "Password is wrong, please retry with correct password"
+
+[LoginErrMsg_WrongNickname]
+other = "Nickname is wrong, please retry with correct nickname"
+
+[LoginErrMsg_PhoneNotRegistered]
+other = "No account is registered by this phone number.Please register account first. "
+
+[LoginErrMsg_EmailHasRegistered]
+other = "Email has registered. Please use other email."
+
+[LoginErrMsg_EmailNotRegistered]
+other = "No account is registered by this email. Please register account first. "
+
+[LoginErrMsg_InvalidEmailCaptcha]
+other = "Email captch is invalid. Please check the email captcha."
+
+[LoginErrMsg_AccountNotLogined]
+other = "You need to log in before do this action."
+
+[LoginErrMsg_SessionExpired]
+other = "Last login had been expired or invalid. You need login again."
+
+[LoginErrMsg_SessionEmpty]
+other = "Empty session. You need login."
+
+[LoginErrMsg_SecondaryPasswordExists]
+other = "The user's secondary passwrod exists."
+
+[LoginErrMsg_TokenIsInvalid]
+other = "Token is invalid. Please input correct token."
+
+[FatalErrMsg]
+other = "Sorry. Some fatal error happened. Try to contact the custom service of this APP."
+
+[CheckLoginErrMsg_InvalidUserID]
+other = "failed to check login status, invalid user id"
+
+[CheckLoginErrMsg_UserNotLogin]
+other = "failed to check login status, user not login"

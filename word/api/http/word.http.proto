@@ -1,0 +1,140 @@
+syntax = "proto3";
+
+package word_api;
+
+import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
+
+service WordService {
+    rpc FetchAudioURL(TextToAudioRequest) returns (TextToAudioResponse) {
+        option (google.api.http) = {
+            post: "/word/audio/getAudioURL/v1"
+            body: "*"
+        };
+    };
+
+    rpc FavoriteDefinition(FavoriteDefinitionRequest) returns (FavoriteDefinitionResponse) {
+        option (google.api.http) = {
+            post: "/word/user/definition/favorite/v1"
+            body: "*"
+        };
+    };
+    rpc FavoritedDefinitions(Empty) returns (FavoritedDefinitionsResponse){
+        option (google.api.http) = {
+            post: "/word/user/definition/favorites/v1"
+            body: "*"
+        };
+    };
+
+    rpc ProgressBackupStatus(ProgressBackupStatusRequest) returns (ProgressBackupStatusResponse) {
+        option (google.api.http) = {
+            post: "/word/user/progress/backup/status/v1"
+            body: "*"
+        };
+    };
+    rpc UploadProgressBackup(UploadProgressBackupRequest) returns (UploadProgressBackupResponse) {
+        option (google.api.http) = {
+            post: "/word/user/progress/backup/upload/v1"
+            body: "*"
+        };
+    };
+    rpc DownloadProgressBackup(DownloadProgressBackupRequest) returns (DownloadProgressBackupResponse) {
+        option (google.api.http) = {
+            post: "/word/user/progress/backup/download/v1"
+            body: "*"
+        };
+    };
+}
+
+message Empty {
+}
+
+message EmptyResponse {
+    int32 code = 1;
+    string message = 2;
+    google.protobuf.Value debugMessage = 3;
+}
+
+// text to audio
+message TextToAudioRequest {
+    string text = 1;
+    string ssml = 2;
+    // uk, us 
+    string accent = 3;
+    // a list of voice
+    string voice = 4;
+    // api key, validate the request is from the trusted client.
+    string apiKey = 5;
+}
+
+message TextToAudioResponse {
+    int32 code = 1;
+    string message = 2;
+    google.protobuf.Value debugMessage = 3;
+    message Data {
+        string audioURL = 1;
+    }
+    Data data = 4;
+}
+
+message FavoriteDefinitionRequest {
+    int64 definitionID = 1;
+}
+
+message FavoriteDefinitionResponse {
+    int32 code = 1;
+    string message = 2;
+    google.protobuf.Value debugMessage = 3;
+}
+
+message FavoritedDefinitionsResponse {
+    int32 code = 1;
+    string message = 2;
+    google.protobuf.Value debugMessage = 3;
+    message Data {
+        repeated int64 definitions = 1;
+    }
+    Data data = 4;
+}
+
+message ProgressBackupStatusRequest {
+    int64 timestamp = 1;
+    int32 version = 2;
+}
+
+message ProgressBackupStatusResponse {
+    int32 code = 1;
+    string message = 2;
+    google.protobuf.Value debugMessage = 3;
+    message Data {
+        int32 code = 1;
+    }
+    Data data = 4;
+}
+
+message UploadProgressBackupRequest {
+    int64 timestamp = 1;
+    int32 version = 2;
+    string data = 3;
+}
+
+message UploadProgressBackupResponse {
+    int32 code = 1;
+    string message = 2;
+    google.protobuf.Value debugMessage = 3;
+}
+
+message DownloadProgressBackupRequest {
+    int64 timestamp = 1;
+    int32 version = 2;
+}
+
+message DownloadProgressBackupResponse {
+    int32 code = 1;
+    string message = 2;
+    google.protobuf.Value debugMessage = 3;
+    message Data {
+        string content = 1;
+    }
+    Data data = 4;
+}

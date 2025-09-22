@@ -1,0 +1,8 @@
+[LoginErrMsg_WrongRequestParameters]
+other = "请求参数有误，请您排错后重试"
+
+[RequestErrMsg]
+other = "对不起，您进了错误请求，请检查请求参数"
+
+[FatalErrMsg]
+other = "服务器发生一些问题， 请稍后重试。 如果多次无法登录， 请联系客服"

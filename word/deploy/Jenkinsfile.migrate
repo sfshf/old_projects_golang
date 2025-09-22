@@ -1,0 +1,20 @@
+pipeline {
+    agent {
+        label 'test'
+    }
+    stages {
+        stage('Run') {
+            steps {
+               configFileProvider([configFile(fileId: 'word-migrate-Config.json', targetLocation: 'cmd/migrate/conf.json', variable: 'MIGRAGE_CONFIG')]) {
+                    sh "docker run --rm \
+                        --name word-migrate \
+                        -v ./:/app \
+                        -w /app \
+                        -e MIGRAGE_CONFIG=cmd/migrate/conf.json\
+                        nextsurfer/word-build-backend:latest \
+                        go run ./cmd/migrate"
+                }
+            }
+        }
+    }
+}

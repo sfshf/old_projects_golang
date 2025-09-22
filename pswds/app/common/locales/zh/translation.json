@@ -1,0 +1,642 @@
+{
+  "app": {
+    "name": "密码管理器",
+    "toast": {
+      "success": "成功",
+      "error": "报错",
+      "requestError": "请求报错",
+      "internalError": "系统报错",
+      "syncBackupError": "同步数据备份报错",
+      "notSignedIn": "未登录",
+      "synchronizingData": "同步数据中...",
+      "afterSyncBackupData": "后台数据已更新，请查看更新数据后，重新操作",
+      "emptyUnlockPassword": "空的解锁密码",
+      "cameraError": "请求相机权限失败",
+      "parameterError": "参数错误",
+      "backupRecordError": "备份记录错误",
+      "familyKeyError": "家庭密钥错误",
+      "notFoundError": "数据未找到"
+    },
+    "alert": {
+      "cancelBtn": "取消",
+      "commitBtn": "提交",
+      "confirmBtn": "确定",
+      "okBtn": "好的",
+      "mustSignedInTitle": "请登录",
+      "mustSignedInMessage": "请必须登录。",
+      "mustSetUnlockPasswordTitle": "请设置解锁密码",
+      "mustSetUnlockPasswordMessage": "请必须设置解锁密码。",
+      "mustSetSecurityQuestionsTitle": "请设置密保问题",
+      "mustSetSecurityQuestionsMessage": "请必须设置密保问题。",
+      "emailHasSentTitle": "请检查您的邮箱",
+      "emailHasSentMessage": "一封邮件已发送到",
+      "recoverRequestLimitTitle": "找回请求限制",
+      "recoverRequestLimitMessage": "找回请求只能一天一次",
+      "nullBackupTitle": "没有设置任何备份",
+      "nullBackupMessage": "该账号没有设置任何备份，无法找回解锁密码。"
+    },
+    "button": {
+      "delete": "删除",
+      "edit": "编辑",
+      "share": "分享",
+      "transfer": "二维码传递",
+      "transfer2": "扫描二维码传递",
+      "copy": "复制"
+    }
+  },
+  "lockScreen": {
+    "title": "验证",
+    "toast": {
+      "notHasHardwareAsync": "当前设备没有指纹/面部扫描功能",
+      "notIsEnrolledAsync": "当前设备没有可供验证的指纹/面部数据"
+    },
+    "tips": { "1": "请输入密码", "2": "请点击进行指纹/面部验证" },
+    "errTips": {
+      "1": "密码为空，请输入密码",
+      "2": "密码错误，请重新输入",
+      "3": "无效的登录会话",
+      "4": "使用第二密码登录失败"
+    },
+    "logout": "重新登录",
+    "usePassword": "进行密码验证",
+    "useFingerprint": "进行指纹/面部验证",
+    "authenticationPromptTitle": "授权指纹验证",
+    "recoverUnlockPassword": "找回解锁密码"
+  },
+  "familyShare": {
+    "overlay": {
+      "shareToAll": "分享给所有人",
+      "shareBtn": "分享",
+      "changeShareBtn": "修改",
+      "stopShareBtn": "取消分享"
+    },
+    "status": {
+      "sharing": "家人共享",
+      "shared": "被分享"
+    }
+  },
+  "familyOperation": {
+    "overlay": {
+      "label": "操作",
+      "operations": {
+        "1": "设置为管理员",
+        "2": "设置为非管理员",
+        "3": "移出家庭",
+        "4": "取消"
+      }
+    }
+  },
+  "home": {
+    "tabTitle": "首页",
+    "searchPassword": {
+      "mostUsedBtn": "最多使用",
+      "latestUsedBtn": "最近使用",
+      "latestUpdatedBtn": "最近变更"
+    }
+  },
+  "dataQR": {
+    "label": "数据二维码",
+    "usePin": "加密数据",
+    "onlyPassword": "只发密码",
+    "pinCode": "加密密码"
+  },
+  "passwords": {
+    "tabTitle": "密码",
+    "firstOneBtn": "创建你的第一个密码记录",
+    "newPassword": {
+      "label": "新建密码",
+      "toast": {
+        "invalidWebsite": "无效的网址",
+        "invalidTOTP": "无效的Totp地址"
+      },
+      "newBtn": "新建密码",
+      "addFieldBtn": "新增字段",
+      "title": "标题",
+      "titlePlaceholder": "输入标题",
+      "website": "网址",
+      "websitePlaceholder": "输入网址（可选）",
+      "username": "用户名",
+      "usernamePlaceholder": "输入用户名",
+      "password": "密码",
+      "passwordPlaceholder": "输入密码",
+      "notes": "备注",
+      "notesPlaceholder": "输入备注（可多行）",
+      "randomPassword": "随机密码",
+      "randomPasswordDialog": {
+        "title": "随机密码生成器",
+        "useBtn": "应用",
+        "cancelBtn": "取消",
+        "type": "类型",
+        "typeListRandomPasswordLabel": "随机密码",
+        "typeRandomPassword": "随机密码",
+        "charLength": "字符",
+        "includeNumber": "包含数字",
+        "includeSymbol": "包含标点符号",
+        "copyPrompt": "已复制"
+      },
+      "emptyTitle": "空标题",
+      "emptyUsername": "空用户名/邮箱",
+      "emptyPassword": "空密码",
+      "otherFields": {
+        "label": "请选择字段类型",
+        "fieldType1": "文本",
+        "fieldType2": "网站地址",
+        "fieldType3": "密码",
+        "fieldType4": "一次性密码",
+        "fieldType5": "日期",
+        "fieldType6": "PIN",
+        "fieldPlaceholder": "输入字段名",
+        "valuePlaceholder": "输入字段值"
+      }
+    },
+    "passwordDetail": {
+      "label": "密码详情",
+      "toast": {
+        "invalidWebsite": "无效的网址",
+        "invalidTOTP": "无效的Totp地址"
+      },
+      "header": "详情",
+      "title": "标题",
+      "titlePlaceholder": "输入标题",
+      "website": "网址",
+      "websitePlaceholder": "输入网址（可选）",
+      "username": "用户名",
+      "usernamePlaceholder": "输入用户名",
+      "password": "密码",
+      "passwordPlaceholder": "输入密码",
+      "notes": "备注",
+      "notesPlaceholder": "输入备注（可多行）",
+      "copyPrompt": "已复制",
+      "editPrompt": "更新密码 ",
+      "deletePrompt": "删除密码 ",
+      "deleteBtn": "删除",
+      "lastEditedLabel": "最后编辑时间为：",
+      "sharingSince": "分享于 ",
+      "sharedBy": "分享者 ",
+      "qrcodeScanner": {
+        "label": "二维码扫描器",
+        "toast": {}
+      }
+    },
+    "searchPassword": {
+      "label": "搜索密码",
+      "searchInputPlaceholder": "输入密码的标题进行搜索"
+    }
+  },
+  "records": {
+    "tabTitle": "非密码",
+    "firstOneBtn": "创建你的第一个非密码记录",
+    "recordType1": "身份证",
+    "recordType2": "信用卡",
+    "recordType3": "银行卡",
+    "recordType4": "驾驶证",
+    "recordType5": "护照",
+    "recordTypeOverlay": {
+      "label": "请选择记录类型"
+    },
+    "newRecord": {
+      "label": "新建记录",
+      "toast": {
+        "invalidTOTP": "无效的Totp地址",
+        "pinTypeError": "pin码格式不正确"
+      },
+      "newBtn": "新建记录",
+      "addFieldBtn": "新增字段",
+      "inputs": {
+        "identity": {
+          "title": "标题",
+          "titlePlaceholder": "输入标题",
+          "firstName": "名",
+          "firstNamePlaceholder": "输入名（可选）",
+          "lastName": "姓",
+          "lastNamePlaceholder": "输入姓（可选）",
+          "gender": "性别",
+          "genderPlaceholder": "输入性别（可选）",
+          "birthDate": "出生日期",
+          "birthDatePlaceholder": "输入出生日期（可选）",
+          "job": "职业",
+          "jobPlaceholder": "输入职业（可选）",
+          "address": "居住地址",
+          "addressPlaceholder": "输入居住地址（可选）",
+          "phone": "手机号码",
+          "phonePlaceholder": "输入手机号码（可选）",
+          "socialSecurityNumber": "社会安全号",
+          "socialSecurityNumberPlaceholder": "输入社会安全号（可选）",
+          "idNumber": "身份证号",
+          "idNumberPlaceholder": "输入身份证号（可选）"
+        },
+        "creditCard": {
+          "title": "标题",
+          "titlePlaceholder": "输入标题",
+          "cardholderName": "持卡人名",
+          "cardholderNamePlaceholder": "输入持卡人名（可选）",
+          "type": "卡类型",
+          "typePlaceholder": "输入卡类型（可选）",
+          "number": "卡号码",
+          "numberPlaceholder": "输入卡号码（可选）",
+          "verificationNumber": "验证号",
+          "verificationNumberPlaceholder": "输入验证号（可选）",
+          "pin": "PIN码",
+          "pinPlaceholder": "输入PIN码（可选）",
+          "expiryDate": "过期日期",
+          "expiryDatePlaceholder": "输入过期日期（可选）",
+          "validFrom": "开始生效日期",
+          "validFromPlaceholder": "输入开始生效日期（可选）",
+          "issuingBank": "发行银行",
+          "issuingBankPlaceholder": "输入发行银行（可选）"
+        },
+        "bankAccount": {
+          "title": "标题",
+          "titlePlaceholder": "输入标题",
+          "bankName": "银行名",
+          "bankNamePlaceholder": "输入银行名（可选）",
+          "nameOnAccount": "持卡人名",
+          "nameOnAccountPlaceholder": "输入持卡人名（可选）",
+          "type": "卡类型",
+          "typePlaceholder": "输入卡类型（可选）",
+          "routingNumber": "区域号",
+          "routingNumberPlaceholder": "输入区域号（可选）",
+          "branch": "分支银行名",
+          "branchPlaceholder": "输入分支银行名（可选）",
+          "accountNumber": "账号号码",
+          "accountNumberPlaceholder": "输入账号号码（可选）",
+          "swift": "SWIFT码",
+          "swiftPlaceholder": "输入SWIFT码（可选）",
+          "pin": "PIN码",
+          "pinPlaceholder": "输入PIN码（可选）",
+          "phone": "持卡人手机号码",
+          "phonePlaceholder": "持卡人手机号码（可选）"
+        },
+        "driverLicense": {
+          "title": "标题",
+          "titlePlaceholder": "输入标题",
+          "fullName": "全名",
+          "fullNamePlaceholder": "输入全名（可选）",
+          "address": "家庭地址",
+          "addressPlaceholder": "输入家庭地址（可选）",
+          "birthDate": "出生日期",
+          "birthDatePlaceholder": "输入出生日期（可选）",
+          "gender": "性别",
+          "genderPlaceholder": "输入性别（可选）",
+          "height": "身高",
+          "heightPlaceholder": "输入身高（可选）",
+          "number": "驾驶证号",
+          "numberPlaceholder": "输入驾驶证号（可选）",
+          "licenseClass": "驾驶证类别",
+          "licenseClassPlaceholder": "输入驾驶证类别（可选）",
+          "state": "驾驶证状态",
+          "statePlaceholder": "输入驾驶证状态（可选）",
+          "country": "国家",
+          "countryPlaceholder": "输入国家（可选）",
+          "expiryDate": "过期日期",
+          "expiryDatePlaceholder": "输入过期日期（可选）"
+        },
+        "passport": {
+          "title": "标题",
+          "titlePlaceholder": "输入标题",
+          "issuingCountry": "发行国家",
+          "issuingCountryPlaceholder": "输入发行国家（可选）",
+          "type": "护照类型",
+          "typePlaceholder": "输入护照类型（可选）",
+          "number": "护照号",
+          "numberPlaceholder": "输入护照号（可选）",
+          "fullName": "全名",
+          "fullNamePlaceholder": "输入全名（可选）",
+          "gender": "性别",
+          "genderPlaceholder": "输入性别（可选）",
+          "nationality": "国籍",
+          "nationalityPlaceholder": "输入国籍（可选）",
+          "issuingAuthority": "发行机构",
+          "issuingAuthorityPlaceholder": "输入发行机构（可选）",
+          "birthDate": "出生日期",
+          "birthDatePlaceholder": "输入出生日期（可选）",
+          "birthPlace": "出生地",
+          "birthPlacePlaceholder": "输入出生地（可选）",
+          "issuedOn": "发行日期",
+          "issuedOnPlaceholder": "输入发行日期（可选）",
+          "expiryDate": "过期日期",
+          "expiryDatePlaceholder": "输入过期日期（可选）"
+        }
+      },
+      "datePicker": {
+        "label": "日期选择器",
+        "byMonth": "截止到月份",
+        "yearLabel": "年",
+        "monthLabel": "月",
+        "dayLabel": "日",
+        "useBtn": "应用"
+      },
+      "emptyTitle": "空标题"
+    },
+    "recordDetail": {
+      "label": "记录详情",
+      "toast": {},
+      "copyPrompt": "已复制",
+      "editPrompt": "更新记录 ",
+      "deletePrompt": "删除记录 ",
+      "deleteBtn": "删除",
+      "lastEditedLabel": "最后编辑时间为：",
+      "sharingSince": "分享于 ",
+      "sharedBy": "分享者 ",
+      "qrcodeScanner": {
+        "label": "二维码扫描器",
+        "toast": {}
+      }
+    }
+  },
+  "settings": {
+    "tabTitle": "设置",
+    "version": "版本",
+    "cards": {
+      "title1": "账号",
+      "title2": "设置",
+      "title3": "关于"
+    },
+    "signin": {
+      "label": "登录",
+      "toast": {
+        "emptyEmail": "空邮箱",
+        "emptyUnlockPassword": "空解锁密码"
+      },
+      "hasSignedIn": "已登录",
+      "email": "邮箱",
+      "emailPlaceholder": "输入邮箱",
+      "unlockPassword": "解锁密码",
+      "unlockPasswordPlaceholder": "输入解锁密码",
+      "noAccount": "无账号试用",
+      "goToSignUp": "注册账号"
+    },
+    "signout": {
+      "label": "登出"
+    },
+    "family": {
+      "label": "家庭共享",
+      "createFamilyBtn": "创建家庭",
+      "familyName": "家庭名： ",
+      "joinedAt": "加入于： ",
+      "isMe": " （我）",
+      "isAdmin": "管理",
+      "inviteMemberBtn": "邀请用户",
+      "leaveFamilyBtn": "离开家庭",
+      "leaveFamilyPrompt": "确定离开家庭？",
+      "removeFamilyBtn": "删除家庭",
+      "removeFamilyPrompt": "确定删除家庭？",
+      "backupUnlockPasswordBtn": "备份解锁密码",
+      "familyMessage": {
+        "label": "家庭消息",
+        "createdAt": "时间： ",
+        "creator": "操作人： ",
+        "target": "目标对象： ",
+        "operation": "操作： ",
+        "operations": {
+          "1": "邀请家庭成员",
+          "2": "接受家庭邀请",
+          "3": "拒绝家庭邀请",
+          "4": "授权家庭管理员",
+          "5": "取消授权家庭管理员",
+          "6": "删除家庭成员",
+          "7": "离开家庭",
+          "8": "家庭邀请已被取消，请重新邀请"
+        }
+      },
+      "familyInvitation": {
+        "title": "家庭邀请",
+        "invitedBy": "邀请人： ",
+        "invitedAt": "邀请时间： ",
+        "acceptBtn": "接受",
+        "rejectBtn": "拒绝"
+      },
+      "createFamily": {
+        "label": "创建家庭",
+        "toast": {
+          "emptyDescription": "空描述"
+        },
+        "descriptionPlaceholder": "输入描述"
+      },
+      "inviteFamilyMember": {
+        "label": "邀请家庭成员",
+        "toast": {
+          "emptyEmail": "空邮箱",
+          "malformedEmail": "邮箱格式不正确",
+          "emptyUserPublicKey": "空用户公钥",
+          "invitationStateNoUser": "未发现用户数据",
+          "invitationStateHasFamily": "用户已有家庭",
+          "invitationStateHasInvited": "用户已被邀请",
+          "invitationStateInvitable": "用户可以被邀请"
+        },
+        "emailPlaceholder": "输入邮箱",
+        "checkBtn": "检测用户",
+        "cancelBtn": "取消",
+        "okBtn": "好的",
+        "inviteBtn": "邀请"
+      },
+      "backupUnlockPassword": {
+        "label": "备份解锁密码",
+        "backupBtn": "设置备份",
+        "sharedBackupAt": "被分享备份于：",
+        "sharingBackupAt": "分享备份于：",
+        "recoverPasswordBtn": "找回密码"
+      },
+      "setupFamilyBackupOverlay": {
+        "backupBtn": "备份"
+      },
+      "familyBackupRecover": {
+        "label": "家庭备份恢复",
+        "recoverFromFamily": "主动恢复",
+        "recoverForFamily": "被动恢复",
+        "helpRecoverBtn": "帮助找回",
+        "labels": {
+          "myRecoverRequest": "我的找回请求",
+          "theirRecoverRequest": "他们的找回请求",
+          "sentAt": "发送于: ",
+          "willExpiredAt": "将要过期于: ",
+          "needToConfirm": "找回邮件未被确认",
+          "ciphertext": "密文：",
+          "plaintext": "解锁密码：",
+          "waitUntil": "等待期至：",
+          "emailRejectedAt": "拒绝于："
+        }
+      },
+      "requestFamilyRecoverOverlay": {
+        "commitBtn": "请求帮助"
+      }
+    },
+    "email": {
+      "label": "私密邮件",
+      "itemSubject": "主题： ",
+      "itemFrom": "来自： ",
+      "itemDate": "时间： ",
+      "paginationTotal": "总计： ",
+      "paginationPage": "当前页： ",
+      "applyEmailAccountBtn": "申请一个邮箱账号"
+    },
+    "emailDetail": {
+      "label": "邮件详情",
+      "sentByLabel": "发件人： ",
+      "sentAtLabel": "时间： ",
+      "titleLabel": "主题： ",
+      "contentLabel": "内容： ",
+      "attachmentLabel": "附件：",
+      "attachmentFilenameLabel": "文件名： ",
+      "attachmentFilesizeLabel": "文件大小： ",
+      "attachmentFilecontentLabel": "文件内容： ",
+      "deletePrompt": "删除邮件 "
+    },
+    "signup": {
+      "label": "注册",
+      "toast": {
+        "emptyEmail": "空邮箱",
+        "emptyCaptcha": "空验证码"
+      },
+      "header": "邮箱注册",
+      "email": "邮箱",
+      "emailPlaceholder": "输入邮箱",
+      "captcha": "验证码",
+      "captchaPlaceholder": "输入验证码",
+      "fetchCaptcha": "获取验证码"
+    },
+    "language": {
+      "label": "语言",
+      "default": "系统默认",
+      "zh": "中文（简体）",
+      "en": "英文（美国）"
+    },
+    "theme": {
+      "label": "主题",
+      "default": "系统默认",
+      "dark": "黑",
+      "light": "白"
+    },
+    "forum": {
+      "label": "论坛"
+    },
+    "unlockPassword": {
+      "label": "解锁密码",
+      "toast": {
+        "notSet": "未设置解锁密码"
+      },
+      "verificationMode": {
+        "label": "切换验证方式",
+        "supportFingerprint": "支持指纹解锁"
+      },
+      "editUnlockPassword": {
+        "label": "设置锁屏密码",
+        "toast": {
+          "passwordTypeError": "密码格式不正确",
+          "inconsistentPasswords": "密码不一致"
+        },
+        "alert": {
+          "title1": "重要警告",
+          "message1": "修改解锁密码，会删除已有的密保问题和可信联络人"
+        },
+        "title1": "验证旧密码",
+        "title2": "输入新密码",
+        "oldPassword": "旧密码",
+        "oldPasswordPlaceholder": "输入旧密码",
+        "verifyBtn": "验证",
+        "password1": "解锁密码",
+        "password1Placeholder": "输入解锁密码",
+        "password2": "确认解锁密码",
+        "password2Placeholder": "再次输入解锁密码",
+        "createBtn": "确定"
+      },
+      "autoLock": {
+        "label": "自动锁屏",
+        "caption": "选择自动锁定时间",
+        "lockTimes": {
+          "immediately": "立刻",
+          "after30Seconds": "30秒之后",
+          "after1Minute": "1分钟之后",
+          "after10Minutes": "10分钟之后",
+          "after30Minutes": "30分钟之后",
+          "after1Hour": "1小时之后",
+          "never": "从不"
+        }
+      },
+      "securityQuestion": {
+        "label": "密保问题",
+        "hasSecurityQuestion": "已设置密保问题",
+        "verifyTitle": "验证解锁密码",
+        "verifyBtn": "验证",
+        "passwordPlaceholder": "输入解锁密码",
+        "question1Title": "问题一",
+        "answer1Title": "答案一",
+        "question2Title": "问题二",
+        "answer2Title": "答案二",
+        "question3Title": "问题三",
+        "answer3Title": "答案三",
+        "securityQuestionDetail": {
+          "label": "密保问题详情"
+        },
+        "editSecurityQuestion": {
+          "label1": "设置密保问题",
+          "label2": "重置密保问题",
+          "toast": {
+            "emptyQuestion": "存在空问题",
+            "emptyAnswer": "存在空答案",
+            "requestPublicKeyError": "获取加密公钥失败",
+            "uploadSecurityQuestionAnswersError": "上传解锁密码的密保问题失败"
+          }
+        }
+      },
+      "recoverUnlockPassword": {
+        "label": "找回解锁密码",
+        "toast": {},
+        "title": "请输入账号邮箱",
+        "emailPlaceholder": "输入账号邮箱",
+        "useFamilyMode": "家庭模式",
+        "doRecoverBtn": "密保找回",
+        "doFamilyRecoverBtn": "家庭备份找回",
+        "doCheckBtn": "检查邮箱",
+        "recoverTip": "您已经在 {{lastRecoveredAt, string}} 请求过密保找回，您可以在 {{nextRecoverTS, string}} 再次请求.",
+        "familyRecoverTip": "您已经在 {{lastFamilyRecoveredAt, string}} 申请过家庭找回，您可以在 {{nextFamilyRecoverTS, string}} 再次申请."
+      },
+      "trustedContact": {
+        "label": "可信联络人",
+        "deleteBtn": "删除",
+        "addBtn": "新增"
+      },
+      "addTrustedContact": {
+        "label": "新增可信联络人",
+        "toast": {
+          "emptyContactEmail": "空的联络人邮箱",
+          "emptyBackupPassword": "空的备份密码"
+        },
+        "contactEmail": "联络人邮箱",
+        "contactEmailPlaceholder": "输入联络人邮箱",
+        "backupPassword": "备份密码",
+        "backupPasswordPlaceholder": "输入备份密码",
+        "addBtn": "新增",
+        "refreshBtn": "刷新",
+        "copyBtn": "复制"
+      }
+    }
+  },
+  "debug": {
+    "label": "应用调试",
+    "useGo": "使用加密Http",
+    "logs": {
+      "label": "调试日志"
+    },
+    "logHttp": "开启Http请求日志",
+    "httpLogs": {
+      "label": "Http日志"
+    },
+    "httpLogDetail": {
+      "label": "Http日志详情",
+      "fields": {
+        "useGo": "是否是加密请求",
+        "start": "开始时间",
+        "end": "结束时间",
+        "duration": "耗时（毫秒）",
+        "host": "主机",
+        "path": "请求地址",
+        "reqBody": "请求体",
+        "reqHeaders": "请求头部",
+        "respCode": "响应码",
+        "respHeaders": "响应头",
+        "respBody": "响应体"
+      }
+    }
+  }
+}

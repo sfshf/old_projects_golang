@@ -1,0 +1,210 @@
+pipeline {
+    agent {
+        label "${JENKINS_AGENT}"
+    }
+    stages {
+        stage('Pre') {
+            steps {
+                script {
+                    sh '''
+                        git remote update origin --prune
+                        git branch -a | grep -e '^  remotes/origin/dev$'
+                        echo 'remote dev branch exists'
+                        git branch -D dev || echo 'no local dev branch'
+                        git branch dev remotes/origin/dev
+                    '''
+                    sh """
+                        git checkout ${BRANCH_NAME}
+                        git rebase dev
+                        echo 'git rebase dev success'
+                        git push origin ${BRANCH_NAME}
+                        echo 'git push origin' ${BRANCH_NAME} 'success'
+                    """
+                }
+            }
+        }
+        stage('BuildConsole') {
+            steps {
+                sh """
+                    docker build \
+                        --build-arg env=test \
+                        --build-arg CONSOLE_HTTP_PORT=${CONSOLE_HTTP_PORT} \
+                        --build-arg CONSOLE_GRPC_PORT=${CONSOLE_GRPC_PORT} \
+                        -t nextsurfer/oracle-console:latest \
+                        -f build/console/Dockerfile .
+                    docker stop -t 90 -s SIGTERM oracle-console && docker rm oracle-console || echo 0
+                    docker run -itd \
+                        --name oracle-console \
+                        --dns ${HOST_IP} \
+                        --dns 8.8.8.8 \
+                        --restart always \
+                        -e 'HOST_IP=${HOST_IP}' \
+                        -e 'CONSOLE_APP_NAME=${CONSOLE_APP_NAME}' \
+                        -e 'CONSUL_HTTP_ADDR=${CONSUL_HTTP_ADDR}' \
+                        -e 'APP_ENV=${APP_ENV}' \
+                        -e 'CONSOLE_HTTP_PORT=${CONSOLE_HTTP_PORT}' \
+                        -e 'CONSOLE_GRPC_PORT=${CONSOLE_GRPC_PORT}' \
+                        -e 'CONSOLE_MYSQL_DNS=${CONSOLE_MYSQL_DNS}' \
+                        -e 'CONSOLE_REDIS_DNS=${CONSOLE_REDIS_DNS}' \
+                        -e 'I18N_TOML_PATH=${I18N_TOML_PATH}' \
+                        -e 'CONSOLE_WEB_PATH=${CONSOLE_WEB_PATH}' \
+                        -e 'CONSOLE_HOST=${CONSOLE_HOST}' \
+                        -e 'PROTO_STATISTIC_CRON_SPEC=${PROTO_STATISTIC_CRON_SPEC}' \
+                        -e 'SERVICE_HEALTH_CHECK_CRON_SPEC=${SERVICE_HEALTH_CHECK_CRON_SPEC}' \
+                        -e 'REFRESH_TLS_CERTIFICATE_CRON_SPEC=${REFRESH_TLS_CERTIFICATE_CRON_SPEC}' \
+                        -e 'GATEWAY_API_HOSTNAME=${GATEWAY_API_HOSTNAME}' \
+                        -p '${CONSOLE_HTTP_PORT}:${CONSOLE_HTTP_PORT}' \
+                        -p '${CONSOLE_GRPC_PORT}:${CONSOLE_GRPC_PORT}' \
+                        nextsurfer/oracle-console:latest
+                """
+            }
+        }
+        stage('BuildGateway') {
+            steps {
+                sh """
+                    docker build \
+                        --build-arg env=test \
+                        --build-arg GATEWAY_HTTP_PORT=${GATEWAY_HTTP_PORT} \
+                        --build-arg GATEWAY_TLS_PORT=${GATEWAY_TLS_PORT} \
+                        --build-arg GATEWAY_GRPC_PORT=${GATEWAY_GRPC_PORT} \
+                        -t nextsurfer/oracle-gateway:latest \
+                        -f build/gateway/Dockerfile .
+                    docker stop -t 90 -s SIGTERM oracle-gateway && docker rm oracle-gateway || echo 0
+                    docker run -itd \
+                        --name oracle-gateway \
+                        --dns ${HOST_IP} \
+                        --dns 8.8.8.8 \
+                        --restart always \
+                        -e 'HOST_IP=${HOST_IP}' \
+                        -e 'GATEWAY_APP_NAME=${GATEWAY_APP_NAME}' \
+                        -e 'CONSUL_HTTP_ADDR=${CONSUL_HTTP_ADDR}' \
+                        -e 'APP_ENV=${APP_ENV}' \
+                        -e 'GATEWAY_HTTP_PORT=${GATEWAY_HTTP_PORT}' \
+                        -e 'GATEWAY_TLS_PORT=${GATEWAY_TLS_PORT}' \
+                        -e 'GATEWAY_GRPC_PORT=${GATEWAY_GRPC_PORT}' \
+                        -e 'GATEWAY_MYSQL_DNS=${GATEWAY_MYSQL_DNS}' \
+                        -e 'GATEWAY_REDIS_DNS=${GATEWAY_REDIS_DNS}' \
+                        -e 'I18N_TOML_PATH=${I18N_TOML_PATH}' \
+                        -e 'CONSOLE_HOST=${CONSOLE_HOST}' \
+                        -e 'CONSOLE_GRPC_PORT=${CONSOLE_GRPC_PORT}' \
+                        -e 'GATEWAY_HOST=${GATEWAY_HOST}' \
+                        -e 'GATEWAY_API_HOSTNAME=${GATEWAY_API_HOSTNAME}' \
+                        -e 'UPLOAD_BUCKET_NAME=${UPLOAD_BUCKET_NAME}' \
+                        -e 'AWS_REGION=${AWS_REGION}' \
+                        -e 'UPLOAD_PROTO_STATISTIC_CRON_SPEC=${UPLOAD_PROTO_STATISTIC_CRON_SPEC}' \
+                        -e 'ORACLE_GATEWAY_INIT_CORS=${ORACLE_GATEWAY_INIT_CORS}' \
+                        -p '${GATEWAY_HTTP_PORT}:${GATEWAY_HTTP_PORT}' \
+                        -p '${GATEWAY_TLS_PORT}:${GATEWAY_TLS_PORT}' \
+                        -p '${GATEWAY_GRPC_PORT}:${GATEWAY_GRPC_PORT}' \
+                        nextsurfer/oracle-gateway:latest
+                """
+            }
+        }
+        stage('Test') {
+            steps {
+                sh """
+                    docker run --rm \
+                        -v ./:/test \
+                        -w /test \
+                        -e 'CONSOLE_HOST=${CONSOLE_HOST}' \
+                        -e 'CONSOLE_GRPC_PORT=${CONSOLE_GRPC_PORT}' \
+                        -e 'CONSOLE_MYSQL_DNS=${CONSOLE_MYSQL_DNS}' \
+                        -e 'GATEWAY_MYSQL_DNS=${GATEWAY_MYSQL_DNS}' \
+                        -e 'ORACLE_CONSOLE_DNS=${ORACLE_CONSOLE_DNS}' \
+                        -e 'ORACLE_DNS=${ORACLE_DNS}' \
+                        -e 'ORACLE_CONSOLE_APIKEY=${ORACLE_CONSOLE_APIKEY}' \
+                        -e 'ORACLE_GATEWAY_APIKEY=${ORACLE_GATEWAY_APIKEY}' \
+                        golang:1.21 \
+                        sh -c \
+                        "git config --global url.https://github@github.com.insteadof https://github.com && GOSUMDB=off go mod tidy && go test -v ./test/e2e/console ./test/e2e/gateway"
+                """
+            }
+        }
+    }
+    post {
+        success {
+            sh """
+                echo 'e2e testing success'
+                git checkout dev
+                git rebase ${BRANCH_NAME}
+                git push origin dev
+            """
+        }
+        failure {
+            sh """
+                    docker build \
+                        --build-arg env=test \
+                        --build-arg CONSOLE_HTTP_PORT=${CONSOLE_HTTP_PORT} \
+                        --build-arg CONSOLE_GRPC_PORT=${CONSOLE_GRPC_PORT} \
+                        -t nextsurfer/oracle-console:latest \
+                        -f build/console/Dockerfile .
+                    docker stop -t 90 -s SIGTERM oracle-console && docker rm oracle-console || echo 0
+                    docker run -itd \
+                        --name oracle-console \
+                        --dns ${HOST_IP} \
+                        --dns 8.8.8.8 \
+                        --restart always \
+                        -e 'HOST_IP=${HOST_IP}' \
+                        -e 'CONSOLE_APP_NAME=${CONSOLE_APP_NAME}' \
+                        -e 'CONSUL_HTTP_ADDR=${CONSUL_HTTP_ADDR}' \
+                        -e 'APP_ENV=${APP_ENV}' \
+                        -e 'CONSOLE_HTTP_PORT=${CONSOLE_HTTP_PORT}' \
+                        -e 'CONSOLE_GRPC_PORT=${CONSOLE_GRPC_PORT}' \
+                        -e 'CONSOLE_MYSQL_DNS=${CONSOLE_MYSQL_DNS}' \
+                        -e 'CONSOLE_REDIS_DNS=${CONSOLE_REDIS_DNS}' \
+                        -e 'I18N_TOML_PATH=${I18N_TOML_PATH}' \
+                        -e 'CONSOLE_WEB_PATH=${CONSOLE_WEB_PATH}' \
+                        -e 'CONSOLE_HOST=${CONSOLE_HOST}' \
+                        -e 'PROTO_STATISTIC_CRON_SPEC=${PROTO_STATISTIC_CRON_SPEC}' \
+                        -e 'SERVICE_HEALTH_CHECK_CRON_SPEC=${SERVICE_HEALTH_CHECK_CRON_SPEC}' \
+                        -e 'REFRESH_TLS_CERTIFICATE_CRON_SPEC=${REFRESH_TLS_CERTIFICATE_CRON_SPEC}' \
+                        -e 'GATEWAY_API_HOSTNAME=${GATEWAY_API_HOSTNAME}' \
+                        -p '${CONSOLE_HTTP_PORT}:${CONSOLE_HTTP_PORT}' \
+                        -p '${CONSOLE_GRPC_PORT}:${CONSOLE_GRPC_PORT}' \
+                        nextsurfer/oracle-console:latest
+                """
+            sh """
+                    docker build \
+                        --build-arg GATEWAY_HTTP_PORT=${GATEWAY_HTTP_PORT} \
+                        --build-arg GATEWAY_TLS_PORT=${GATEWAY_TLS_PORT} \
+                        --build-arg GATEWAY_GRPC_PORT=${GATEWAY_GRPC_PORT} \
+                        -t nextsurfer/oracle-gateway:latest \
+                        -f build/gateway/Dockerfile .
+                    docker stop -t 90 -s SIGTERM oracle-gateway && docker rm oracle-gateway || echo 0
+                    docker run -itd \
+                        --name oracle-gateway \
+                        --dns ${HOST_IP} \
+                        --dns 8.8.8.8 \
+                        --restart always \
+                        -e 'HOST_IP=${HOST_IP}' \
+                        -e 'GATEWAY_APP_NAME=${GATEWAY_APP_NAME}' \
+                        -e 'CONSUL_HTTP_ADDR=${CONSUL_HTTP_ADDR}' \
+                        -e 'APP_ENV=${APP_ENV}' \
+                        -e 'GATEWAY_HTTP_PORT=${GATEWAY_HTTP_PORT}' \
+                        -e 'GATEWAY_TLS_PORT=${GATEWAY_TLS_PORT}' \
+                        -e 'GATEWAY_GRPC_PORT=${GATEWAY_GRPC_PORT}' \
+                        -e 'GATEWAY_MYSQL_DNS=${GATEWAY_MYSQL_DNS}' \
+                        -e 'GATEWAY_REDIS_DNS=${GATEWAY_REDIS_DNS}' \
+                        -e 'I18N_TOML_PATH=${I18N_TOML_PATH}' \
+                        -e 'CONSOLE_HOST=${CONSOLE_HOST}' \
+                        -e 'CONSOLE_GRPC_PORT=${CONSOLE_GRPC_PORT}' \
+                        -e 'GATEWAY_HOST=${GATEWAY_HOST}' \
+                        -e 'GATEWAY_API_HOSTNAME=${GATEWAY_API_HOSTNAME}' \
+                        -e 'UPLOAD_BUCKET_NAME=${UPLOAD_BUCKET_NAME}' \
+                        -e 'AWS_REGION=${AWS_REGION}' \
+                        -e 'UPLOAD_PROTO_STATISTIC_CRON_SPEC=${UPLOAD_PROTO_STATISTIC_CRON_SPEC}' \
+                        -e 'ORACLE_GATEWAY_INIT_CORS=${ORACLE_GATEWAY_INIT_CORS}' \
+                        -p '${GATEWAY_HTTP_PORT}:${GATEWAY_HTTP_PORT}' \
+                        -p '${GATEWAY_TLS_PORT}:${GATEWAY_TLS_PORT}' \
+                        -p '${GATEWAY_GRPC_PORT}:${GATEWAY_GRPC_PORT}' \
+                        nextsurfer/oracle-gateway:latest
+                """
+        }
+        cleanup {
+            sh """
+                docker system prune -f
+            """
+            cleanWs()
+        }
+    }
+}

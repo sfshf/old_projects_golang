@@ -1,0 +1,77 @@
+[LoginErrMsg_WrongRequestParameters]
+other = "请求参数有误，请您排错后重试"
+
+[ClientErrMsg_UserHasJoined]
+other = "当前账号已加入该应用，您可以尝试其他账号或应用"
+
+[ClientErrMsg_InvalidReferralCode]
+other = "推荐码无效，请您尝试其他推荐码"
+
+[ClientErrMsg_UserRegisteredOnOldDevice]
+other = "当前账号在旧设备上已注册，您可以尝试其他账号"
+
+[ClientErrMsg_UserHasNoReferralPointRecord]
+other = "当前账号没有积分，您可以尝试获取一些积分"
+
+[ClientErrMsg_UserHasNoReferralNewUserRecord]
+other = "当前账号非新用户，您可以尝试其他账号"
+
+[ClientErrMsg_ReferralNewUserRecordHasExpired]
+other = "当前账号的新用户状态已过期，您可以尝试其他账号"
+
+[ClientErrMsg_UserHasNoAppAccountToken]
+other = "当前账号没有应用账号token，您可以尝试获取一个应用账号token"
+
+[ClientErrMsg_UserHasNoNewUserDiscountStateAndNoNewUserReferral]
+other = "当前账号没有新用户折扣优惠，又没有新用户推荐码，您可以尝试其他账号"
+
+[ClientErrMsg_UserHasNoNewUserDiscountState]
+other = "当前账号没有新用户折扣优惠，您可以尝试其他账号"
+
+[ClientErrMsg_UserHasNoNewUserDiscountStateAndExpiredNewUserReferral]
+other = "当前账号没有新用户折扣优惠，且新用户推荐码已过期，您可以尝试其他账号"
+
+[ClientErrMsg_NewUserDiscountStateRemainingTimeNotGreaterThanZero]
+other = "当前账号的新用户优惠剩余次数不大于0，您可以尝试其他账号."
+
+[ClientErrMsg_NewUserDiscountStateRemainingTimeNotEqualToOne]
+other = "当前账号的新用户优惠剩余次数不等于1，您可以尝试其他账号"
+
+[ClientErrMsg_NewUserDiscountStateRemainingTimeMismatch]
+other = "当前账号的新用户优惠剩余次数不匹配，您可以尝试其他账号"
+
+[ClientErrMsg_UserHasNoReferralCode]
+other = "当前账号没有优惠码"
+
+[ClientErrMsg_UserHasNoPromotionalOfferRecord]
+other = "当前账号没有促销优惠"
+
+[ClientErrMsg_InvalidRewardId]
+other = "无效优惠"
+
+[ClientErrMsg_ReferalPointsNotEnoughToCost]
+other = "当前优惠积分不够用，您可以尝试其它优惠"
+
+[ClientErrMsg_UserHasNoFreeTrialState]
+other = "当前账号没有试用优惠，您可以尝试获取试用优惠"
+
+[ClientErrMsg_NoNeedToMarkNewRegistration]
+other = "无需刷新注册"
+
+[ClientErrMsg_WrongParameters]
+other = "参数错误或无效"
+
+[ClientErrMsg_UserHasNotRegistered]
+other = "用户还未注册"
+
+[ClientErrMsg_UserHasRegisteredExceed]
+other = "用户注册时长已过期限"
+
+[ParamErrMsg_ApiKeyIsInvalid]
+other = "ApiKey无效，请正确输入apiKey"
+
+[ClientErrMsg_DeformedConfig]
+other = "配置格式错误"
+
+[FatalErrMsg]
+other = "服务器发生一些问题， 请稍后重试。 如果多次无法登录， 请联系客服"

@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package alchemist_notification_api;
+option go_package = "./api/notification";
+import "google/protobuf/struct.proto";
+
+service AlchemistNotificationService {
+  rpc AppStoreNotificationsProd(AppStoreNotificationsProdRequest) returns (EmptyResponse);
+  rpc AppStoreNotificationsTest(AppStoreNotificationsTestRequest) returns (EmptyResponse);
+}
+
+message Empty {
+}
+
+message EmptyResponse {
+    int32 code = 1;
+    string message = 2;
+    google.protobuf.Value debugMessage = 3;
+}
+
+message AppStoreNotificationsProdRequest {
+  string signedPayload = 1; // @gotags: validate:"required"
+}
+
+message AppStoreNotificationsTestRequest {
+  string signedPayload = 1; // @gotags: validate:"required"
+}

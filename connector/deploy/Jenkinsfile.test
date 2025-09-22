@@ -1,0 +1,162 @@
+pipeline {
+    agent {
+        label "${JENKINS_AGENT}"
+    }
+    stages {
+        stage('Pre') {
+            steps {
+                script {
+                    sh '''
+                        git remote update origin --prune
+                        git branch -a | grep -e '^  remotes/origin/dev$'
+                        echo 'remote dev branch exists'
+                        git branch -D dev || echo 'no local dev branch'
+                        git branch dev remotes/origin/dev
+                    '''
+                    sh """
+                        git checkout ${BRANCH_NAME}
+                        git rebase dev
+                        echo 'git rebase dev success'
+                        git push origin ${BRANCH_NAME}
+                        echo 'git push origin' ${BRANCH_NAME} 'success'
+                    """
+                }
+            }
+        }
+        stage('Build') {
+            steps {
+                sh """
+                    docker build \
+                        --build-arg env=test \
+                        --build-arg GRPC_SERVER_PORT=${GRPC_SERVER_PORT} \
+                        --build-arg GRPC_METRIC_PORT=${GRPC_METRIC_PORT} \
+                        --build-arg MYSQL_METRIC_PORT=${MYSQL_METRIC_PORT} \
+                        --build-arg HTTP_SERVER_PORT=${HTTP_SERVER_PORT} \
+                        -t nextsurfer/connector:latest \
+                        -f build/connector/Dockerfile .
+                    docker stop -t 60 -s SIGTERM connector && docker rm connector || echo 0
+                    docker run -itd \
+                        --name connector \
+                        --dns ${HOST_IP} \
+                        --dns 8.8.8.8 \
+                        --restart always \
+                        -e 'APP_NAME=${APP_NAME}' \
+                        -e 'CONSUL_HTTP_ADDR=${CONSUL_HTTP_ADDR}' \
+                        -e 'GRPC_SERVER_HOST=${GRPC_SERVER_HOST}' \
+                        -e 'GRPC_SERVER_PORT=${GRPC_SERVER_PORT}' \
+                        -e 'GRPC_METRIC_PORT=${GRPC_METRIC_PORT}' \
+                        -e 'MYSQL_METRIC_PORT=${MYSQL_METRIC_PORT}' \
+                        -e 'HTTP_SERVER_PORT=${HTTP_SERVER_PORT}' \
+                        -e 'CONNECTOR_MANAGER_WEB_PATH=${CONNECTOR_MANAGER_WEB_PATH}' \
+                        -e 'APPLICATION_ENV=${APPLICATION_ENV}' \
+                        -e 'I18N_TOML_PATH=${I18N_TOML_PATH}' \
+                        -e 'KEY_STORE_ADDRESS=${KEY_STORE_ADDRESS}' \
+                        -e 'CONNECTOR_REDIS_DNS=${CONNECTOR_REDIS_DNS}' \
+                        -e 'CONNECTOR_MYSQL_DNS=${CONNECTOR_MYSQL_DNS}' \
+                        -e 'UPDATE_CONNECTOR_PASSWORD=${UPDATE_CONNECTOR_PASSWORD}' \
+                        -p '${GRPC_SERVER_PORT}:${GRPC_SERVER_PORT}' \
+                        -p '${GRPC_METRIC_PORT}:${GRPC_METRIC_PORT}' \
+                        -p '${MYSQL_METRIC_PORT}:${MYSQL_METRIC_PORT}' \
+                        -p '${HTTP_SERVER_PORT}:${HTTP_SERVER_PORT}' \
+                        nextsurfer/connector:latest
+                """
+            }
+        }
+        stage('PushService') {
+            steps {
+                sh """
+                    docker run --rm \
+                        -v ./:/test \
+                        -w /test \
+                        -e 'CONSOLE_HOST=${CONSOLE_HOST}' \
+                        -e 'CONSOLE_GRPC_PORT=${CONSOLE_GRPC_PORT}' \
+                        golang:1.21 \
+                        sh -c \
+                        "git config --global url.https://github@github.com.insteadof https://github.com && GOSUMDB=off go mod tidy && go run ./cmd/pushproto -dns http://${HOST_IP}:8866"
+                """
+            }
+        }
+        stage('Push2tester') {
+            steps {
+                sh 'docker run --rm \
+                        -v ./:/test \
+                        -w /test \
+                        golang:1.21 \
+                        sh -c \
+                        "git config --global url.https://github@github.com.insteadof https://github.com && GOSUMDB=off go mod tidy && go run ./cmd/push2tester"'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh """
+                    docker run --rm \
+                        -v ./:/test \
+                        -w /test \
+                        -e 'CONNECTOR_REDIS_DNS=${CONNECTOR_REDIS_DNS}' \
+                        -e 'CONNECTOR_MYSQL_DNS=${CONNECTOR_MYSQL_DNS}' \
+                        -e 'PSWD_RIKI_E2E_TEST1=${PSWD_RIKI_E2E_TEST1}' \
+                        -e 'PSWD_RIKI_E2E_TEST2=${PSWD_RIKI_E2E_TEST2}' \
+                        -e 'RIKI_ADMIN_APIKEY=${RIKI_ADMIN_APIKEY}' \
+                        golang:1.21 \
+                        sh -c \
+                        "git config --global url.https://github@github.com.insteadof https://github.com && GOSUMDB=off go mod tidy && go test -v ./test/e2e/connector ./test/e2e/console"
+                """
+            }
+        }
+    }
+    post {
+        success {
+            sh """
+                echo 'e2e testing success'
+                git checkout dev
+                git rebase ${BRANCH_NAME}
+                git push origin dev
+            """
+        }
+        failure {
+            sh """
+                echo 'feature build or e2e testing fail'
+                git checkout dev
+                docker build \
+                    --build-arg env=test \
+                    --build-arg GRPC_SERVER_PORT=${GRPC_SERVER_PORT} \
+                    --build-arg GRPC_METRIC_PORT=${GRPC_METRIC_PORT} \
+                    --build-arg MYSQL_METRIC_PORT=${MYSQL_METRIC_PORT} \
+                    --build-arg HTTP_SERVER_PORT=${HTTP_SERVER_PORT} \
+                    -t nextsurfer/connector:latest \
+                    -f build/connector/Dockerfile .
+                docker stop -t 60 -s SIGTERM connector && docker rm connector || echo 0
+                docker run -itd \
+                    --name connector \
+                    --dns ${HOST_IP} \
+                    --dns 8.8.8.8 \
+                    --restart always \
+                    -e 'APP_NAME=${APP_NAME}' \
+                    -e 'CONSUL_HTTP_ADDR=${CONSUL_HTTP_ADDR}' \
+                    -e 'GRPC_SERVER_HOST=${GRPC_SERVER_HOST}' \
+                    -e 'GRPC_SERVER_PORT=${GRPC_SERVER_PORT}' \
+                    -e 'GRPC_METRIC_PORT=${GRPC_METRIC_PORT}' \
+                    -e 'MYSQL_METRIC_PORT=${MYSQL_METRIC_PORT}' \
+                    -e 'HTTP_SERVER_PORT=${HTTP_SERVER_PORT}' \
+                    -e 'CONNECTOR_MANAGER_WEB_PATH=${CONNECTOR_MANAGER_WEB_PATH}' \
+                    -e 'APPLICATION_ENV=${APPLICATION_ENV}' \
+                    -e 'I18N_TOML_PATH=${I18N_TOML_PATH}' \
+                    -e 'KEY_STORE_ADDRESS=${KEY_STORE_ADDRESS}' \
+                    -e 'CONNECTOR_REDIS_DNS=${CONNECTOR_REDIS_DNS}' \
+                    -e 'CONNECTOR_MYSQL_DNS=${CONNECTOR_MYSQL_DNS}' \
+                    -e 'UPDATE_CONNECTOR_PASSWORD=${UPDATE_CONNECTOR_PASSWORD}' \
+                    -p '${GRPC_SERVER_PORT}:${GRPC_SERVER_PORT}' \
+                    -p '${GRPC_METRIC_PORT}:${GRPC_METRIC_PORT}' \
+                    -p '${MYSQL_METRIC_PORT}:${MYSQL_METRIC_PORT}' \
+                    -p '${HTTP_SERVER_PORT}:${HTTP_SERVER_PORT}' \
+                    nextsurfer/connector:latest
+            """
+        }
+        cleanup {
+            sh """
+                docker system prune -f
+            """
+            cleanWs()
+        }
+    }
+}

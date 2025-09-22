@@ -1,0 +1,301 @@
+syntax = "proto3";
+
+package slark_api;
+import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
+
+service UserService {
+    rpc LoginByPhone(PhoneLoginRequest) returns (LoginResponse) {
+        option (google.api.http) = {
+            post: "/slark/user/loginByPhone/v1"
+            body: "*"
+        };
+    };
+    rpc LoginByEmail(EmailLoginRequest) returns (LoginResponse) {
+        option (google.api.http) = {
+            post: "/slark/user/loginByEmail/v1"
+            body: "*"
+        };
+    };
+    rpc LoginBySession(Empty) returns (LoginResponse) {
+        option (google.api.http) = {
+            post: "/slark/user/loginBySession/v1"
+            body: "*"
+        };
+    };
+    rpc LoginByApple(LoginByAppleRequest) returns (LoginResponse) {
+        option (google.api.http) = {
+            post: "/slark/user/loginByApple/v1"
+            body: "*"
+        };
+    };
+    rpc RegisterByEmail(RegisterByEmailRequest) returns (LoginResponse) {
+        option (google.api.http) = {
+            post: "/slark/user/registerByEmail/v1"
+            body: "*"
+        };
+    };
+    rpc RegisterByEmailCaptcha(RegisterByEmailCaptchaRequest) returns (LoginResponse) {
+        option (google.api.http) = {
+            post: "/slark/user/registerByEmailCaptcha/v1"
+            body: "*"
+        };
+    };
+    rpc SendRegistrationEmailCaptcha(SendRegistrationEmailCaptchaRequest) returns (SendRegistrationEmailCaptchaResponse) {
+        option (google.api.http) = {
+            post: "/slark/user/sendRegistrationEmailCaptcha/v1"
+            body: "*"
+        };
+    };
+    rpc LogOutBySession(Empty) returns (EmptyResponse) {
+        option (google.api.http) = {
+            post: "/slark/user/logout/v1"
+            body: "*"
+        };
+    };
+    rpc CheckLogin(Empty) returns (EmptyResponse) {
+        option (google.api.http) = {
+            post: "/slark/user/checkLogin/v1"
+            body: "*"
+        };
+    };
+    rpc LoginInfo(Empty) returns (LoginResponse) {
+        option (google.api.http) = {
+            post: "/slark/user/loginInfo/v1"
+            body: "*"
+        };
+    };
+    rpc QRLogin(QRLoginRequest) returns (QRLoginResponse) {
+        option (google.api.http) = {
+            post: "/slark/qrcode/login/v1"
+            body: "*"
+        };
+    };
+    rpc SendLoginEmailCode(SendLoginEmailCodeRequest) returns (SendLoginEmailCodeResponse) {
+        option (google.api.http) = {
+            post: "/slark/sendLoginEmailCode/v1"
+            body: "*"
+        };
+    };
+    rpc LoginByEmailCode(LoginByEmailCodeRequest) returns (LoginResponse) {
+        option (google.api.http) = {
+            post: "/slark/loginByEmailCode/v1"
+            body: "*"
+        };
+    };
+    rpc UpdateNickname(UpdateNicknameRequest) returns (UpdateNicknameResponse) {
+        option (google.api.http) = {
+            post: "/slark/updateNickname/v1"
+            body: "*"
+        };
+    };
+    rpc Unregister(Empty) returns (UnregisterResponse) {
+        option (google.api.http) = {
+            post: "/slark/unregister/v1"
+            body: "*"
+        };
+    };
+    rpc RandomNickname(Empty) returns (RandomNicknameResponse) {
+        option (google.api.http) = {
+            post: "/slark/randomNickname/v1"
+            body: "*"
+        };
+    };
+    rpc CreateSecondaryPassword(CreateSecondaryPasswordRequest) returns (EmptyResponse) {
+        option (google.api.http) = {
+            post: "/slark/createSecondaryPassword/v1"
+            body: "*"
+        };
+    };
+    rpc UpdateSecondaryPassword(UpdateSecondaryPasswordRequest) returns (EmptyResponse) {
+        option (google.api.http) = {
+            post: "/slark/updateSecondaryPassword/v1"
+            body: "*"
+        };
+    };
+    rpc LoginBySecondaryPassword(LoginBySecondaryPasswordRequest) returns (LoginResponse) {
+        option (google.api.http) = {
+            post: "/slark/loginBySecondaryPassword/v1"
+            body: "*"
+        };
+    };
+}
+
+service TestService {
+    rpc GetRegistrationEmailCaptchas(Empty) returns (GetRegistrationEmailCaptchasResponse) {
+        option (google.api.http) = {
+            post: "/slark/test/getRegistrationEmailCaptchas/v1"
+            body: "*"
+        };
+    };
+    rpc GetLoginEmailCaptchas(Empty) returns (GetLoginEmailCaptchasResponse) {
+        option (google.api.http) = {
+            post: "/slark/test/getLoginEmailCaptchas/v1"
+            body: "*"
+        };
+    };
+}
+
+
+message LoginBySecondaryPasswordRequest {
+    string email = 1;
+    string passwordHash = 2;
+}
+
+message UpdateSecondaryPasswordRequest {
+    string oldPasswordHash = 1;
+    string newPasswordHash = 2;
+}
+
+message CreateSecondaryPasswordRequest {
+    string passwordHash = 1;
+}
+
+message Empty {
+}
+
+message EmptyResponse {
+    int32 code = 1;
+    string message = 2;
+    google.protobuf.Value debugMessage = 3;
+    string oracle = 4;
+}
+
+message PhoneLoginRequest {
+    string phone = 1;
+    string passwordHash = 2;
+}
+
+message EmailLoginRequest {
+    string email = 1;
+    string passwordHash = 2;
+}
+
+message LoginResponse {
+    int32 code = 1;
+    string message = 2;
+    google.protobuf.Value debugMessage = 3;
+    string oracle = 4;
+    message Data {
+        int64 userID = 1;
+        string nickname = 2;
+        string email = 3;
+        string phone = 4;
+    }
+    Data data = 5;
+}
+
+message RegisterByEmailRequest {
+    string email = 1;
+    string nickname = 2;
+    string passwordHash = 3;
+    string captcha = 4;
+}
+
+message RegisterByEmailCaptchaRequest {
+    string email = 1;
+    string captcha = 2;
+}
+
+
+message LoginByAppleRequest {
+    string email = 1;
+    string userIdentifier = 2;
+}
+
+message SendRegistrationEmailCaptchaRequest {
+  string email = 1;
+}
+
+message SendRegistrationEmailCaptchaResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message QRLoginRequest {
+    string token = 1;
+}
+
+message QRLoginResponse {
+    int32 code = 1;
+    string message = 2;
+    google.protobuf.Value debugMessage = 3;
+    string oracle = 4;
+}
+
+message SendLoginEmailCodeRequest {
+    string email = 1;
+}
+
+message SendLoginEmailCodeResponse {
+    int32 code = 1;
+    string message = 2;
+    google.protobuf.Value debugMessage = 3;
+    string oracle = 4;
+}
+
+message LoginByEmailCodeRequest {
+    string email = 1;
+    string code = 2;
+}
+
+message UpdateNicknameRequest {
+    string nickname = 1;
+}
+
+message UpdateNicknameResponse {
+    int32 code = 1;
+    string message = 2;
+    google.protobuf.Value debugMessage = 3;
+    string oracle = 4;
+}
+
+message UnregisterResponse {
+    int32 code = 1;
+    string message = 2;
+    google.protobuf.Value debugMessage = 3;
+    string oracle = 4;
+}
+
+message RandomNicknameResponse {
+    int32 code = 1;
+    string message = 2;
+    google.protobuf.Value debugMessage = 3;
+    string oracle = 4;
+    message Data {
+        string nickname = 1;
+    }
+    Data data = 5;
+}
+
+message GetRegistrationEmailCaptchasResponse {
+    int32 code = 1;
+    string message = 2;
+    google.protobuf.Value debugMessage = 3;
+    string oracle = 4;
+    message EmailCaptcha {
+        string email = 1;
+        string code = 2;
+    }
+    message Data {
+        repeated EmailCaptcha list = 1;
+    }
+    Data data = 5;
+}
+
+message GetLoginEmailCaptchasResponse {
+    int32 code = 1;
+    string message = 2;
+    google.protobuf.Value debugMessage = 3;
+    string oracle = 4;
+    message EmailCaptcha {
+        string email = 1;
+        string code = 2;
+    }
+    message Data {
+        repeated EmailCaptcha list = 1;
+    }
+    Data data = 5;
+}

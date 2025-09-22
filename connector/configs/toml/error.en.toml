@@ -1,0 +1,38 @@
+[LoginErrMsg_WrongRequestParameters]
+other = "Request has wrong parameters, please inspect parameters"
+
+[ParamErrMsg_ApiKeyIsInvalid]
+other = "ApiKey is invalid. Please input apiKey correctly."
+
+[ParamErrMsg_IDIsInvalid]
+other = "ID is invalid. Please input id correctly."
+
+[ParamErrMsg_KeyIDIsDeformed]
+other = "KeyID is deformed. password key id must have pswd_ prefix, private key id must not have pswd_ prefix."
+
+[ParamErrMsg_PermissionIsDeformed]
+other = "Permission is deformed. permission must be 'write' or 'read'"
+
+[ParamErrMsg_RoleIsDeformed]
+other = "Role is deformed. Please input role correctly."
+
+[ParamErrMsg_ApiKeyNameExists]
+other = "Api key name exists. Please input another."
+
+[ParamErrMsg_KeyIDExists]
+other = "Key id exists. Please input another."
+
+[ParamErrMsg_KeyIDNotExists]
+other = "Key id not exists. Please input another."
+
+[ClientErrMsg_UnmatchedPermission]
+other = "Permissoin is unmatched. Unauthorized operation."
+
+[ClientErrMsg_NoWritePermission]
+other = "No write permission. Unauthorized operation."
+
+[ClientErrMsg_NotAdminApp]
+other = "Not admin app. Unauthorized operation."
+
+[FatalErrMsg]
+other = "Sorry. Some fatal error happened. Try to contact the custom service of this APP."

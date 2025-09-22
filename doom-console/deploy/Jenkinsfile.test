@@ -1,0 +1,161 @@
+pipeline {
+    agent {
+        label 'hongkong-test'
+    }
+    stages {
+        stage('Pre') {
+            steps {
+                script {
+                    sh '''
+                        git remote update origin --prune
+                        git branch -a | grep -e '^  remotes/origin/dev$'
+                        echo 'remote dev branch exists'
+                        git branch -D dev || echo 'no local dev branch'
+                        git branch dev remotes/origin/dev
+                    '''
+                    sh """
+                        git checkout ${BRANCH_NAME}
+                        git rebase dev
+                        echo 'git rebase dev success'
+                        git push origin ${BRANCH_NAME}
+                        echo 'git push origin' ${BRANCH_NAME} 'success'
+                    """
+                }
+            }
+        }
+        stage('Build') {
+            steps {
+                sh """
+                    docker build \
+                        --build-arg env=test \
+                        -t nextsurfer/doom-console:latest \
+                        -f build/doom-console/Dockerfile .
+                    docker stop -t 60 -s SIGTERM doom-console && docker rm doom-console || echo 0
+                    docker run -itd \
+                        --name doom-console \
+                        --dns ${HOST_IP} \
+                        --dns 8.8.8.8 \
+                        --restart always \
+                        -e 'APP_NAME=${APP_NAME}' \
+                        -e 'CONSUL_HTTP_ADDR=${CONSUL_HTTP_ADDR}' \
+                        -e 'GRPC_SERVER_HOST=${GRPC_SERVER_HOST}' \
+                        -e 'GRPC_SERVER_PORT=${GRPC_SERVER_PORT}' \
+                        -e 'GRPC_METRIC_PORT=${GRPC_METRIC_PORT}' \
+                        -e 'MYSQL_METRIC_PORT=${MYSQL_METRIC_PORT}' \
+                        -e 'APPLICATION_ENV=${APPLICATION_ENV}' \
+                        -e 'KONG_ADDRESS=${KONG_ADDRESS}' \
+                        -e 'I18N_TOML_PATH=${I18N_TOML_PATH}' \
+                        -e 'DOOM_MONGODB_URI=${DOOM_MONGODB_URI}' \
+                        -p '${GRPC_SERVER_PORT}:${GRPC_SERVER_PORT}' \
+                        -p '${GRPC_METRIC_PORT}:${GRPC_METRIC_PORT}' \
+                        -p '${MYSQL_METRIC_PORT}:${MYSQL_METRIC_PORT}' \
+                        nextsurfer/doom-console:latest
+                """
+            }
+        }
+         stage('PushService') {
+            steps {
+                sh """docker run --rm \
+                        -v ./:/test \
+                        -w /test \
+                        -e 'CONSOLE_HOST=${CONSOLE_HOST}' \
+                        -e 'CONSOLE_GRPC_PORT=${CONSOLE_GRPC_PORT}' \
+                        golang:1.21 \
+                        sh -c \
+                        "git config --global url.https://github@github.com.insteadof https://github.com && GOSUMDB=off go mod tidy && go run ./cmd/pushproto"
+                """
+            }
+        }
+        stage('Test') {
+            steps {
+                sh '''
+                    docker run --rm \
+                        -v ./:/test \
+                        -w /test \
+                        golang:1.21 \
+                        sh -c \
+                        "git config --global url.https://github@github.com.insteadof https://github.com && GOSUMDB=off go mod tidy && go test --ldflags '-extldflags "-Wl,--allow-multiple-definition"' -v -timeout 0 ./test/e2e/doom-console"
+
+                '''
+            }
+        }
+        stage('UI') {
+            steps {
+                sh """
+                    docker build \
+                        --build-arg env=test \
+                        -t nextsurfer/doom-console-ui:latest \
+                        -f ./ui/Dockerfile ./ui
+                    docker stop doom-console-ui && docker rm doom-console-ui || echo 0
+                    docker run -d \
+                        --restart always \
+                        --name doom-console-ui \
+                        --dns ${HOST_IP} \
+                        --dns 8.8.8.8 \
+                        -p 10080:3000 \
+                        nextsurfer/doom-console-ui:latest
+                """
+            }
+        }
+    }
+    post {
+        success {
+            sh """
+                echo 'e2e testing success'
+                git checkout dev
+                git rebase ${BRANCH_NAME}
+                git push origin dev
+            """
+        }
+        failure {
+            sh """
+                echo 'feature build or e2e testing fail'
+                git checkout dev
+                docker build \
+                    --build-arg env=test \
+                    -t nextsurfer/doom-console:latest \
+                    -f build/doom-console/Dockerfile .
+                docker stop -t 60 -s SIGTERM doom-console && docker rm doom-console || echo 0
+                docker run -itd \
+                    --name doom-console \
+                    --dns ${HOST_IP} \
+                    --dns 8.8.8.8 \
+                    --restart always \
+                    -e 'APP_NAME=${APP_NAME}' \
+                    -e 'CONSUL_HTTP_ADDR=${CONSUL_HTTP_ADDR}' \
+                    -e 'GRPC_SERVER_HOST=${GRPC_SERVER_HOST}' \
+                    -e 'GRPC_SERVER_PORT=${GRPC_SERVER_PORT}' \
+                    -e 'GRPC_METRIC_PORT=${GRPC_METRIC_PORT}' \
+                    -e 'MYSQL_METRIC_PORT=${MYSQL_METRIC_PORT}' \
+                    -e 'APPLICATION_ENV=${APPLICATION_ENV}' \
+                    -e 'KONG_ADDRESS=${KONG_ADDRESS}' \
+                    -e 'I18N_TOML_PATH=${I18N_TOML_PATH}' \
+                    -e 'DOOM_MONGODB_URI=${DOOM_MONGODB_URI}' \
+                    -p '${GRPC_SERVER_PORT}:${GRPC_SERVER_PORT}' \
+                    -p '${GRPC_METRIC_PORT}:${GRPC_METRIC_PORT}' \
+                    -p '${MYSQL_METRIC_PORT}:${MYSQL_METRIC_PORT}' \
+                    nextsurfer/doom-console:latest
+            """ 
+            sh """
+                docker build \
+                    --build-arg env=test \
+                    -t nextsurfer/doom-console-ui:latest \
+                    -f ./ui/Dockerfile ./ui
+                docker stop doom-console-ui && docker rm doom-console-ui || echo 0
+                docker run -d \
+                    --restart always \
+                    --name doom-console-ui \
+                    --dns ${HOST_IP} \
+                    --dns 8.8.8.8 \
+                    -p 10080:3000 \
+                    nextsurfer/doom-console-ui:latest
+            """
+        }
+        cleanup {
+            sh """
+                docker system prune -f
+            """
+            cleanWs()
+        }
+    }
+}

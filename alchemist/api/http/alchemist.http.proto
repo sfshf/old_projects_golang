@@ -1,0 +1,597 @@
+syntax = "proto3";
+
+package alchemist_api;
+
+import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
+
+service AlchemistService {
+  rpc GetAppAccountToken(Empty) returns (GetAppAccountTokenResponse) {
+    option (google.api.http) = {
+      post: "/alchemist/getAppAccountToken/v1"
+      body: "*"
+    };
+  };
+  rpc JoinReferralProgram(JoinReferralProgramRequest) returns (JoinReferralProgramResponse) {
+    option (google.api.http) = {
+      post: "/alchemist/joinReferralProgram/v1"
+      body: "*"
+    };
+  };
+  rpc CheckReferralCode(CheckReferralCodeRequest) returns (CheckReferralCodeResponse) {
+    option (google.api.http) = {
+      post: "/alchemist/checkReferralCode/v1"
+      body: "*"
+    };
+  };
+  rpc BindReferralCode(BindReferralCodeRequest) returns (EmptyResponse) {
+    option (google.api.http) = {
+      post: "/alchemist/bindReferralCode/v1"
+      body: "*"
+    };
+  };
+  rpc GetRewardPoints(GetRewardPointsRequest) returns (GetRewardPointsResponse) {
+    option (google.api.http) = {
+      post: "/alchemist/getRewardPoints/v1"
+      body: "*"
+    };
+  };
+  rpc GetNewUserDiscountState(GetNewUserDiscountStateRequest) returns (GetNewUserDiscountStateResponse) {
+    option (google.api.http) = {
+      post: "/alchemist/getNewUserDiscountState/v1"
+      body: "*"
+    };
+  };
+  rpc GetNewUserDiscountSignature(GetNewUserDiscountSignatureRequest) returns (GetNewUserDiscountSignatureResponse) {
+    option (google.api.http) = {
+      post: "/alchemist/getNewUserDiscountSignature/v1"
+      body: "*"
+    };
+  };
+  rpc UseNewUserDiscountOffer(UseNewUserDiscountOfferRequest) returns (UseNewUserDiscountOfferResponse) {
+    option (google.api.http) = {
+      post: "/alchemist/useNewUserDiscountOffer/v1"
+      body: "*"
+    };
+  };
+  rpc GetTrialState(GetTrialStateRequest) returns (GetTrialStateResponse) {
+    option (google.api.http) = {
+      post: "/alchemist/getTrialState/v1"
+      body: "*"
+    };
+  };
+  rpc GetRewardList(GetRewardListRequest) returns (GetRewardListResponse) {
+    option (google.api.http) = {
+      post: "/alchemist/getRewardList/v1"
+      body: "*"
+    };
+  };
+  rpc RedeemReward(RedeemRewardRequest) returns (RedeemRewardResponse) {
+    option (google.api.http) = {
+      post: "/alchemist/redeemReward/v1"
+      body: "*"
+    };
+  };
+  rpc RedeemRewardOffer(RedeemRewardOfferRequest) returns (RedeemRewardOfferResponse) {
+    option (google.api.http) = {
+      post: "/alchemist/redeemRewardOffer/v1"
+      body: "*"
+    };
+  };
+  rpc FinishRewardOffer(FinishRewardOfferRequest) returns (FinishRewardOfferResponse) {
+    option (google.api.http) = {
+      post: "/alchemist/finishRewardOffer/v1"
+      body: "*"
+    };
+  };
+  rpc ConvertUnusedNewUserDiscount(ConvertUnusedNewUserDiscountRequest) returns (ConvertUnusedNewUserDiscountResponse) {
+    option (google.api.http) = {
+      post: "/alchemist/convertUnusedNewUserDiscount/v1"
+      body: "*"
+    };
+  };
+  rpc CheckReferralCodeAndDevice(CheckReferralCodeAndDeviceRequest) returns (CheckReferralCodeAndDeviceResponse) {
+    option (google.api.http) = {
+      post: "/alchemist/checkReferralCodeAndDevice/v1"
+      body: "*"
+    };
+  };
+  rpc MarkNewRegistration(MarkNewRegistrationRequest) returns (MarkNewRegistrationResponse) {
+    option (google.api.http) = {
+      post: "/alchemist/markNewRegistration/v1"
+      body: "*"
+    };
+  };
+  rpc Unregister(Empty) returns (UnregisterResponse) {
+    option (google.api.http) = {
+      post: "/alchemist/unregister/v1"
+      body: "*"
+    };
+  };
+  rpc GetState(GetStateRequest) returns (GetStateResponse) {
+    option (google.api.http) = {
+      post: "/alchemist/getState/v1"
+      body: "*"
+    };
+  };
+}
+
+service AlchemistConsoleService {
+  rpc ListConfigs(ListConfigsRequest) returns (ListConfigsResponse) {
+    option (google.api.http) = {
+      post: "/alchemist/console/listConfigs/v1"
+      body: "*"
+    };
+  };
+  rpc CreateConfig(CreateConfigRequest) returns (CreateConfigResponse) {
+    option (google.api.http) = {
+      post: "/alchemist/console/createConfig/v1"
+      body: "*"
+    };
+  };
+  rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse) {
+    option (google.api.http) = {
+      post: "/alchemist/console/updateConfig/v1"
+      body: "*"
+    };
+  };
+  rpc DeleteConfig(DeleteConfigRequest) returns (DeleteConfigResponse) {
+    option (google.api.http) = {
+      post: "/alchemist/console/deleteConfig/v1"
+      body: "*"
+    };
+  };
+  rpc GetCurrentSubscriptionCount(GetCurrentSubscriptionCountRequest) returns (GetCurrentSubscriptionCountResponse) {
+    option (google.api.http) = {
+      post: "/alchemist/console/getCurrentSubscriptionCount/v1"
+      body: "*"
+    };
+  };
+  rpc ListSubscriptionCounts(ListSubscriptionCountsRequest) returns (ListSubscriptionCountsResponse) {
+    option (google.api.http) = {
+      post: "/alchemist/console/listSubscriptionCounts/v1"
+      body: "*"
+    };
+  };
+  rpc GetAllApps(GetAllAppsRequest) returns (GetAllAppsResponse) {
+    option (google.api.http) = {
+      post: "/alchemist/console/getAllApps/v1"
+      body: "*"
+    };
+  };
+}
+
+service TestService {
+  rpc ResetDeviceCheck(ResetDeviceCheckRequest) returns (ResetDeviceCheckResponse) {
+    option (google.api.http) = {
+      post: "/alchemist/test/resetDeviceCheck/v1"
+      body: "*"
+    };
+  };
+  rpc RemoveFraudRecord(Empty) returns (RemoveFraudRecordResponse) {
+    option (google.api.http) = {
+      post: "/alchemist/test/removeFraudRecord/v1"
+      body: "*"
+    };
+  };
+}
+
+message Empty {
+}
+
+message EmptyResponse {
+    int32 code = 1;
+    string message = 2;
+    google.protobuf.Value debugMessage = 3;
+}
+
+message GetAppAccountTokenResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    string appAccountToken = 1;
+  }
+  Data data = 4;
+}
+
+message JoinReferralProgramRequest {
+  string appID = 1;
+}
+
+message JoinReferralProgramResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    string referralCode = 1;
+  }
+  Data data = 4;
+}
+
+message CheckReferralCodeRequest {
+  string referralCode = 1;
+}
+
+message CheckReferralCodeResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    bool valid = 1;
+  }
+  Data data = 4;
+}
+
+message BindReferralCodeRequest {
+  string appID = 1;
+  string referralCode = 2;
+}
+
+message GetRewardPointsRequest {
+  string appID = 1;
+}
+
+message GetRewardPointsResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Record {
+    int64 timestamp = 1;
+    int32 type = 2;
+    string reason = 3;
+    int32 points = 4;
+  }
+  message Data {
+    int32 points = 1;
+    repeated Record records = 2;
+    int32 numberOfNewUsers = 3;
+    int32 numberOfBilledUsers = 4;
+  }
+  Data data = 4;
+}
+
+message GetNewUserDiscountStateRequest {
+  string appID = 1;
+  int32 billedTimes = 2;
+}
+
+message GetNewUserDiscountStateResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    bool hasNewUserDiscount = 1;
+    bool redeemed = 2;
+    int32 remainingTimes = 3;
+  }
+  Data data = 4;
+}
+
+message GetNewUserDiscountSignatureRequest {
+  string appID = 1;
+  string environment = 2;
+}
+
+message GetNewUserDiscountSignatureResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message SignatureInfo {
+    string keyID = 1;
+    string nonce = 2;
+    int64 timestamp = 3;
+    string signature = 4;
+  }
+  message Data {
+    string offerID = 1;
+    bool canConvertToPoints = 2;
+    SignatureInfo signatureInfo = 3;
+  }
+  Data data = 4;
+}
+
+message UseNewUserDiscountOfferRequest {
+  string appID = 1;
+  string offerID = 2;
+  string environment = 3;
+}
+
+message UseNewUserDiscountOfferResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}
+
+message GetTrialStateRequest {
+  string appID =1;
+}
+
+message GetTrialStateResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    bool inFreeTrial = 1;
+    int64 expirationDate = 2;
+    int64 startDate = 3;
+    int32 daysOfTrial = 4;
+    int32 totalDaysOfTrial = 5;
+  }
+  Data data = 4;
+}
+
+message GetRewardListRequest {
+  string appID =1;
+}
+
+message GetRewardListResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Reward {
+    string id = 1;
+    string name = 2;
+    string description = 3;
+    string offerID = 4;
+    int32 cost = 5;
+    string duration = 6;
+    int32 durationInDays = 7;
+  }
+  message Data {
+    repeated Reward rewardList = 1;
+  }
+  Data data = 4;
+}
+
+message RedeemRewardRequest {
+  string appID = 1;
+  string rewardID = 2;
+}
+
+message RedeemRewardResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    int32 remainingPoints = 1;
+    int64 expirationDate = 2;
+  }
+  Data data = 4;
+}
+
+message RedeemRewardOfferRequest {
+  string appID = 1;
+  string rewardID = 2;
+  string environment = 3;
+}
+
+message RedeemRewardOfferResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message SignatureInfo {
+    string keyID = 1;
+    string nonce = 2;
+    int64 timestamp = 3;
+    string signature = 4;
+  }
+  message Data {
+    string offerID = 1;
+    SignatureInfo signatureInfo = 2;
+  }
+  Data data = 4;
+}
+
+message FinishRewardOfferRequest {
+  string appID = 1;
+  string rewardID = 2;
+  string environment = 3;
+}
+
+message FinishRewardOfferResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    int32 remainingPoints = 1;
+  }
+  Data data = 4;
+}
+
+message ConvertUnusedNewUserDiscountRequest {
+  string appID = 1;
+}
+
+message ConvertUnusedNewUserDiscountResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}
+
+message CheckReferralCodeAndDeviceRequest {
+  string appID = 1;
+  string deviceToken = 2;
+  string referralCode = 3;
+}
+
+message CheckReferralCodeAndDeviceResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+    message Data {
+    bool codeValid = 1;
+    bool deviceValid = 2;
+  }
+  Data data = 4;
+}
+
+message MarkNewRegistrationRequest {
+  string appID = 1;
+  string deviceToken0 = 2;
+  string deviceToken1 = 3;
+}
+
+message MarkNewRegistrationResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}
+
+message ListConfigsRequest {
+  string password = 1;
+}
+
+message ListConfigsResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message AppConfig {
+    int64 id = 1;
+    string config = 2;
+  }
+  message Data {
+    repeated AppConfig list = 1;
+  }
+  Data data = 4;
+}
+
+message CreateConfigRequest {
+  string password = 1;
+  string config = 2;
+}
+
+message CreateConfigResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}
+
+message UpdateConfigRequest {
+  string password = 1;
+  int64 id = 2;
+  string config = 3; 
+}
+
+message UpdateConfigResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}
+
+message DeleteConfigRequest {
+  string password = 1;
+  int64 id = 2;
+}
+
+message DeleteConfigResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}
+
+message GetCurrentSubscriptionCountRequest {
+  string password = 1;
+  string appID = 2;
+}
+
+message GetCurrentSubscriptionCountResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    int64 count = 1;
+  }
+  Data data = 4;
+}
+
+message ListSubscriptionCountsRequest {
+  string password = 1;
+  string appID = 2;
+  string startDate = 3;
+  string endDate = 4;
+}
+
+message ListSubscriptionCountsResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    repeated int64 list = 1;
+  }
+  Data data = 4;
+}
+
+message UnregisterResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3; 
+}
+
+message GetStateRequest {
+  string appID =1;
+  int32 billedTimes = 2;
+}
+
+message GetStateResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message ReferralCodeState {
+    google.protobuf.Value myReferralCode = 1;
+    google.protobuf.Value newUserStatusExpirationDate = 2;
+    string shareURL = 3;
+    google.protobuf.Value usedReferralCode = 4;
+  }
+  message TrialState {
+    bool inFreeTrial = 1;
+    int64 expirationDate = 2;
+    int64 startDate = 3;
+    int32 daysOfTrial = 4;
+    int32 totalDaysOfTrial = 5;
+  }
+  message NewUserDiscountState {
+    bool hasNewUserDiscount = 1;
+    bool redeemed = 2;
+    int32 remainingTimes = 3;
+  }
+  message Data {
+    ReferralCodeState referralCodeState = 1;
+    int32 rewardPoints = 2;
+    TrialState trialState = 3;
+    NewUserDiscountState newUserDiscountState = 4;
+  }
+  Data data = 4;
+}
+
+message GetAllAppsRequest {
+  string password = 1;
+}
+
+message GetAllAppsResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    repeated string list = 1;
+  }
+  Data data = 4;
+}
+
+message ResetDeviceCheckRequest {
+  string appID = 1;
+  string deviceToken0 = 2;
+  string deviceToken1 = 3;
+}
+
+message ResetDeviceCheckResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}
+
+message RemoveFraudRecordResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}

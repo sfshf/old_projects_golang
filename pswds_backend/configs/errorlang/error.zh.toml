@@ -1,0 +1,53 @@
+[ClientErrMsg_WrongRequestParameters]
+other = "请求参数有误，请您排错后重试"
+
+[ClientErrMsg_InvalidApiKey]
+other = "ApiKey错误"
+
+[ClientErrMsg_InvalidUserID]
+other = "无效的用户ID"
+
+[ClientErrMsg_InvalidSession]
+other = "无效的会话"
+
+[ClientErrMsg_LockScreenSecretChanged]
+other = "锁屏密码已经修改"
+
+[ClientErrMsg_BackendDataPullAhead]
+other = "后台数据已超前"
+
+[ClientErrMsg_BackendDataFallBehind]
+other = "后台数据已落后"
+
+[ClientErrMsg_UserHasNoBackup]
+other = "当前用户没有备份，您可以尝试创建备份"
+
+[ClientErrMsg_HasNotSetSecurityQuestions]
+other = "用户还未设置密保问题"
+
+[ClientErrMsg_TooManyRequests]
+other = "请求太多，请等会重试"
+
+[ClientErrMsg_HasRelatedRecord]
+other = "有关联数据记录，当前操作被禁止"
+
+[ClientErrMsg_ResourceNotFound]
+other = "未找到相关资源"
+
+[ClientErrMsg_ResourceExists]
+other = "资源已存在"
+
+[ClientErrMsg_EmailNotRegistered]
+other = "账号未注册， 请先注册账号。"
+
+[ClientErrMsg_Unauthorized]
+other = "未授权的操作。"
+
+[ClientErrMsg_Forbidden]
+other = "被禁止的操作。"
+
+[ClientErrMsg_ResourceLimit]
+other = "资源已达限制"
+
+[FatalErrMsg]
+other = "服务器发生一些问题， 请稍后重试。 如果多次无法登录， 请联系客服"

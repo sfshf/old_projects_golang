@@ -1,0 +1,56 @@
+[LoginErrMsg_WrongRequestParameters]
+other = "请求参数有误，请您排错后重试"
+
+[LoginErrMsg_WrongPassword]
+other = "密码输入错误，请重新输入"
+
+[LoginErrMsg_PhoneNotRegistered]
+other = "手机号未注册， 请先注册账号。"
+
+[LoginErrMsg_EmailNotRegistered]
+other = "账号未注册， 请先注册账号。"
+
+[LoginErrMsg_AccountNotLogined]
+other = "请先登录"
+
+[LoginErrMsg_SessionExpired]
+other = "登录超时， 请重新登录"
+
+[LoginErrMsg_SecondaryPasswordExists]
+other = "用户的第二密码已存在"
+
+[FatalErrMsg]
+other = "服务器发生一些问题， 请稍后重试。 多次失败， 请联系客服"
+
+[RegisterErrMsg_EmailHasRegistered]
+other = "邮箱已注册， 请直接登录"
+
+[CheckLoginErrMsg_InvalidUserID]
+other = "检查登陆状态失败，无效用户ID"
+
+[CheckLoginErrMsg_UserNotLogin]
+other = "检查登陆状态失败，用户未登录"
+
+[ParamErrMsg_EmailIsDeformed]
+other = "邮箱格式异常，请正确输入邮箱"
+
+[ParamErrMsg_NicknameIsRepeated]
+other = "昵称已重复，请输入其他昵称"
+
+[RegisterErrMsg_NicknameHasRegistered]
+other = "昵称已被注册，请输入其他昵称"
+
+[LoginErrMsg_WrongNickname]
+other = "错误昵称，请用正确昵称重试"
+
+[LoginErrMsg_EmailHasRegistered]
+other = "邮箱已被注册，请输入其他邮箱"
+
+[LoginErrMsg_InvalidEmailCaptcha]
+other = "无效的邮箱验证码，请校对您的邮箱验证码"
+
+[LoginErrMsg_SessionEmpty]
+other = "空会话，请先登录"
+
+[LoginErrMsg_TokenIsInvalid]
+other = "无效token"

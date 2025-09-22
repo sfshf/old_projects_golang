@@ -1,0 +1,38 @@
+[LoginErrMsg_WrongRequestParameters]
+other = "请求参数有误，请您排错后重试"
+
+[ParamErrMsg_ApiKeyIsInvalid]
+other = "ApiKey无效，请正确输入apiKey"
+
+[ParamErrMsg_IDIsInvalid]
+other = "无效ID，请输入有效id"
+
+[ParamErrMsg_KeyIDIsDeformed]
+other = "KeyID错误格式，密码的keyID必需有pswd_作为前缀，密钥的keyID不能有pswd_前缀"
+
+[ParamErrMsg_PermissionIsDeformed]
+other = "Permission错误格式，权限值只能为write或read"
+
+[ParamErrMsg_RoleIsDeformed]
+other = "Role错误格式，role必需是write或read"
+
+[ParamErrMsg_ApiKeyNameExists]
+other = "api key的名称已存在，请重新输入"
+
+[ParamErrMsg_KeyIDExists]
+other = "keyID已存在，请重新输入"
+
+[ParamErrMsg_KeyIDNotExists]
+other = "keyID不存在，请重新输入"
+
+[ClientErrMsg_UnmatchedPermission]
+other = "权限不匹配，无权操作"
+
+[ClientErrMsg_NoWritePermission]
+other = "无写权限，无权操作"
+
+[ClientErrMsg_NotAdminApp]
+other = "非admin应用，无权操作"
+
+[FatalErrMsg]
+other = "服务器发生一些问题， 请稍后重试。 如果多次无法登录， 请联系客服"

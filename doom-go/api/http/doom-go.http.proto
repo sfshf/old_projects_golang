@@ -1,0 +1,865 @@
+syntax = "proto3";
+
+package doom_api;
+
+import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
+
+service DoomService {
+  rpc CreateSecurityQuestions(CreateSecurityQuestionsRequest) returns (CreateSecurityQuestionsResponse) {
+    option (google.api.http) = {
+      post: "/doom/createSecurityQuestions/v1"
+      body: "*"
+    };
+  };
+  rpc ListSecurityQuestions(ListSecurityQuestionsRequest) returns (ListSecurityQuestionsResponse) {
+    option (google.api.http) = {
+      post: "/doom/listSecurityQuestions/v1"
+      body: "*"
+    };
+  };
+  rpc GetSecurityQuestions(GetSecurityQuestionsRequest) returns (GetSecurityQuestionsResponse) {
+    option (google.api.http) = {
+      post: "/doom/getSecurityQuestions/v1"
+      body: "*"
+    };
+  };
+  rpc DeleteSecurityQuestions(DeleteSecurityQuestionsRequest) returns (DeleteSecurityQuestionsResponse) {
+    option (google.api.http) = {
+      post: "/doom/deleteSecurityQuestions/v1"
+      body: "*"
+    };
+  };
+  rpc CreateData(CreateDataRequest) returns (CreateDataResponse) {
+    option (google.api.http) = {
+      post: "/doom/createData/v1"
+      body: "*"
+    };
+  };
+  rpc ListData(ListDataRequest) returns (ListDataResponse) {
+    option (google.api.http) = {
+      post: "/doom/listData/v1"
+      body: "*"
+    };
+  };
+  rpc GetData(GetDataRequest) returns (GetDataResponse) {
+    option (google.api.http) = {
+      post: "/doom/getData/v1"
+      body: "*"
+    };
+  };
+  rpc DeleteData(DeleteDataRequest) returns (DeleteDataResponse) {
+    option (google.api.http) = {
+      post: "/doom/deleteData/v1"
+      body: "*"
+    };
+  };
+  rpc GetLatestSpotPrice(GetLatestSpotPriceRequest) returns (GetLatestSpotPriceResponse) {
+    option (google.api.http) = {
+      post: "/doom/getLatestSpotPrice/v1"
+      body: "*"
+    };
+  };
+  rpc GetLatestSpotPrices(GetLatestSpotPricesRequest) returns (GetLatestSpotPricesResponse) {
+    option (google.api.http) = {
+      post: "/doom/getLatestSpotPrices/v1"
+      body: "*"
+    };
+  };
+  rpc GetAssets(GetAssetsRequest) returns (GetAssetsResponse) {
+    option (google.api.http) = {
+      post: "/doom/getAssets/v1"
+      body: "*"
+    };
+  };
+  rpc GetUIKlines(GetUIKlinesRequest) returns (GetUIKlinesResponse) {
+    option (google.api.http) = {
+      post: "/doom/getUIKlines/v1"
+      body: "*"
+    };
+  };
+  rpc GetDappAssets(GetDappAssetsRequest) returns (GetDappAssetsResponse) {
+    option (google.api.http) = {
+      post: "/doom/getDappAssets/v1"
+      body: "*"
+    };
+  };
+  rpc GetTokens(GetTokensRequest) returns (GetTokensResponse) {
+    option (google.api.http) = {
+      post: "/doom/getTokens/v1"
+      body: "*"
+    };
+  };
+  rpc GetDapps(GetDappsRequest) returns (GetDappsResponse) {
+    option (google.api.http) = {
+      post: "/doom/getDapps/v1"
+      body: "*"
+    };
+  };
+  rpc FavoriteToken(FavoriteTokenRequest) returns (FavoriteTokenResponse) {
+    option (google.api.http) = {
+      post: "/doom/favoriteToken/v1"
+      body: "*"
+    };
+  };
+  rpc GetFavoritedTokens(GetFavoritedTokensRequest) returns (GetFavoritedTokensResponse) {
+    option (google.api.http) = {
+      post: "/doom/getFavoritedTokens/v1"
+      body: "*"
+    };
+  };
+  rpc GetFavoritedLatestSpotPrices(GetFavoritedLatestSpotPricesRequest) returns (GetFavoritedLatestSpotPricesResponse) {
+    option (google.api.http) = {
+      post: "/doom/getFavoritedLatestSpotPrices/v1"
+      body: "*"
+    };
+  };
+  rpc GetTokenBalances(GetTokenBalancesRequest) returns (GetTokenBalancesResponse) {
+    option (google.api.http) = {
+      post: "/doom/getTokenBalances/v1"
+      body: "*"
+    };
+  };
+  rpc GetBalance(GetBalanceRequest) returns (GetBalanceResponse) {
+    option (google.api.http) = {
+      post: "/doom/getBalance/v1"
+      body: "*"
+    };
+  };
+  rpc GetABI(GetABIRequest) returns (GetABIResponse) {
+    option (google.api.http) = {
+      post: "/doom/getABI/v1"
+      body: "*"
+    };
+  };
+  rpc GetTokenApprovals(GetTokenApprovalsRequest) returns (GetTokenApprovalsResponse) {
+    option (google.api.http) = {
+      post: "/doom/getTokenApprovals/v1"
+      body: "*"
+    };
+  };
+  rpc GetAddress(GetAddressRequest) returns (GetAddressResponse) {
+    option (google.api.http) = {
+      post: "/doom/bitcoin/getAddress/v1"
+      body: "*"
+    };
+  };
+  rpc GetAddressTransactions(GetAddressTransactionsRequest) returns (GetAddressTransactionsResponse) {
+    option (google.api.http) = {
+      post: "/doom/bitcoin/getAddressTransactions/v1"
+      body: "*"
+    };
+  };
+  rpc GetAddressTransactionsMempool(GetAddressTransactionsMempoolRequest) returns (GetAddressTransactionsMempoolResponse) {
+    option (google.api.http) = {
+      post: "/doom/bitcoin/getAddressTransactionsMempool/v1"
+      body: "*"
+    };
+  };
+  rpc GetGasFee(GetGasFeeRequest) returns (GetGasFeeResponse) {
+    option (google.api.http) = {
+      post: "/doom/getGasFee/v1"
+      body: "*"
+    };
+  };
+  rpc GetEstimationOfConfirmationTime(GetEstimationOfConfirmationTimeRequest) returns (GetEstimationOfConfirmationTimeResponse) {
+    option (google.api.http) = {
+      post: "/doom/getEstimationOfConfirmationTime/v1"
+      body: "*"
+    };
+  };
+  
+
+  rpc CreatePrivateKeyBackup(CreatePrivateKeyBackupRequest) returns (CreatePrivateKeyBackupResponse) {
+    option (google.api.http) = {
+      post: "/doom/createPrivateKeyBackup/v1"
+      body: "*"
+    };
+  };
+  rpc ListPrivateKeyBackup(ListPrivateKeyBackupRequest) returns (ListPrivateKeyBackupResponse) {
+    option (google.api.http) = {
+      post: "/doom/listPrivateKeyBackup/v1"
+      body: "*"
+    };
+  };
+  rpc GetPrivateKeyBackup(GetPrivateKeyBackupRequest) returns (GetPrivateKeyBackupResponse) {
+    option (google.api.http) = {
+      post: "/doom/getPrivateKeyBackup/v1"
+      body: "*"
+    };
+  };
+  rpc DeletePrivateKeyBackup(DeletePrivateKeyBackupRequest) returns (DeletePrivateKeyBackupResponse) {
+    option (google.api.http) = {
+      post: "/doom/deletePrivateKeyBackup/v1"
+      body: "*"
+    };
+  };
+}
+
+message CreateSecurityQuestionsRequest {
+  string plainText = 1;
+  string cipherText = 2;
+  string title = 3;
+  string description = 4;
+}
+
+message CreateSecurityQuestionsResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message ListSecurityQuestionsRequest {
+  
+}
+
+message ListSecurityQuestionsResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message ListItem {
+    string title = 1;
+    string dataID = 2;
+    string description = 3;
+    string date = 4;
+  }
+  message Data {
+    repeated ListItem list = 1;
+  }
+  Data data = 5;
+}
+
+message GetSecurityQuestionsRequest {
+  string title = 1;
+}
+
+message GetSecurityQuestionsResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Data {
+    string plainText = 1;
+  }
+  Data data = 5;
+}
+
+message DeleteSecurityQuestionsRequest {
+  string title = 1;
+}
+
+message DeleteSecurityQuestionsResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message CreateDataRequest {
+  string plainText = 1;
+  string cipherText = 2;
+  string title = 3;
+}
+
+message CreateDataResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message ListDataRequest {
+
+}
+
+message ListDataResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message ListItem {
+    string title = 1;
+    string dataID = 2;
+    string date = 3;
+  }
+  message Data {
+    repeated ListItem list = 1;
+  }
+  Data data = 5;
+}
+
+message GetDataRequest {
+  string title = 1;
+}
+
+message GetDataResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Data {
+    string plainText = 1;
+  }
+  Data data = 5;
+}
+
+message DeleteDataRequest {
+  string title = 1;
+}
+
+message DeleteDataResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message GetLatestSpotPriceRequest {
+  string symbol = 1;
+  string baseCoin = 2;
+}
+
+message GetLatestSpotPriceResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Data {
+    string price = 1;
+  }
+  Data data = 5;
+}
+
+message GetLatestSpotPricesRequest {
+  repeated string symbols = 1;
+  string baseCoin = 2;
+}
+
+message GetLatestSpotPricesResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Data {
+    repeated string list = 1;
+  }
+  Data data = 5;
+}
+
+message GetAssetsRequest {
+  string address = 1;
+  string chain = 2;
+}
+
+message GetAssetsResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Token {
+    string balance = 1;
+    string address = 2;
+    string name = 3;
+    string symbol = 4;
+    google.protobuf.Value price = 5;
+    google.protobuf.Value value = 6;
+  }
+  message UnknownToken {
+    string balance = 1;
+    string address = 2;
+  }
+  message Balance {
+    string balance = 1;
+    string price = 2;
+    string value = 3;
+  }
+  message DappAsset {
+    string app = 1;
+    string value = 2;
+  }
+  message Data {
+    google.protobuf.Value toBlock = 1;
+    repeated Token tokens = 2;
+    repeated UnknownToken unknownTokens = 3;
+    Balance balance = 4;
+    repeated DappAsset dappAssets = 5;
+    string totalValue = 6;
+  }
+  Data data = 5;
+}
+
+
+message GetUIKlinesRequest {
+  string interval = 1;
+  int64 beginTime = 2;
+  int64 endTime = 3;
+  string baseCoin = 4;
+  string symbol = 5;
+}
+
+message GetUIKlinesResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Price {
+    string openPrice = 1;
+    string closePrice = 2;
+    string highPrice = 3;
+    string lowPrice = 4;
+    int64 openTime = 5;
+    int64 closeTime = 6;
+  }
+  message Data {
+    repeated Price list = 1;
+  }
+  Data data = 5;
+}
+
+message GetDappAssetsRequest {
+  string app = 1;
+  string chain = 2; 
+  string address = 3; 
+}
+
+message GetDappAssetsResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Holding {
+    string token = 1;
+    string amount = 2;
+    string price = 3;
+    string value = 4;
+  }
+  message Asset {
+    string name = 1;
+    string tokenAddress = 2;
+    string totalValue = 3;
+    repeated Holding holdings = 4;
+  }
+  message Reward {
+    string token = 1;
+    string amount = 2;
+    string price = 3;
+    string value = 4;
+  }
+  message Data {
+    repeated Asset assets = 1;
+    repeated Asset debts = 2;
+    repeated Reward rewards = 3;
+    string totalValue = 4;
+  }
+  Data data = 5;
+}
+
+message GetTokensRequest{
+}
+
+message GetTokensResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Token {
+    string symbol = 1;
+    string name = 2;
+  }
+  message Data {
+    repeated Token list = 1;
+  }
+  Data data = 5;
+}
+
+
+message GetDappsRequest{
+}
+
+message GetDappsResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Data {
+    repeated string list = 1;
+  }
+  Data data = 5;
+}
+
+message FavoriteTokenRequest{
+  string symbol = 1;
+}
+
+message FavoriteTokenResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message GetFavoritedTokensRequest{
+}
+
+message GetFavoritedTokensResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Data {
+    repeated string list = 1;
+  }
+  Data data = 5;
+}
+
+message GetFavoritedLatestSpotPricesRequest {
+  string baseCoin = 1;
+}
+
+message GetFavoritedLatestSpotPricesResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Data {
+    repeated string list = 1;
+  }
+  Data data = 5;
+}
+
+message GetTokenBalancesRequest {
+  string address = 1; // @gotags: validate:"required"
+  string chain = 2; // @gotags: validate:"oneof=eth"
+}
+
+message GetTokenBalancesResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Token {
+    string balance = 1;
+    string address = 2;
+    string name = 3;
+    string symbol = 4;
+    google.protobuf.Value price = 5;
+    google.protobuf.Value value = 6;
+  }
+  message UnknownToken {
+    string balance = 1;
+    string address = 2;
+  }
+  message Data {
+    google.protobuf.Value toBlock = 1;
+    repeated Token tokens = 2;
+    repeated UnknownToken unknownTokens = 3;
+  }
+  Data data = 5;
+}
+
+message GetBalanceRequest {
+  string address = 1; // @gotags: validate:"required"
+  string chain = 2; // @gotags: validate:"oneof=eth"
+}
+
+message GetBalanceResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Data {
+    string balance = 1;
+    string price = 2;
+    string value = 3;
+  }
+  Data data = 5;
+}
+
+message GetABIRequest {
+  string address = 1; // @gotags: validate:"required"
+  string chain = 2; // @gotags: validate:"oneof=eth"
+}
+
+message GetABIResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Data {
+    string ABI = 1;
+    bool isProxy = 2;
+    google.protobuf.Value targetAddress = 3;
+    google.protobuf.Value proxyType = 4;
+    google.protobuf.Value proxyABI = 5;
+  }
+  Data data = 5;
+}
+
+message GetTokenApprovalsRequest {
+  string address = 1; // @gotags: validate:"required"
+  string chain = 2; // @gotags: validate:"oneof=eth"
+}
+
+message GetTokenApprovalsResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Approval {
+    string address = 1;
+    string target = 2;
+    google.protobuf.Value allowance = 3;
+    bool unlimited = 4;
+    string symbol = 5;
+    string name = 6;
+  }
+  message UnknownApproval {
+    string address = 1;
+    string target = 2;
+    google.protobuf.Value allowance = 3;
+    bool unlimited = 4;
+  }
+  message Data {
+    repeated Approval approvals = 1;
+    repeated UnknownApproval unknownApprovals = 2;
+  }
+  Data data = 5;
+}
+
+message GetAddressRequest {
+  string address = 1;
+}
+
+message GetAddressResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message ChainStats {
+    int32 fundedTxoCount = 1;
+    int64 fundedTxoSum = 2;
+    int32 spentTxoCount = 3;
+    int64 spentTxoSum = 4;
+    int64 txCount = 5;
+  }
+  message MempoolStats {
+    int32 fundedTxoCount = 1;
+    int64 fundedTxoSum = 2;
+    int32 spentTxoCount = 3;
+    int64 spentTxoSum = 4;
+    int32 txCount = 5;
+  }
+  message Data {
+    string address = 1;
+    ChainStats chainStats = 2;
+    MempoolStats mempoolStats = 3;
+  }
+  Data data = 5;
+}
+
+message GetAddressTransactionsRequest {
+  string address = 1;
+}
+
+message GetAddressTransactionsResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Prevout {
+    string scriptpubkey = 1;
+    string scriptpubkeyAsm = 2;
+    string scriptpubkeyType = 3;
+    string scriptpubkeyAddress = 4;
+    int32 value = 5;
+  }
+  message Vin {
+    string txID = 1;
+    int32 vout = 2;
+    Prevout prevout = 3;
+    string scriptsig = 4;
+    string scriptsigAsm = 5;
+    repeated string witness = 6;
+    bool isCoinbase = 7;
+    int64 sequence = 8;
+  }
+  message Vout {
+    string scriptpubkey = 1;
+    string scriptpubkeyAsm = 2;
+    string scriptpubkeyType = 3;
+    string scriptpubkeyAddress = 4;
+    int32 value = 5;
+  }
+  message Status {
+    bool confirmed = 1;
+    int32 blockHeight = 2;
+    string blockHash = 3;
+    int64 blockTime = 4;
+  }
+  message Transaction {
+    string txID = 1;
+    int32 version = 2;
+    int32 locktime = 3;
+    repeated Vin vin = 4;
+    repeated Vout vout = 5;
+    int32 size = 6;
+    int32 weight = 7; 
+    int32 fee = 8;
+    Status status = 9;
+  }
+  message Data {
+    repeated Transaction list = 1;
+  }
+  Data data = 5;
+}
+
+message GetAddressTransactionsMempoolRequest {
+  string address = 1;
+}
+
+message GetAddressTransactionsMempoolResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Prevout {
+    string scriptpubkey = 1;
+    string scriptpubkeyAsm = 2;
+    string scriptpubkeyType = 3;
+    string scriptpubkeyAddress = 4;
+    int32 value = 5;
+  }
+  message Vin {
+    string txID = 1;
+    int32 vout = 2;
+    Prevout prevout = 3;
+    string scriptsig = 4;
+    string scriptsigAsm = 5;
+    repeated string witness = 6;
+    bool isCoinbase = 7;
+    int64 sequence = 8;
+  }
+  message Vout {
+    string scriptpubkey = 1;
+    string scriptpubkeyAsm = 2;
+    string scriptpubkeyType = 3;
+    string scriptpubkeyAddress = 4;
+    int32 value = 5;
+  }
+  message Status {
+    bool confirmed = 1;
+    int32 blockHeight = 2;
+    string blockHash = 3;
+    int64 blockTime = 4;
+  }
+  message Transaction {
+    string txID = 1;
+    int32 version = 2;
+    int32 locktime = 3;
+    repeated Vin vin = 4;
+    repeated Vout vout = 5;
+    int32 size = 6;
+    int32 weight = 7; 
+    int32 fee = 8;
+    Status status = 9;
+  }
+  message Data {
+    repeated Transaction list = 1;
+  }
+  Data data = 5;
+}
+
+message GetGasFeeRequest {
+  string chain = 1; // @gotags: validate:"oneof=eth"
+}
+
+message GetGasFeeResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Data {
+    string baseFee = 1;
+    string slowGasPrice = 2;
+    string normalGasPrice = 3;
+    string fastGasPrice = 4;
+  }
+  Data data = 5;
+}
+
+message GetEstimationOfConfirmationTimeRequest {
+  string chain = 1; // @gotags: validate:"oneof=eth"
+  string gasPrice = 2;  // @gotags: validate:"required"
+}
+
+message GetEstimationOfConfirmationTimeResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Data {
+    string estimatedSeconds = 1;
+  }
+  Data data = 5;
+}
+
+message CreatePrivateKeyBackupRequest {
+  string plainText = 1;
+  string cipherText = 2;
+  string title = 3;
+}
+
+message CreatePrivateKeyBackupResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message ListPrivateKeyBackupRequest {
+
+}
+
+message ListPrivateKeyBackupResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message ListItem {
+    string title = 1;
+    string dataID = 2;
+    string date = 3;
+  }
+  message Data {
+    repeated ListItem list = 1;
+  }
+  Data data = 5;
+}
+
+message GetPrivateKeyBackupRequest {
+  string title = 1;
+}
+
+message GetPrivateKeyBackupResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Data {
+    string plainText = 1;
+  }
+  Data data = 5;
+}
+
+message DeletePrivateKeyBackupRequest {
+  string title = 1;
+}
+
+message DeletePrivateKeyBackupResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}

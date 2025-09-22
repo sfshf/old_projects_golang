@@ -1,0 +1,535 @@
+syntax = "proto3";
+
+package connector_api;
+option go_package = "./api";
+
+import "google/protobuf/struct.proto";
+
+service ConnectorService {
+  rpc CreatePassword(CreatePasswordRequest) returns (CreatePasswordResponse);
+  rpc CheckPassword(CheckPasswordRequest) returns (CheckPasswordResponse);
+  rpc DeletePassword(DeletePasswordRequest) returns (DeletePasswordResponse);
+  rpc CreatePrivateKey(CreatePrivateKeyRequest) returns (CreatePrivateKeyResponse);
+  rpc GetPublicKey(GetPublicKeyRequest) returns (GetPublicKeyResponse);
+  rpc DeletePrivateKey(DeletePrivateKeyRequest) returns (DeletePrivateKeyResponse);
+  rpc SaveData(SaveDataRequest) returns (SaveDataResponse);
+  rpc DeleteData(DeleteDataRequest) returns (DeleteDataResponse);
+  rpc DecryptData(DecryptDataRequest) returns (DecryptDataResponse);
+  rpc GetData(GetDataRequest) returns (GetDataResponse);
+  rpc CheckKeyExisting(CheckKeyExistingRequest) returns (CheckKeyExistingResponse);
+}
+
+service ConnectorConsoleService {
+  rpc GetLogs(GetLogsRequest) returns (GetLogsResponse);
+  rpc GetMonitorInfos(GetMonitorInfosRequest) returns (GetMonitorInfosResponse);
+  rpc ListConfigs(ListConfigsRequest) returns (ListConfigsResponse);
+  rpc CreateConfig(CreateConfigRequest) returns (CreateConfigResponse);
+  rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse);
+  rpc DeleteConfig(DeleteConfigRequest) returns (DeleteConfigResponse);
+  rpc ListPassword(ListPasswordRequest) returns (ListPasswordResponse);
+  rpc AddPassword(AddPasswordRequest) returns (AddPasswordResponse);
+  rpc RemovePassword(RemovePasswordRequest) returns (RemovePasswordResponse);
+  rpc FetchPassword(FetchPasswordRequest) returns (FetchPasswordResponse);
+  rpc ListPrivateKey(ListPrivateKeyRequest) returns (ListPrivateKeyResponse);
+  rpc AddPrivateKey(AddPrivateKeyRequest) returns (AddPrivateKeyResponse);
+  rpc RemovePrivateKey(RemovePrivateKeyRequest) returns (RemovePrivateKeyResponse);
+  rpc GetAllApps(GetAllAppsRequest) returns (GetAllAppsResponse);
+  rpc GetAllKeyIDs(GetAllKeyIDsRequest) returns (GetAllKeyIDsResponse);
+  rpc ListApiKey(ListApiKeyRequest) returns (ListApiKeyResponse);
+  rpc AddApiKey(AddApiKeyRequest) returns (AddApiKeyResponse);
+  rpc RemoveApiKey(RemoveApiKeyRequest) returns (RemoveApiKeyResponse);
+  rpc ValidateApiKey(ValidateApiKeyRequest) returns (ValidateApiKeyResponse);
+  rpc GetManagePlatformLogs(GetManagePlatformLogsRequest) returns (GetManagePlatformLogsResponse);
+}
+
+message CreatePasswordRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+  string keyID = 2; // @gotags: validate:"required,startswith=pswd_"
+}
+
+message CreatePasswordResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Data {
+    string password = 1;
+  }
+  Data data = 5;
+}
+
+message CheckPasswordRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+  string keyID = 2; // @gotags: validate:"required,startswith=pswd_"
+  string passwordHash = 3; // @gotags: validate:"required"
+}
+
+message CheckPasswordResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Data {
+    bool valid = 1;
+  }
+  Data data = 5;
+}
+
+message DeletePasswordRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+  string keyID = 2; // @gotags: validate:"required,startswith=pswd_"
+}
+
+message DeletePasswordResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message CreatePrivateKeyRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+  string keyID = 2; // @gotags: validate:"required,startsnotwith=pswd_"
+}
+
+message CreatePrivateKeyResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Data {
+    string publicKey = 1;
+  }
+  Data data = 5;
+}
+
+message GetPublicKeyRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+  string keyID = 2; // @gotags: validate:"required"
+}
+
+message GetPublicKeyResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Data {
+    string publicKey = 1;
+  }
+  Data data = 5;
+}
+
+message DeletePrivateKeyRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+  string keyID = 2; // @gotags: validate:"required,startsnotwith=pswd_"
+}
+
+message DeletePrivateKeyResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message SaveDataRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+  string keyID = 2; // @gotags: validate:"required"
+  string dataID = 3; // @gotags: validate:"required"
+  bool replaceCurrentItem = 4;
+  string data = 5; // @gotags: validate:"required"
+  string plaintextHash = 6; // @gotags: validate:"required"
+}
+
+message SaveDataResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message DeleteDataRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+  string keyID = 2; // @gotags: validate:"required"
+  string dataID = 3; // @gotags: validate:"required"
+}
+
+message DeleteDataResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message DecryptDataRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+  string keyID = 2; // @gotags: validate:"required"
+  string data = 3; // @gotags: validate:"required"
+}
+
+message DecryptDataResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Data {
+    string decrypedData = 1;
+  }
+  Data data = 5;
+}
+
+message GetDataRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+  string keyID = 2; // @gotags: validate:"required"
+  string dataID = 3; // @gotags: validate:"required"
+}
+
+message GetDataResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Data {
+    string data = 1;
+  }
+  Data data = 5;
+}
+
+message CheckKeyExistingRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+  string keyID = 2; // @gotags: validate:"required"
+}
+
+message CheckKeyExistingResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Data {
+    bool existing = 1;
+  }
+  Data data = 5;
+}
+
+message GetLogsRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+  int32 pageNumber = 2; // @gotags: validate:"gte=0"
+  int32 pageSize = 3; // @gotags: validate:"gt=0"
+}
+
+message GetLogsResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    int32 total = 1;
+    repeated string list = 2;
+  }
+  Data data = 4;
+}
+
+message GetMonitorInfosRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+}
+
+message GetMonitorInfosResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message InfoItem {
+    string name = 1;
+    string value = 2;
+  }
+  message Data {
+    repeated InfoItem infos = 1;
+  }
+  Data data = 4;
+}
+
+message ListConfigsRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+}
+
+message ListConfigsResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message AppConfig {
+    string app = 1;
+    string config = 2;
+  }
+  message Data {
+    repeated AppConfig configList = 1;
+  }
+  Data data = 4;
+}
+
+message CreateConfigRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+  string app = 2; // @gotags: validate:"required"
+  string config = 3; // @gotags: validate:"required"
+}
+
+message CreateConfigResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}
+
+message UpdateConfigRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+  string app = 2; // @gotags: validate:"required"
+  string config = 3; // @gotags: validate:"required"
+}
+
+message UpdateConfigResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}
+
+message DeleteConfigRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+  string app = 2; // @gotags: validate:"required"
+}
+
+message DeleteConfigResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}
+
+message ListPasswordRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+  string app = 2;
+}
+
+message ListPasswordResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message ListItem {
+    string keyID = 1;
+    string passwordHash = 2;
+    int64 createdAt = 3;
+    string app = 4;
+  }
+  message Data {
+    repeated ListItem list = 1;
+  }
+  Data data = 4;
+}
+
+message AddPasswordRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+  string app = 2; // @gotags: validate:"required"
+  string keyID = 3; // @gotags: validate:"required,startswith=pswd_"
+}
+
+message AddPasswordResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    string keyID = 1;
+    string passwordHash = 2;
+    int64 createdAt = 3;
+  }
+  Data data = 4;
+}
+
+message RemovePasswordRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+  string app = 2; // @gotags: validate:"required"
+  string keyID = 3; // @gotags: validate:"required,startswith=pswd_"
+}
+
+message RemovePasswordResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}
+
+message FetchPasswordRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+  string app = 2; // @gotags: validate:"required"
+  string keyID = 3; // @gotags: validate:"required,startswith=pswd_"
+}
+
+message FetchPasswordResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    string password = 1;
+  }
+  Data data = 4;
+}
+
+message ListPrivateKeyRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+  string app = 2;
+}
+
+message ListPrivateKeyResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message ListItem {
+    string keyID = 1;
+    int64 createdAt = 2;
+    string publicKey = 3;
+    string app = 4;
+  }
+  message Data {
+    repeated ListItem list = 1;
+  }
+  Data data = 4;
+}
+
+message AddPrivateKeyRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+  string app = 2; // @gotags: validate:"required"
+  string keyID = 3; // @gotags: validate:"required,startsnotwith=pswd_"
+}
+
+message AddPrivateKeyResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    string keyID = 1;
+    int64 createdAt = 2;
+    string publicKey = 3;
+  }
+  Data data = 4;
+}
+
+message RemovePrivateKeyRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+  string app = 2; // @gotags: validate:"required"
+  string keyID = 3; // @gotags: validate:"required,startsnotwith=pswd_"
+}
+
+message RemovePrivateKeyResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}
+
+message GetAllAppsRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+}
+
+message GetAllAppsResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    repeated string list = 1;
+  }
+  Data data = 4;
+}
+
+message GetAllKeyIDsRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+}
+
+message GetAllKeyIDsResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    repeated string list = 1;
+  }
+  Data data = 4;
+}
+
+message ListApiKeyRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+}
+
+message ListApiKeyResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message ListItem {
+    int64 id = 1;
+    int64 createdAt = 2;
+    string keyID = 3;
+    string permission = 4;
+    string app = 5;
+    string name = 6;
+  }
+  message Data {
+    repeated ListItem list = 1;
+  }
+  Data data = 4;
+}
+
+message AddApiKeyRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+  string app = 2; // @gotags: validate:"required"
+  string keyID = 3; // @gotags: validate:"required"
+  string name = 4; // @gotags: validate:"required"
+  string permission = 5; // @gotags: validate:"oneof=write read"
+}
+
+message AddApiKeyResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}
+
+message RemoveApiKeyRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+  int64 id = 2; // @gotags: validate:"required"
+}
+
+message RemoveApiKeyResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}
+
+message ValidateApiKeyRequest {
+  string app = 1; // @gotags: validate:"required"
+  string apiKey = 2; // @gotags: validate:"required"
+  string role = 3; // @gotags: validate:"oneof=write read"
+}
+
+message ValidateApiKeyResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    bool valid = 1;
+  }
+  Data data = 4;
+}
+
+message GetManagePlatformLogsRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+  int32 pageSize = 2; // @gotags: validate:"gt=0"
+  int32 pageNumber = 3; // @gotags: validate:"gte=0"
+}
+
+message GetManagePlatformLogsResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message ListItem {
+    int64 createdAt = 1;
+    string ip = 2;
+    string status = 3;
+    string object = 4;
+    string operation = 5;
+    string keyID = 6;
+    string app = 7;
+    string apiKeyName = 8;
+  }
+  message Data {
+    int64 total = 1;
+    repeated ListItem list = 2;
+  }
+  Data data = 4;
+}

@@ -1,0 +1,32 @@
+[ClientMsg_OK]
+other = "OK"
+
+[ClientErrMsg_WrongRequestParameters]
+other = "Request has wrong parameters, please inspect parameters"
+
+[ClientErrMethodNotAllowed]
+other = "http request method not allowed."
+
+[ClientErrUpstreamServiceNotFound]
+other = "upstream service not found."
+
+[ClientErrMsg_WrongParameters]
+other = "wrong parameters"
+
+[ClientErrMsg_BadRequest]
+other = "bad request"
+
+[ClientErrMsg_ContentLengthLimit]
+other = "http body content length must be less than or equal to 5M"
+
+[ClientErrMsg_TooManyRequests]
+other = "too many requests"
+
+[ClientErrMsg_ApiKeyIsInvalid]
+other = "ApiKey is invalid. Please input apiKey correctly."
+
+[ClientErrMsg_RequestTimeout]
+other = "Request timeout."
+
+[FatalErrMsg]
+other = "Sorry. Some fatal error happened. Try to contact the custom service of this APP."

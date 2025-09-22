@@ -1,0 +1,11 @@
+{
+  "files.watcherExclude": {
+    "**/.cxx/**": true,
+    "**/.vscode/**": true,
+    "**/.yarn/**": true,
+    "**/build/outputs/**": true,
+    "**/dist/**": true,
+    "**/node_modules/**": true,
+    "**/tmp/**": true
+  }
+}

@@ -1,0 +1,16 @@
+filebeat.inputs:
+  - type: filestream
+    id: ID
+    paths:
+      - /tmp/ID.log
+    parsers:
+      - ndjson:
+          target: ''
+          add_error_key: true
+          message_key: msg
+cloud.id: 'n1xt:dXMtZWFzdC0xLmF3cy5mb3VuZC5pbzo0NDMkOTAwNzY1OTYzY2U3NDM1Mjk2MDFmZDE0NDZhMzUxN2MkM2JkMTQ2YjJkMDU5NDUxMWJjZTgwZDlmOTgzYjRlYmI='
+cloud.auth: 'elastic:0OtqoNZ8fM35odRNgcxdaNCK'
+output.elasticsearch:
+  index: 'logs-TAG-slark'
+setup.template.name: 'logs-TAG-slark'
+setup.template.pattern: 'logs-TAG-slark'

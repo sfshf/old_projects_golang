@@ -1,0 +1,462 @@
+syntax = "proto3";
+
+package alchemist_api;
+option go_package = "./api";
+
+import "google/protobuf/struct.proto";
+
+service AlchemistService {
+  rpc GetAppAccountToken(Empty) returns (GetAppAccountTokenResponse);
+  rpc JoinReferralProgram(JoinReferralProgramRequest) returns (JoinReferralProgramResponse);
+  rpc CheckReferralCode(CheckReferralCodeRequest) returns (CheckReferralCodeResponse);
+  rpc BindReferralCode(BindReferralCodeRequest) returns (EmptyResponse);
+  rpc GetRewardPoints(GetRewardPointsRequest) returns (GetRewardPointsResponse);
+  rpc GetNewUserDiscountState(GetNewUserDiscountStateRequest) returns (GetNewUserDiscountStateResponse);
+  rpc GetNewUserDiscountSignature(GetNewUserDiscountSignatureRequest) returns (GetNewUserDiscountSignatureResponse);
+  rpc UseNewUserDiscountOffer(UseNewUserDiscountOfferRequest) returns (UseNewUserDiscountOfferResponse);
+  rpc GetTrialState(GetTrialStateRequest) returns (GetTrialStateResponse);
+  rpc GetRewardList(GetRewardListRequest) returns (GetRewardListResponse);
+  rpc RedeemReward(RedeemRewardRequest) returns (RedeemRewardResponse);
+  rpc RedeemRewardOffer(RedeemRewardOfferRequest) returns (RedeemRewardOfferResponse);
+  rpc FinishRewardOffer(FinishRewardOfferRequest) returns (FinishRewardOfferResponse);
+  rpc ConvertUnusedNewUserDiscount(ConvertUnusedNewUserDiscountRequest) returns (ConvertUnusedNewUserDiscountResponse);
+  rpc CheckReferralCodeAndDevice(CheckReferralCodeAndDeviceRequest) returns (CheckReferralCodeAndDeviceResponse);
+  rpc MarkNewRegistration(MarkNewRegistrationRequest) returns (MarkNewRegistrationResponse);
+  rpc Unregister(Empty) returns (UnregisterResponse);
+  rpc GetState(GetStateRequest) returns (GetStateResponse);
+}
+
+service AlchemistConsoleService {
+  rpc ListConfigs(ListConfigsRequest) returns (ListConfigsResponse);
+  rpc CreateConfig(CreateConfigRequest) returns (CreateConfigResponse);
+  rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse);
+  rpc DeleteConfig(DeleteConfigRequest) returns (DeleteConfigResponse);
+  rpc GetCurrentSubscriptionCount(GetCurrentSubscriptionCountRequest) returns (GetCurrentSubscriptionCountResponse);
+  rpc ListSubscriptionCounts(ListSubscriptionCountsRequest) returns (ListSubscriptionCountsResponse);
+  rpc GetAllApps(GetAllAppsRequest) returns (GetAllAppsResponse);
+}
+
+service TestService {
+  rpc ResetDeviceCheck(ResetDeviceCheckRequest) returns (ResetDeviceCheckResponse);
+  rpc RemoveFraudRecord(Empty) returns (RemoveFraudRecordResponse);
+}
+
+message Empty {
+}
+
+message EmptyResponse {
+    int32 code = 1;
+    string message = 2;
+    google.protobuf.Value debugMessage = 3;
+}
+
+message GetAppAccountTokenResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    string appAccountToken = 1;
+  }
+  Data data = 4;
+}
+
+message JoinReferralProgramRequest {
+  string appID = 1; // @gotags: validate:"required"
+}
+
+message JoinReferralProgramResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    string referralCode = 1;
+  }
+  Data data = 4;
+}
+
+message CheckReferralCodeRequest {
+  string referralCode = 1; // @gotags: validate:"required"
+}
+
+message CheckReferralCodeResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    bool valid = 1;
+  }
+  Data data = 4;
+}
+
+message BindReferralCodeRequest {
+  string appID = 1; // @gotags: validate:"required"
+  string referralCode = 2; // @gotags: validate:"required"
+}
+
+message GetRewardPointsRequest {
+  string appID = 1; // @gotags: validate:"required"
+}
+
+message GetRewardPointsResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Record {
+    int64 timestamp = 1;
+    int32 type = 2;
+    string reason = 3;
+    int32 points = 4;
+  }
+  message Data {
+    int32 points = 1;
+    repeated Record records = 2;
+    int32 numberOfNewUsers = 3;
+    int32 numberOfBilledUsers = 4;
+  }
+  Data data = 4;
+}
+
+message GetNewUserDiscountStateRequest {
+  string appID = 1; // @gotags: validate:"required"
+  int32 billedTimes = 2; // @gotags: validate:"gte=0"
+}
+
+message GetNewUserDiscountStateResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    bool hasNewUserDiscount = 1;
+    bool redeemed = 2;
+    int32 remainingTimes = 3;
+  }
+  Data data = 4;
+}
+
+message GetNewUserDiscountSignatureRequest {
+  string appID = 1; // @gotags: validate:"required"
+  string environment = 2; // @gotags: validate:"oneof='sandbox' 'environment' ''"
+}
+
+message GetNewUserDiscountSignatureResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message SignatureInfo {
+    string keyID = 1;
+    string nonce = 2;
+    int64 timestamp = 3;
+    string signature = 4;
+  }
+  message Data {
+    string offerID = 1;
+    bool canConvertToPoints = 2;
+    SignatureInfo signatureInfo = 3;
+  }
+  Data data = 4;
+}
+
+message UseNewUserDiscountOfferRequest {
+  string appID = 1; // @gotags: validate:"required"
+  string offerID = 2; // @gotags: validate:"required"
+  string environment = 3; // @gotags: validate:"oneof='sandbox' 'environment' ''"
+}
+
+message UseNewUserDiscountOfferResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}
+
+message GetTrialStateRequest {
+  string appID =1; // @gotags: validate:"required"
+}
+
+message GetTrialStateResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    bool inFreeTrial = 1;
+    int64 expirationDate = 2;
+    int64 startDate = 3;
+    int32 daysOfTrial = 4;
+    int32 totalDaysOfTrial = 5;
+  }
+  Data data = 4;
+}
+
+message GetRewardListRequest {
+  string appID =1; // @gotags: validate:"required"
+}
+
+message GetRewardListResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Reward {
+    string id = 1;
+    string name = 2;
+    string description = 3;
+    string offerID = 4;
+    int32 cost = 5;
+    string duration = 6;
+    int32 durationInDays = 7;
+  }
+  message Data {
+    repeated Reward rewardList = 1;
+  }
+  Data data = 4;
+}
+
+message RedeemRewardRequest {
+  string appID = 1; // @gotags: validate:"required"
+  string rewardID = 2; // @gotags: validate:"required"
+}
+
+message RedeemRewardResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    int32 remainingPoints = 1;
+    int64 expirationDate = 2;
+  }
+  Data data = 4;
+}
+
+message RedeemRewardOfferRequest {
+  string appID = 1; // @gotags: validate:"required"
+  string rewardID = 2; // @gotags: validate:"required"
+  string environment = 3; // @gotags: validate:"oneof='sandbox' 'environment' ''"
+}
+
+message RedeemRewardOfferResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message SignatureInfo {
+    string keyID = 1;
+    string nonce = 2;
+    int64 timestamp = 3;
+    string signature = 4;
+  }
+  message Data {
+    string offerID = 1;
+    SignatureInfo signatureInfo = 2;
+  }
+  Data data = 4;
+}
+
+message FinishRewardOfferRequest {
+  string appID = 1; // @gotags: validate:"required"
+  string rewardID = 2; // @gotags: validate:"required"
+  string environment = 3; // @gotags: validate:"oneof='sandbox' 'environment' ''"
+}
+
+message FinishRewardOfferResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    int32 remainingPoints = 1;
+  }
+  Data data = 4;
+}
+
+message ConvertUnusedNewUserDiscountRequest {
+  string appID = 1; // @gotags: validate:"required"
+}
+
+message ConvertUnusedNewUserDiscountResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}
+
+message CheckReferralCodeAndDeviceRequest {
+  string appID = 1; // @gotags: validate:"required"
+  string deviceToken = 2; // @gotags: validate:"required"
+  string referralCode = 3; // @gotags: validate:"required"
+}
+
+message CheckReferralCodeAndDeviceResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+    message Data {
+    bool codeValid = 1;
+    bool deviceValid = 2;
+  }
+  Data data = 4;
+}
+
+message MarkNewRegistrationRequest {
+  string appID = 1; // @gotags: validate:"required"
+  string deviceToken0 = 2; // @gotags: validate:"required"
+  string deviceToken1 = 3; // @gotags: validate:"required"
+}
+
+message MarkNewRegistrationResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}
+
+message ListConfigsRequest {
+  string password = 1; // @gotags: validate:"required"
+}
+
+message ListConfigsResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message AppConfig {
+    int64 id = 1;
+    string config = 2;
+  }
+  message Data {
+    repeated AppConfig list = 1;
+  }
+  Data data = 4;
+}
+
+message CreateConfigRequest {
+  string password = 1; // @gotags: validate:"required"
+  string config = 2; // @gotags: validate:"required"
+}
+
+message CreateConfigResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}
+
+message UpdateConfigRequest {
+  string password = 1; // @gotags: validate:"required"
+  int64 id = 2; // @gotags: validate:"required"
+  string config = 3; // @gotags: validate:"required"
+}
+
+message UpdateConfigResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}
+
+message DeleteConfigRequest {
+  string password = 1; // @gotags: validate:"required"
+  int64 id = 2; // @gotags: validate:"required"
+}
+
+message DeleteConfigResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}
+
+message GetCurrentSubscriptionCountRequest {
+  string password = 1; // @gotags: validate:"required"
+  string appID = 2; // @gotags: validate:"required"
+}
+
+message GetCurrentSubscriptionCountResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    int64 count = 1;
+  }
+  Data data = 4;
+}
+
+message ListSubscriptionCountsRequest {
+  string password = 1; // @gotags: validate:"required"
+  string appID = 2;
+  string startDate = 3;
+  string endDate = 4;
+}
+
+message ListSubscriptionCountsResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    repeated int64 list = 1;
+  }
+  Data data = 4;
+}
+
+message UnregisterResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3; 
+}
+
+message GetStateRequest {
+  string appID =1; // @gotags: validate:"required"
+  int32 billedTimes = 2; // @gotags: validate:"gte=0"
+}
+
+message GetStateResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message ReferralCodeState {
+    google.protobuf.Value myReferralCode = 1;
+    google.protobuf.Value newUserStatusExpirationDate = 2;
+    string shareURL = 3;
+    google.protobuf.Value usedReferralCode = 4;
+  }
+  message TrialState {
+    bool inFreeTrial = 1;
+    int64 expirationDate = 2;
+    int64 startDate = 3;
+    int32 daysOfTrial = 4;
+    int32 totalDaysOfTrial = 5;
+  }
+  message NewUserDiscountState {
+    bool hasNewUserDiscount = 1;
+    bool redeemed = 2;
+    int32 remainingTimes = 3;
+  }
+  message Data {
+    ReferralCodeState referralCodeState = 1;
+    int32 rewardPoints = 2;
+    TrialState trialState = 3;
+    NewUserDiscountState newUserDiscountState = 4;
+  }
+  Data data = 4;
+}
+
+message GetAllAppsRequest {
+  string password = 1; // @gotags: validate:"required"
+}
+
+message GetAllAppsResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    repeated string list = 1;
+  }
+  Data data = 4;
+}
+
+message ResetDeviceCheckRequest {
+  string appID = 1; // @gotags: validate:"required"
+  string deviceToken0 = 2; // @gotags: validate:"required"
+  string deviceToken1 = 3; // @gotags: validate:"required"
+}
+
+message ResetDeviceCheckResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}
+
+message RemoveFraudRecordResponse {
+    int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}

@@ -1,0 +1,91 @@
+pipeline {
+    agent {
+        label 'hongkong-test'
+    }
+    stages {
+        stage('Pre') {
+            steps {
+                script {
+                    sh '''
+                        git remote update origin --prune
+                        git branch -a | grep -e '^  remotes/origin/dev$'
+                        echo 'remote dev branch exists'
+                        git branch -D dev || echo 'no local dev branch'
+                        git branch dev remotes/origin/dev
+                    '''
+                    sh """
+                        git checkout ${BRANCH_NAME}
+                        git rebase dev
+                        echo 'git rebase dev success'
+                        git push origin ${BRANCH_NAME}
+                        echo 'git push origin' ${BRANCH_NAME} 'success'
+                    """
+                }
+            }
+        }
+        stage('Build') {
+            steps {
+                sh """
+                    docker build \
+                        --build-arg env=test \
+                        -t nextsurfer/monitor:latest \
+                        -f build/monitor/Dockerfile \
+                        .
+                    docker stop -t 60 -s SIGTERM monitor && docker rm monitor || echo 0
+                    docker run -itd \
+                        --name monitor \
+                        --dns ${HOST_IP} \
+                        --dns 8.8.8.8 \
+                        --restart always \
+                        -e 'APP_NAME=${APP_NAME}' \
+                        -e 'APPLICATION_ENV=${APPLICATION_ENV}' \
+                        -e 'MONITOR_MONGODB_URI=${MONITOR_MONGODB_URI}' \
+                        -e 'DIFF_COINBASE_BINANCE_CRON=${DIFF_COINBASE_BINANCE_CRON}' \
+                        -e 'TXS_MEMPOOL_CRON=${TXS_MEMPOOL_CRON}' \
+                        -e 'MONITOR_REDIS_DNS=${MONITOR_REDIS_DNS}' \
+                        nextsurfer/monitor:latest
+                """
+            }
+        }
+    }
+    post {
+        success {
+            sh """
+                echo 'deploy success'
+                git checkout dev
+                git rebase ${BRANCH_NAME}
+                git push origin dev
+            """
+        }
+        failure {
+            sh """
+                echo 'feature build or e2e testing fail'
+                git checkout dev
+                docker build \
+                        --build-arg env=test \
+                        -t nextsurfer/monitor:latest \
+                        -f build/monitor/Dockerfile \
+                        .
+                docker stop -t 60 -s SIGTERM monitor && docker rm monitor || echo 0
+                docker run -itd \
+                    --name monitor \
+                    --dns ${HOST_IP} \
+                    --dns 8.8.8.8 \
+                    --restart always \
+                    -e 'APP_NAME=${APP_NAME}' \
+                    -e 'APPLICATION_ENV=${APPLICATION_ENV}' \
+                    -e 'MONITOR_MONGODB_URI=${MONITOR_MONGODB_URI}' \
+                    -e 'DIFF_COINBASE_BINANCE_CRON=${DIFF_COINBASE_BINANCE_CRON}' \
+                    -e 'TXS_MEMPOOL_CRON=${TXS_MEMPOOL_CRON}' \
+                    -e 'MONITOR_REDIS_DNS=${MONITOR_REDIS_DNS}' \
+                    nextsurfer/monitor:latest
+            """ 
+        }
+        cleanup {
+            sh """
+                docker system prune -f
+            """
+            cleanWs()
+        }
+    }
+}

@@ -1,0 +1,774 @@
+syntax = "proto3";
+
+package invoker_api;
+option go_package = "./api";
+
+import "google/protobuf/struct.proto";
+
+service AdminService {
+  rpc GetSites(GetSitesRequest) returns (GetSitesResponse);
+  rpc AddSite(AddSiteRequest) returns (AddSiteResponse);
+  rpc EditSite(EditSiteRequest) returns (EditSiteResponse);
+  rpc DeleteSite(DeleteSiteRequest) returns (DeleteSiteResponse);
+  rpc GetSiteAdmins(GetSiteAdminsRequest) returns (GetSiteAdminsResponse);
+  rpc AddSiteAdmin(AddSiteAdminRequest) returns (AddSiteAdminResponse);
+  rpc DeleteSiteAdmin(DeleteSiteAdminRequest) returns (DeleteSiteAdminResponse);
+  rpc GetStorageInfo(GetStorageInfoRequest) returns (GetStorageInfoResponse);
+}
+
+service SiteService {
+  rpc GetSiteList(GetSiteListRequest) returns (GetSiteListResponse);
+  rpc GetSite(GetSiteRequest) returns (GetSiteResponse);
+  rpc GetCategoryList(GetCategoryListRequest) returns (GetCategoryListResponse);
+  rpc GetCategory(GetCategoryRequest) returns (GetCategoryResponse);
+  rpc AddCategory(AddCategoryRequest) returns (AddCategoryResponse);
+  rpc EditCategory(EditCategoryRequest) returns (EditCategoryResponse);
+  rpc DeleteCategory(DeleteCategoryRequest) returns (DeleteCategoryResponse);
+  rpc GetPostList(GetPostListRequest) returns (GetPostListResponse);
+  rpc GetPostDetail(GetPostDetailRequest) returns (GetPostDetailResponse);
+  rpc AddPost(AddPostRequest) returns (AddPostResponse);
+  rpc EditPost(EditPostRequest) returns (EditPostResponse);
+  rpc DeletePost(DeletePostRequest) returns (DeletePostResponse);
+  rpc GetComments(GetCommentsRequest) returns (GetCommentsResponse);
+  rpc AddComment(AddCommentRequest) returns (AddCommentResponse);
+  rpc EditComment(EditCommentRequest) returns (EditCommentResponse);
+  rpc DeleteComment(DeleteCommentRequest) returns (DeleteCommentResponse);
+  rpc AggregatedSitePage(AggregatedSitePageRequest) returns (AggregatedSitePageResponse);
+  rpc AggregatedCategoryPage(AggregatedCategoryPageRequest) returns (AggregatedCategoryPageResponse);
+  rpc AggregatedPostPage(AggregatedPostPageRequest) returns (AggregatedPostPageResponse);
+  rpc AggregatedSearchPage(AggregatedSearchPageRequest) returns (AggregatedSearchPageResponse);
+  rpc SearchPostComment(SearchPostCommentRequest) returns (SearchPostCommentResponse);
+}
+
+service UserService {
+  rpc ThumbupPost(ThumbupPostRequest) returns (ThumbupPostResponse);
+  rpc ThumbupComment(ThumbupCommentRequest) returns (ThumbupCommentResponse);
+  rpc PostHistory(PostHistoryRequest) returns (PostHistoryResponse);
+  rpc CommentHistory(CommentHistoryRequest) returns (CommentHistoryResponse);
+  rpc ThumbupHistory(ThumbupHistoryRequest) returns (ThumbupHistoryResponse);
+}
+
+message GetSitesRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+}
+
+message GetSitesResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message SiteInfo {
+    int64 id = 1;
+    string name = 2;
+  }
+  message Data {
+    repeated SiteInfo list = 1;
+  }
+  Data data = 5;
+}
+
+message AddSiteRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+  string name = 2; // @gotags: validate:"required"
+}
+
+message AddSiteResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message EditSiteRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+  int64 id = 2; // @gotags: validate:"required"
+  string name = 3; // @gotags: validate:"required"
+}
+
+message EditSiteResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message DeleteSiteRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+  int64 id = 2; // @gotags: validate:"required"
+}
+
+message DeleteSiteResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message GetSiteAdminsRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+  int64 id = 2; // @gotags: validate:"required"
+}
+
+message GetSiteAdminsResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message AdminInfo {
+    int64 userID = 1;
+    bool valid = 2;
+  }
+  message Data {
+    repeated AdminInfo list = 1;
+  }
+  Data data = 5;
+}
+
+message AddSiteAdminRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+  int64 id = 2; // @gotags: validate:"required"
+  int64 userID = 3; // @gotags: validate:"required"
+}
+
+message AddSiteAdminResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message DeleteSiteAdminRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+  int64 id = 2; // @gotags: validate:"required"
+  int64 userID = 3; // @gotags: validate:"required"
+}
+
+message DeleteSiteAdminResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message GetStorageInfoRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+}
+
+message GetStorageInfoResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message DatabaseInfo {
+    string database = 1;
+    double size = 2;
+  }
+  message SystemInfo {
+    uint64 total = 1;
+    uint64 free = 2;
+  }
+  message Data {
+    SystemInfo systemInfo = 1;
+    repeated DatabaseInfo databaseInfos = 2;
+  }
+  Data data = 5;
+}
+
+message GetSiteListRequest {
+}
+
+message GetSiteListResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message SiteInfo {
+    int64 id = 1;
+    string name = 2;
+  }
+  message Data {
+    repeated SiteInfo list = 1;
+  }
+  Data data = 5;
+}
+
+message GetSiteRequest {
+  string name = 1; // @gotags: validate:"required"
+}
+
+message GetSiteResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Data {
+    int64 id = 1;
+    string name = 2;
+    repeated int64 admins = 3;
+  }
+  Data data = 5;
+}
+
+message GetCategoryListRequest {
+  int64 siteID = 1; // @gotags: validate:"required"
+}
+
+message GetCategoryListResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message CategoryInfo {
+    int64 id = 1;
+    int64 siteID = 2;
+    string name = 3;
+    int64 posts = 4;
+  }
+  message Data {
+    repeated CategoryInfo list = 1;
+  }
+  Data data = 5;
+}
+
+message GetCategoryRequest {
+  int64 siteID = 1; // @gotags: validate:"required"
+  string name = 2; // @gotags: validate:"required"
+}
+
+message GetCategoryResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Data {
+    int64 id = 1;
+    int64 siteID = 2;
+    string name = 3;
+  }
+  Data data = 5;
+}
+
+message AddCategoryRequest {
+  int64 siteID = 1; // @gotags: validate:"required"
+  string name = 2; // @gotags: validate:"required"
+}
+
+message AddCategoryResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message EditCategoryRequest {
+  int64 id = 1; // @gotags: validate:"required"
+  string name = 2; // @gotags: validate:"required"
+}
+
+message EditCategoryResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message DeleteCategoryRequest {
+  int64 id = 1; // @gotags: validate:"required"
+}
+
+message DeleteCategoryResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message GetPostListRequest {
+  int64 siteID = 1; // @gotags: validate:"required"
+  int64 categoryID = 2;
+  bool sortedByActivity = 3;
+  bool sortedByViews = 4;
+  bool sortedByReplies = 5;
+  int64 pageSize = 6; // @gotags: validate:"gt=0"
+  int64 pageNumber = 7; // @gotags: validate:"gte=0"
+}
+
+message GetPostListResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message PostInfo {
+    int64 id = 1;
+    string title = 2;
+    int64 postedAt = 3;
+    int64 postedBy = 4;
+    string postedByString = 5;
+    int64 views = 6;
+    int64 replies = 7;
+    int64 activity = 8;
+  }
+  message Data {
+    repeated PostInfo list = 1;
+    int64 total = 2;
+  }
+  Data data = 5;
+}
+
+message GetPostDetailRequest {
+  int64 id = 1; // @gotags: validate:"required"
+}
+
+message GetPostDetailResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Data {
+    int64 id = 1;
+    string title = 2;
+    int64 postedAt = 3;
+    int64 postedBy = 4;
+    string postedByString = 5;
+    string content = 6;
+    string image = 7;
+    int32 state = 8;
+    int64 views = 9;
+    int64 replies = 10;
+    int64 activity = 11;
+    int64 thumbups = 12;
+    bool thumbup = 13;
+  }
+  Data data = 5;
+}
+
+message AddPostRequest {
+  int64 siteID = 1; // @gotags: validate:"required"
+  int64 categoryID = 2; // @gotags: validate:"required"
+  string title = 3; // @gotags: validate:"required"
+  string content = 4; // @gotags: validate:"required"
+  string image = 5;
+}
+
+message AddPostResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message EditPostRequest {
+  int64 id = 1; // @gotags: validate:"required"
+  string title = 2; // @gotags: validate:"required"
+  string content = 3; // @gotags: validate:"required"
+  string image = 4;
+}
+
+message EditPostResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message DeletePostRequest {
+  int64 id = 1; // @gotags: validate:"required"
+}
+
+message DeletePostResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message GetCommentsRequest {
+  int64 postID = 1;
+  int64 commentID = 2; // @gotags: validate:"required_without=PostID"
+  int64 pageSize = 3; // @gotags: validate:"gt=0"
+  int64 pageNumber = 4; // @gotags: validate:"gte=0"
+}
+
+message GetCommentsResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message CommentInfo {
+    int64 id = 1;
+    int64 postID = 2;
+    int64 rootCommentID = 3;
+    int64 postedAt = 4;
+    int64 postedBy = 5;
+    string postedByString = 6;
+    int64 atWho = 7;
+    string atWhoString = 8;
+    string content = 9;
+    int64 replies = 10;
+    int64 thumbups = 11;
+    bool thumbup = 12;
+  }
+  message Data {
+    repeated CommentInfo list = 1;
+    int64 total = 2;
+  }
+  Data data = 5;
+}
+
+message AddCommentRequest {
+  int64 postID = 1; // @gotags: validate:"required"
+  int64 rootCommentID = 2;
+  int64 atWho = 3;
+  string content = 4; // @gotags: validate:"required"
+}
+
+message AddCommentResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message EditCommentRequest {
+  int64 id = 1; // @gotags: validate:"required"
+  string content = 2; // @gotags: validate:"required"
+}
+
+message EditCommentResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message DeleteCommentRequest {
+  int64 id = 1; // @gotags: validate:"required"
+}
+
+message DeleteCommentResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message AggregatedLoginInfo {
+  int64 userID = 1;
+  string nickname = 2;
+  string email = 3;
+  string phone = 4;
+}
+
+message AggregatedSiteInfo {
+  int64 id = 1;
+  string name = 2;
+  repeated int64 admins = 3;
+}
+
+message AggregatedCategoryInfo {
+  int64 id = 1;
+  int64 siteID = 2;
+  string name = 3;
+  int64 posts = 4;
+}
+
+message AggregatedPostListInfo {
+  int64 id = 1;
+  string title = 2;
+  int64 postedAt = 3;
+  int64 postedBy = 4;
+  string postedByString = 5;
+  int64 views = 6;
+  int64 replies = 7;
+  int64 activity = 8;
+  int64 thumbups = 9;
+}
+
+message AggregatedSitePageRequest {
+  string site = 1; // @gotags: validate:"required"
+}
+
+message AggregatedSitePageResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Data {
+    AggregatedLoginInfo loginInfo = 1;
+    AggregatedSiteInfo siteInfo = 2;
+    repeated AggregatedCategoryInfo categories = 3;
+    repeated AggregatedPostListInfo posts = 4;
+    int64 postTotal = 5;
+  }
+  Data data = 5;
+}
+
+message AggregatedCategoryPageRequest {
+  string site = 1; // @gotags: validate:"required"
+  string category = 2; // @gotags: validate:"required"
+}
+
+message AggregatedCategoryPageResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message Data {
+    AggregatedLoginInfo loginInfo = 1;
+    AggregatedSiteInfo siteInfo = 2;
+    repeated AggregatedCategoryInfo categories = 3;
+    repeated AggregatedPostListInfo posts = 4;
+    int64 postTotal = 5;
+  }
+  Data data = 5;
+}
+
+message AggregatedPostPageRequest {
+  string site = 1; // @gotags: validate:"required"
+  int64 postID = 2; // @gotags: validate:"required"
+  int64 anchorCommentID = 3;
+}
+
+message AggregatedPostPageResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message PostInfo {
+    int64 id = 1;
+    string title = 2;
+    int64 postedAt = 3;
+    int64 postedBy = 4;
+    string postedByString = 5;
+    string content = 6;
+    string image = 7;
+    int32 state = 8;
+    int64 views = 9;
+    int64 replies = 10;
+    int64 activity = 11;
+    repeated CommentInfo comments = 12;
+    int64 commentTotal = 13;
+    int64 thumbups = 14;
+    bool thumbup = 15;
+  }
+  message CommentInfo {
+    int64 id = 1;
+    int64 postID = 2;
+    int64 rootCommentID = 3;
+    int64 postedAt = 4;
+    int64 postedBy = 5;
+    string postedByString = 6;
+    int64 atWho = 7;
+    string atWhoString = 8;
+    string content = 9;
+    int64 replies = 10;
+    int64 thumbups = 11;
+    bool thumbup = 12;
+  }
+  message AnchorInfo {
+    int64 rootCommentID = 1;
+    int64 firstLevelPageNumber = 2;
+    int64 secondLevelPageNumber = 3;
+    repeated CommentInfo secondLevelComments = 4;
+    int64 secondLevelTotal = 5;
+  }
+  message Data {
+    AggregatedLoginInfo loginInfo = 1;
+    AggregatedSiteInfo siteInfo = 2;
+    AggregatedCategoryInfo categoryInfo = 3;
+    repeated AggregatedCategoryInfo categories = 4;
+    PostInfo post = 5;
+    AnchorInfo anchorInfo = 6;
+  }
+  Data data = 5;
+}
+
+message AggregatedSearchPageRequest {
+  string site = 1; // @gotags: validate:"required"
+  string searchText = 2;
+}
+
+message AggregatedSearchPageResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message MatchedInfo {
+    int64 postID = 1;
+    string title = 2;
+    int64 postPostedAt = 3;
+    int64 postPostedBy = 4;
+    string postPostedByString = 5;
+    string postContent = 6;
+    int64 commentID = 7;
+    string commentContent = 8;
+    int64 commentPostedAt = 9;
+    int64 commentPostedBy = 10;
+    string commentPostedByString = 11;
+    bool postTitleMatched = 12;
+    bool postContentMatched = 13;
+    bool commentContentMatched = 14;
+  }
+  message Data {
+    AggregatedLoginInfo loginInfo = 1;
+    AggregatedSiteInfo siteInfo = 2;
+    repeated AggregatedCategoryInfo categories = 3;
+    repeated MatchedInfo matchedInfos = 4;
+    int64 total = 5;
+  }
+  Data data = 5;
+}
+
+
+message SearchPostCommentRequest {
+  string site = 1; // @gotags: validate:"required"
+  string searchText = 2; // @gotags: validate:"required"
+  int64 pageSize = 3; // @gotags: validate:"gt=0"
+  int64 pageNumber = 4; // @gotags: validate:"gte=0"
+}
+
+message SearchPostCommentResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message MatchedInfo {
+    int64 postID = 1;
+    string title = 2;
+    int64 postPostedAt = 3;
+    int64 postPostedBy = 4;
+    string postPostedByString = 5;
+    string postContent = 6;
+    int64 commentID = 7;
+    string commentContent = 8;
+    int64 commentPostedAt = 9;
+    int64 commentPostedBy = 10;
+    string commentPostedByString = 11;
+    bool postTitleMatched = 12;
+    bool postContentMatched = 13;
+    bool commentContentMatched = 14;
+  }
+  message Data {
+    repeated MatchedInfo list = 1;
+    int64 total = 5;
+  }
+  Data data = 5;
+}
+
+message PostHistoryRequest {
+  int64 pageSize = 1; // @gotags: validate:"gt=0"
+  int64 pageNumber = 2; // @gotags: validate:"gte=0"
+  string site = 3; // @gotags: validate:"required"
+}
+
+message PostHistoryResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message PostInfo {
+    int64 id = 1;
+    int64 categoryID = 2;
+    string title = 3;
+    int64 postedAt = 4;
+    int64 postedBy = 5;
+    string postedByString = 6;
+    int64 views = 7;
+    int64 replies = 8;
+    int64 activity = 9;
+  }
+  message Data {
+    AggregatedLoginInfo loginInfo = 1;
+    AggregatedSiteInfo siteInfo = 2;
+    repeated PostInfo list = 3;
+    int64 total = 4;
+  }
+  Data data = 5;
+}
+
+message CommentHistoryRequest {
+  int64 pageSize = 1; // @gotags: validate:"gt=0"
+  int64 pageNumber = 2; // @gotags: validate:"gte=0"
+  string site = 3; // @gotags: validate:"required"
+}
+
+message CommentHistoryResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message CommentInfo {
+    int64 id = 1;
+    int64 postID = 2;
+    string title = 3;
+    int64 rootCommentID = 4;
+    int64 postedAt = 5;
+    int64 postedBy = 6;
+    string postedByString = 7;
+    int64 atWho = 8;
+    string atWhoString = 9;
+    string content = 10;
+    int64 replies = 11;
+    int64 thumbups = 12;
+  }
+  message Data {
+    AggregatedLoginInfo loginInfo = 1;
+    AggregatedSiteInfo siteInfo = 2;
+    repeated CommentInfo list = 3;
+    int64 total = 4;
+  }
+  Data data = 5;
+}
+
+message ThumbupPostRequest {
+  int64 postID = 1; // @gotags: validate:"required"
+}
+
+message ThumbupPostResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message ThumbupCommentRequest {
+  int64 commentID = 1; // @gotags: validate:"required"
+}
+
+message ThumbupCommentResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+}
+
+message ThumbupHistoryRequest {
+  int64 pageSize = 1; // @gotags: validate:"gt=0"
+  int64 pageNumber = 2; // @gotags: validate:"gte=0"
+  string site = 3; // @gotags: validate:"required"
+}
+
+message ThumbupHistoryResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  string oracle = 4;
+  message ThumbupInfo {
+    int64 id = 1;
+    int64 postID = 2;
+    string title = 3;
+    string type = 4;
+    int64 commentID = 5;
+    int64 postedAt = 6;
+    int64 postedBy = 7;
+    string postedByString = 8;
+    string content = 9;
+  }
+  message Data {
+    AggregatedLoginInfo loginInfo = 1;
+    AggregatedSiteInfo siteInfo = 2;
+    repeated ThumbupInfo list = 3;
+    int64 total = 4;
+  }
+  Data data = 5;
+}

@@ -1,0 +1,227 @@
+syntax = "proto3";
+
+package doom_console_api;
+
+import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
+
+service DoomConsoleService {
+  rpc ListReputableTokens(ListReputableTokensRequest) returns (ListReputableTokensResponse) {
+    option (google.api.http) = {
+      post: "/doom/console/listReputableTokens/v1"
+      body: "*"
+    };
+  };
+  rpc UniswapInfo(UniswapInfoRequest) returns (UniswapInfoResponse) {
+    option (google.api.http) = {
+      post: "/doom/console/uniswapInfo/v1"
+      body: "*"
+    };
+  };
+  rpc Erc20TokensInfo(Erc20TokensInfoRequest) returns (Erc20TokensInfoResponse) {
+    option (google.api.http) = {
+      post: "/doom/console/erc20TokensInfo/v1"
+      body: "*"
+    };
+  };
+  rpc Erc20TokensQuery(Erc20TokensQueryRequest) returns (Erc20TokensQueryResponse) {
+    option (google.api.http) = {
+      post: "/doom/console/erc20TokensQuery/v1"
+      body: "*"
+    };
+  };
+  rpc ListErrorTokens(ListErrorTokensRequest) returns (ListErrorTokensResponse) {
+    option (google.api.http) = {
+      post: "/doom/console/listErrorTokens/v1"
+      body: "*"
+    };
+  };
+  rpc CheckErrorToken(CheckErrorTokenRequest) returns (CheckErrorTokenResponse) {
+    option (google.api.http) = {
+      post: "/doom/console/checkErrorToken/v1"
+      body: "*"
+    };
+  };
+  rpc DetectErrorToken(DetectErrorTokenRequest) returns (DetectErrorTokenResponse) {
+    option (google.api.http) = {
+      post: "/doom/console/detectErrorToken/v1"
+      body: "*"
+    };
+  };
+  rpc RpcServerDetection(RpcServerDetectionRequest) returns (RpcServerDetectionResponse) {
+    option (google.api.http) = {
+      post: "/doom/console/rpcServerDetection/v1"
+      body: "*"
+    };
+  };
+}
+
+message Empty {
+}
+
+message EmptyResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}
+
+message ListReputableTokensRequest {
+  string apiKey = 1;
+  int64 pageNumber = 2;
+  int64 pageSize = 3;
+}
+
+message ListReputableTokensResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message ReputableToken {
+    string address = 1;
+    string type = 2;
+    string symbol = 3;
+    string name = 4;
+    uint32 decimals = 5;
+    string exchange = 6;
+  }
+  message Data {
+    int64 total = 1;
+    repeated ReputableToken list = 2;
+  }
+  Data data = 4;
+}
+
+message UniswapInfoRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+}
+
+message UniswapInfoResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message V2Info {
+    uint64 totalRealTime = 1;
+    uint64 totalInDB = 2;
+    uint64 diffValue = 3;
+  }
+  message V3Info {
+    int64 timestamp = 1;
+    uint64 totalInDB = 2;
+  }
+  message Data {
+    V2Info v2Info = 1;
+    V3Info v3Info = 2;
+  }
+  Data data = 4;
+}
+
+message Erc20TokensInfoRequest {
+  string apiKey = 1;
+}
+
+message Erc20TokensInfoResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    uint64 headerNumber = 1;
+    uint64 toBlockNumber = 2;
+    uint64 numberDiff = 3;
+    uint32 days = 4;
+    uint64 totalTokens = 5;
+  }
+  Data data = 4;
+}
+
+message Erc20TokensQueryRequest {
+  string apiKey = 1;
+  string contractAddress = 2;
+}
+
+message Erc20TokensQueryResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    string address = 1;
+    string type = 2;
+    string name = 3;
+    string symbol = 4;
+    uint32 decimals = 5;
+    bool priced = 6;
+    bool checked = 7;
+  }
+  Data data = 4;
+}
+
+message ListErrorTokensRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+  int64 pageNumber = 2;
+  int64 pageSize = 3;
+  bool checked = 4; 
+}
+
+message ListErrorTokensResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message ErrorToken {
+    string id = 1;
+    string address = 2;
+    string type = 3;
+    string symbol = 4;
+    string name = 5;
+    bool checked = 6;
+  }
+  message Data {
+    int64 total = 1;
+    repeated ErrorToken list = 2;
+  }
+  Data data = 4;
+}
+
+message CheckErrorTokenRequest {
+  string apiKey = 1;
+  string id = 2;
+}
+
+message CheckErrorTokenResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+}
+
+message DetectErrorTokenRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+  string id = 2; // @gotags: validate:"required"
+}
+
+message DetectErrorTokenResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message Data {
+    string result = 1;
+  }
+  Data data = 4;
+}
+
+message RpcServerDetectionRequest {
+  string apiKey = 1; // @gotags: validate:"required"
+  string serverUrl = 2; // @gotags: validate:"required"
+}
+
+message RpcServerDetectionResponse {
+  int32 code = 1;
+  string message = 2;
+  google.protobuf.Value debugMessage = 3;
+  message RpcServerState {
+    string rpcServer = 1;
+    int32 status = 2;
+    uint64 blockNumber = 3;
+    int32 delay = 4;
+  }
+  message Data {
+    RpcServerState state = 1;
+  }
+  Data data = 4;
+}

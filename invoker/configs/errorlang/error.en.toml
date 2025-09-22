@@ -1,0 +1,29 @@
+[ClientErrMsg_WrongRequestParameters]
+other = "Request has wrong parameters, please inspect parameters"
+
+[ClientErrMsg_InvalidApiKey]
+other = "Invalid api key."
+
+[ClientErrMsg_InvalidUserID]
+other = "Invalid user ID."
+
+[ClientErrMsg_InvalidSession]
+other = "Invalid session."
+
+[ClientErrMsg_UserHasNoSecurityQuestions]
+other = "User has no security questions. You can try to create some security questions."
+
+[ClientErrMsg_UserHasNoDatum]
+other = "User has no datum. You can try to create some datum."
+
+[ClientErrMsg_UserHasNoPrivateKeyBackup]
+other = "User has no private key bakup. You can try to create some private key backup."
+
+[ClientErrMsg_TooManyRequests]
+other = "Too many requests."
+
+[ClientErrMsg_HasRelatedRecord]
+other = "Has related record, the operation is forbidden."
+
+[FatalErrMsg]
+other = "Sorry. Some fatal error happened. Try to contact the custom service of this APP."
