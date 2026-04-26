@@ -6,7 +6,9 @@
       [
         "react-native-permissions",
         {
-          "iosPermissions": ["FaceID"]
+          "iosPermissions": [
+            "FaceID"
+          ]
         }
       ],
       [
@@ -38,6 +40,13 @@
       "infoPlist": {
         "NSFaceIDUsageDescription": "Allow $(PRODUCT_NAME) to use FaceID"
       }
+    },
+    "android": {
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.anonymous.pswds"
     }
   }
 }

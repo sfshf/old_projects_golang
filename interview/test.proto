@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package alchemist_notification_api;
+
+import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
+
+service AlchemistNotificationService {
+  rpc AppStoreNotificationsProd(AppStoreNotificationsProdRequest) returns (EmptyResponse) {
+    option (google.api.http) = {
+      post: "/alchemist/appstore/notifications"
+      body: "*"
+    };
+  };
+  rpc AppStoreNotificationsTest(AppStoreNotificationsTestRequest) returns (EmptyResponse) {
+    option (google.api.http) = {
+      post: "/alchemist/appstore/test-notifications"
+      body: "*"
+    };
+  };
+}
+
+message Empty {
+}
+
+message EmptyResponse {
+    int32 code = 1;
+    string message = 2;
+    google.protobuf.Value debugMessage = 3;
+}
+
+message AppStoreNotificationsProdRequest {
+  string signedPayload = 1;
+}
+
+message AppStoreNotificationsTestRequest {
+  string signedPayload = 1;
+}
